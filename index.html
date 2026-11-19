@@ -864,7 +864,7 @@
       <!-- STEP 1: CHOOSE FROM ALL 32 NHL TEAMS -->
       <div id="stepTeamSelect" style="display:flex;flex-direction:column;min-height:0;flex:1;">
         <div class="card-header">
-          <div class="badge">ALLA 32 NHL-LAG • 3 MOT 3 • 2 MINUTER</div>
+          <div class="badge">ALLA 32 NHL-LAG • 2026/27 TRUPPER • 3 MOT 3</div>
           <h1 class="title">ICE BLITZ NHL</h1>
           <p class="subtitle">Välj ditt NHL-lag och motståndare ur listan nedan!</p>
 
@@ -1084,391 +1084,391 @@
   };
 
   // =========================================================================
-  // ALL 32 NHL TEAMS — FULL GAME-DAY ROSTERS (2 GOALIES + 18 SKATERS EACH = 640 PLAYERS!)
+  // ALL 32 NHL TEAMS — UPDATED 2026–27 ROSTERS (AS OF NOVEMBER 19, 2026 — 640 PLAYERS!)
   // =========================================================================
   const NHL_RAW_TEAMS = [
     {
       abbr: 'ANA', name: 'Anaheim Ducks', color: '#f47a38', accent: '#b9975b',
-      goalies: [['Lukas Dostal', 1, 'reflex'], ['John Gibson', 36, 'mur']],
+      goalies: [['Lukas Dostal', 1, 'reflex'], ['Ville Husso', 35, 'mur']],
       skaters: [
-        ['Leo Carlsson', 91, 'speed', 91, 84, 72], ['Troy Terry', 19, 'sniper', 86, 90, 62], ['Mason McTavish', 23, 'enforcer', 78, 84, 86],
-        ['Trevor Zegras', 11, 'speed', 90, 82, 56], ['Cutter Gauthier', 61, 'sniper', 87, 92, 68], ['Frank Vatrano', 77, 'sniper', 82, 91, 74],
-        ['Alex Killorn', 17, 'enforcer', 74, 78, 84], ['Ryan Strome', 16, 'speed', 81, 79, 68], ['Isac Lundestrom', 21, 'speed', 85, 72, 66],
-        ['Brock McGinn', 26, 'enforcer', 76, 70, 84], ['Brett Leason', 20, 'enforcer', 75, 74, 82], ['Ross Johnston', 44, 'enforcer', 64, 62, 95],
-        ['Pavel Mintyukov', 34, 'speed', 87, 80, 78], ['Olen Zellweger', 51, 'speed', 90, 81, 66], ['Jackson LaCombe', 2, 'speed', 84, 76, 74],
-        ['Radko Gudas', 7, 'enforcer', 68, 72, 98], ['Brian Dumoulin', 6, 'enforcer', 72, 68, 84], ['Jacob Trouba', 65, 'enforcer', 70, 78, 96]
+        ['Leo Carlsson', 91, 'speed', 94, 88, 76], ['Cutter Gauthier', 61, 'sniper', 89, 94, 70], ['Troy Terry', 19, 'sniper', 86, 90, 62],
+        ['Mikael Granlund', 64, 'speed', 86, 85, 70], ['Beckett Sennecke', 45, 'sniper', 88, 90, 72], ['Frank Vatrano', 77, 'sniper', 82, 91, 74],
+        ['Alex Killorn', 17, 'enforcer', 74, 78, 84], ['Ryan Poehling', 25, 'speed', 87, 76, 76], ['A.J. Greer', 10, 'enforcer', 78, 74, 92],
+        ['Sam Colangelo', 12, 'sniper', 83, 84, 76], ['Roger McQueen', 24, 'enforcer', 82, 83, 88], ['Jeff Malott', 72, 'enforcer', 75, 74, 88],
+        ['John Carlson', 74, 'sniper', 82, 92, 82], ['Pavel Mintyukov', 34, 'speed', 88, 82, 78], ['Jackson LaCombe', 2, 'speed', 87, 80, 76],
+        ['Olen Zellweger', 51, 'speed', 91, 82, 66], ['Tristan Luneau', 67, 'speed', 85, 80, 76], ['Radko Gudas', 7, 'enforcer', 68, 72, 98]
       ]
     },
     {
       abbr: 'BOS', name: 'Boston Bruins', color: '#ffb81c', accent: '#111111',
-      goalies: [['Jeremy Swayman', 1, 'reflex'], ['Joonas Korpisalo', 70, 'mur']],
+      goalies: [['Jeremy Swayman', 1, 'reflex'], ['Michael DiPietro', 64, 'mur']],
       skaters: [
-        ['David Pastrnak', 88, 'sniper', 88, 97, 66], ['Brad Marchand', 63, 'speed', 87, 88, 80], ['Elias Lindholm', 28, 'sniper', 82, 86, 76],
-        ['Pavel Zacha', 18, 'sniper', 81, 85, 76], ['Charlie Coyle', 13, 'enforcer', 78, 80, 86], ['Morgan Geekie', 39, 'sniper', 79, 86, 78],
-        ['Trent Frederic', 11, 'enforcer', 77, 78, 90], ['Matthew Poitras', 51, 'speed', 87, 79, 62], ['Justin Brazeau', 55, 'enforcer', 71, 80, 88],
-        ['Mark Kastelic', 47, 'enforcer', 73, 72, 93], ['John Beecher', 19, 'speed', 86, 72, 78], ['Cole Koepke', 45, 'speed', 85, 76, 74],
-        ['Charlie McAvoy', 73, 'enforcer', 85, 83, 92], ['Hampus Lindholm', 27, 'speed', 84, 79, 80], ['Brandon Carlo', 25, 'enforcer', 74, 72, 88],
-        ['Nikita Zadorov', 91, 'enforcer', 72, 76, 97], ['Mason Lohrei', 6, 'speed', 85, 78, 72], ['Andrew Peeke', 52, 'enforcer', 73, 68, 86]
+        ['David Pastrnak', 88, 'sniper', 88, 97, 66], ['JJ Peterka', 77, 'speed', 93, 90, 66], ['Elias Lindholm', 28, 'sniper', 82, 86, 76],
+        ['Casey Mittelstadt', 37, 'speed', 88, 85, 68], ['Pavel Zacha', 18, 'sniper', 81, 85, 76], ['Morgan Geekie', 39, 'sniper', 79, 87, 78],
+        ['James Hagens', 10, 'speed', 92, 86, 64], ['Fraser Minten', 93, 'enforcer', 83, 81, 82], ['Marat Khusnutdinov', 22, 'speed', 91, 76, 68],
+        ['Tanner Jeannot', 84, 'enforcer', 76, 74, 97], ['Mark Kastelic', 47, 'enforcer', 74, 73, 93], ['Michael Eyssimont', 23, 'enforcer', 86, 76, 88],
+        ['Charlie McAvoy', 73, 'enforcer', 85, 84, 92], ['Hampus Lindholm', 27, 'speed', 84, 79, 80], ['Nikita Zadorov', 91, 'enforcer', 73, 76, 97],
+        ['Will Borgen', 3, 'enforcer', 79, 74, 91], ['Mason Lohrei', 6, 'speed', 86, 80, 72], ['Connor Clifton', 75, 'enforcer', 77, 70, 91]
       ]
     },
     {
       abbr: 'BUF', name: 'Buffalo Sabres', color: '#003087', accent: '#ffb81c',
-      goalies: [['Ukko-Pekka Luukkonen', 1, 'mur'], ['Devon Levi', 27, 'reflex']],
+      goalies: [['Ukko-Pekka Luukkonen', 1, 'mur'], ['Alex Lyon', 34, 'reflex']],
       skaters: [
-        ['Tage Thompson', 72, 'sniper', 82, 97, 84], ['Alex Tuch', 89, 'speed', 89, 87, 82], ['JJ Peterka', 77, 'speed', 92, 87, 64],
-        ['Dylan Cozens', 24, 'speed', 88, 84, 78], ['Jack Quinn', 22, 'sniper', 84, 88, 66], ['Jason Zucker', 17, 'sniper', 83, 85, 74],
-        ['Zach Benson', 9, 'speed', 88, 80, 68], ['Ryan McLeod', 71, 'speed', 93, 76, 68], ['Jordan Greenway', 12, 'enforcer', 73, 74, 93],
-        ['Peyton Krebs', 19, 'speed', 84, 74, 72], ['Beck Malenstyn', 29, 'enforcer', 80, 68, 89], ['Sam Lafferty', 81, 'speed', 86, 72, 80],
-        ['Rasmus Dahlin', 26, 'sniper', 88, 89, 84], ['Owen Power', 25, 'speed', 86, 81, 80], ['Bowen Byram', 4, 'speed', 89, 80, 76],
-        ['Mattias Samuelsson', 23, 'enforcer', 73, 68, 90], ['Henri Jokiharju', 10, 'speed', 81, 74, 74], ['Connor Clifton', 75, 'enforcer', 76, 70, 91]
+        ['Tage Thompson', 72, 'sniper', 83, 97, 84], ['Josh Norris', 18, 'sniper', 86, 91, 76], ['Alex Tuch', 89, 'speed', 89, 87, 82],
+        ['Jack Quinn', 22, 'sniper', 85, 89, 66], ['Zach Benson', 9, 'speed', 89, 82, 68], ['Jiri Kulich', 20, 'sniper', 87, 90, 68],
+        ['Ryan McLeod', 71, 'speed', 93, 78, 68], ['Josh Doan', 91, 'enforcer', 84, 83, 84], ['Noah Ostlund', 28, 'speed', 89, 80, 66],
+        ['Peyton Krebs', 19, 'speed', 84, 75, 74], ['Sam Carrick', 39, 'enforcer', 78, 72, 88], ['Beck Malenstyn', 29, 'enforcer', 80, 68, 89],
+        ['Rasmus Dahlin', 26, 'sniper', 89, 90, 84], ['Owen Power', 25, 'speed', 87, 82, 80], ['Mattias Samuelsson', 23, 'enforcer', 74, 68, 90],
+        ['Matt Grzelcyk', 48, 'speed', 87, 76, 68], ['Conor Timmins', 78, 'speed', 82, 78, 76], ['Dennis Gilbert', 4, 'enforcer', 74, 68, 92]
       ]
     },
     {
       abbr: 'CGY', name: 'Calgary Flames', color: '#d2001c', accent: '#f1be48',
-      goalies: [['Dustin Wolf', 32, 'reflex'], ['Dan Vladar', 80, 'mur']],
+      goalies: [['Dustin Wolf', 32, 'reflex'], ['Devin Cooley', 1, 'mur']],
       skaters: [
-        ['Nazem Kadri', 91, 'sniper', 84, 89, 82], ['Jonathan Huberdeau', 10, 'speed', 85, 84, 68], ['Blake Coleman', 20, 'enforcer', 84, 83, 86],
-        ['Mikael Backlund', 11, 'speed', 82, 80, 78], ['Yegor Sharangovich', 17, 'sniper', 84, 90, 66], ['Connor Zary', 47, 'speed', 89, 83, 68],
-        ['Andrei Kuzmenko', 96, 'sniper', 82, 88, 62], ['Martin Pospisil', 76, 'enforcer', 85, 76, 93], ['Anthony Mantha', 39, 'sniper', 77, 86, 82],
-        ['Matt Coronato', 27, 'sniper', 84, 87, 66], ['Kevin Rooney', 21, 'enforcer', 76, 68, 82], ['Ryan Lomberg', 70, 'enforcer', 86, 68, 92],
-        ['MacKenzie Weegar', 52, 'enforcer', 82, 85, 90], ['Rasmus Andersson', 4, 'sniper', 82, 86, 82], ['Kevin Bahl', 7, 'enforcer', 71, 68, 92],
-        ['Daniil Miromanov', 62, 'sniper', 79, 82, 74], ['Brayden Pachal', 94, 'enforcer', 74, 68, 89], ['Jake Bean', 24, 'speed', 82, 74, 70]
+        ['Jonathan Huberdeau', 10, 'speed', 85, 85, 68], ['Matt Coronato', 27, 'sniper', 86, 90, 68], ['Connor Zary', 47, 'speed', 90, 85, 70],
+        ['Joel Farabee', 86, 'speed', 87, 85, 74], ['Morgan Frost', 16, 'speed', 88, 83, 66], ['Mikael Backlund', 11, 'speed', 82, 80, 78],
+        ['Yegor Sharangovich', 17, 'sniper', 84, 90, 66], ['Andrei Kuzmenko', 96, 'sniper', 82, 88, 62], ['Martin Pospisil', 76, 'enforcer', 86, 77, 94],
+        ['Ryan Strome', 18, 'speed', 81, 80, 68], ['Maxim Tsyplakov', 7, 'enforcer', 81, 83, 88], ['Brennan Othmann', 78, 'enforcer', 83, 84, 86],
+        ['Zayne Parekh', 19, 'speed', 92, 88, 66], ['Simon Nemec', 2, 'speed', 88, 82, 78], ['Kevin Bahl', 88, 'enforcer', 72, 68, 92],
+        ['Jake Middleton', 5, 'enforcer', 74, 74, 93], ['Zach Whitecloud', 24, 'enforcer', 80, 74, 88], ['Joel Hanley', 44, 'enforcer', 76, 70, 82]
       ]
     },
     {
       abbr: 'CAR', name: 'Carolina Hurricanes', color: '#ce1126', accent: '#111111',
-      goalies: [['Pyotr Kochetkov', 52, 'reflex'], ['Frederik Andersen', 31, 'mur']],
+      goalies: [['Pyotr Kochetkov', 52, 'reflex'], ['Brandon Bussi', 30, 'mur']],
       skaters: [
-        ['Sebastian Aho', 20, 'speed', 92, 91, 70], ['Andrei Svechnikov', 37, 'enforcer', 86, 90, 88], ['Seth Jarvis', 24, 'speed', 93, 88, 72],
-        ['Martin Necas', 88, 'speed', 97, 89, 66], ['Jordan Staal', 11, 'enforcer', 75, 78, 91], ['Jesperi Kotkaniemi', 82, 'enforcer', 79, 80, 82],
-        ['Jack Roslovic', 96, 'speed', 89, 83, 64], ['Jordan Martinook', 48, 'enforcer', 83, 74, 86], ['Eric Robinson', 50, 'speed', 91, 74, 76],
-        ['William Carrier', 28, 'enforcer', 81, 72, 92], ['Jackson Blake', 53, 'speed', 88, 82, 60], ['Tyson Jost', 27, 'speed', 82, 74, 72],
-        ['Jaccob Slavin', 74, 'speed', 88, 76, 82], ['Brent Burns', 8, 'sniper', 76, 91, 86], ['Dmitry Orlov', 7, 'enforcer', 81, 82, 88],
-        ['Shayne Gostisbehere', 4, 'sniper', 87, 88, 64], ['Sean Walker', 26, 'speed', 86, 78, 74], ['Jalen Chatfield', 5, 'speed', 89, 74, 80]
+        ['Sebastian Aho', 20, 'speed', 92, 92, 70], ['Nikolaj Ehlers', 27, 'speed', 96, 90, 64], ['Seth Jarvis', 24, 'speed', 93, 90, 74],
+        ['Andrei Svechnikov', 37, 'enforcer', 86, 90, 89], ['Logan Stankoven', 22, 'speed', 92, 87, 72], ['Jackson Blake', 53, 'speed', 89, 85, 62],
+        ['Jordan Staal', 11, 'enforcer', 75, 78, 91], ['Jesperi Kotkaniemi', 82, 'enforcer', 79, 80, 82], ['Jack Roslovic', 96, 'speed', 89, 84, 64],
+        ['Jordan Martinook', 48, 'enforcer', 83, 74, 86], ['Eric Robinson', 50, 'speed', 91, 75, 76], ['William Carrier', 28, 'enforcer', 81, 72, 92],
+        ['Jaccob Slavin', 74, 'speed', 89, 77, 82], ['Shayne Gostisbehere', 4, 'sniper', 87, 89, 64], ['Sean Walker', 26, 'speed', 86, 79, 74],
+        ['Jalen Chatfield', 5, 'speed', 90, 75, 80], ['Alexander Nikishin', 21, 'enforcer', 84, 88, 94], ['KAndre Miller', 19, 'speed', 90, 81, 86]
       ]
     },
     {
       abbr: 'CHI', name: 'Chicago Blackhawks', color: '#cf0a2c', accent: '#ffffff',
-      goalies: [['Petr Mrazek', 34, 'reflex'], ['Arvid Soderblom', 40, 'mur']],
+      goalies: [['Spencer Knight', 30, 'mur'], ['Spencer Martin', 41, 'reflex']],
       skaters: [
-        ['Connor Bedard', 98, 'sniper', 91, 97, 62], ['Teuvo Teravainen', 86, 'speed', 88, 86, 62], ['Tyler Bertuzzi', 59, 'enforcer', 80, 84, 86],
-        ['Taylor Hall', 71, 'speed', 91, 85, 70], ['Philipp Kurashev', 23, 'speed', 88, 82, 64], ['Nick Foligno', 17, 'enforcer', 74, 76, 91],
-        ['Ryan Donato', 8, 'sniper', 84, 86, 72], ['Jason Dickinson', 16, 'enforcer', 80, 78, 84], ['Ilya Mikheyev', 95, 'speed', 94, 75, 68],
-        ['Lukas Reichel', 73, 'speed', 91, 79, 60], ['Craig Smith', 15, 'sniper', 81, 82, 74], ['Pat Maroon', 77, 'enforcer', 64, 70, 95],
-        ['Seth Jones', 4, 'enforcer', 83, 84, 86], ['Alex Vlasic', 72, 'enforcer', 81, 74, 88], ['Connor Murphy', 5, 'enforcer', 74, 72, 90],
-        ['Alec Martinez', 22, 'enforcer', 74, 76, 84], ['TJ Brodie', 78, 'speed', 81, 70, 74], ['Wyatt Kaiser', 44, 'speed', 86, 72, 72]
+        ['Connor Bedard', 98, 'sniper', 92, 98, 64], ['Patrick Kane', 88, 'sniper', 84, 92, 56], ['Teuvo Teravainen', 86, 'speed', 88, 86, 62],
+        ['Frank Nazar', 91, 'speed', 94, 86, 68], ['Tyler Bertuzzi', 59, 'enforcer', 80, 85, 86], ['Ryan Donato', 8, 'sniper', 84, 87, 72],
+        ['Andrew Mangiapane', 89, 'speed', 88, 84, 74], ['Anton Frondell', 15, 'sniper', 87, 90, 74], ['Oliver Moore', 11, 'speed', 96, 81, 66],
+        ['Jordan Greenway', 12, 'enforcer', 74, 74, 93], ['Cole Smith', 36, 'enforcer', 79, 72, 90], ['Jason Dickinson', 16, 'enforcer', 80, 78, 84],
+        ['Bowen Byram', 4, 'speed', 90, 82, 78], ['Artyom Levshunov', 55, 'enforcer', 86, 85, 89], ['Alex Vlasic', 72, 'enforcer', 82, 76, 89],
+        ['Kevin Korchinski', 14, 'speed', 90, 80, 70], ['Wyatt Kaiser', 44, 'speed', 87, 74, 74], ['Ian Cole', 28, 'enforcer', 74, 72, 88]
       ]
     },
     {
       abbr: 'COL', name: 'Colorado Avalanche', color: '#6f263d', accent: '#236192',
-      goalies: [['Alexandar Georgiev', 40, 'reflex'], ['Justus Annunen', 60, 'mur']],
+      goalies: [['Mackenzie Blackwood', 39, 'mur'], ['Scott Wedgewood', 41, 'reflex']],
       skaters: [
-        ['Nathan MacKinnon', 29, 'speed', 98, 94, 76], ['Mikko Rantanen', 96, 'sniper', 85, 96, 84], ['Casey Mittelstadt', 37, 'speed', 88, 84, 68],
-        ['Valeri Nichushkin', 13, 'enforcer', 85, 88, 90], ['Artturi Lehkonen', 62, 'speed', 87, 84, 76], ['Jonathan Drouin', 27, 'speed', 89, 82, 62],
-        ['Ross Colton', 20, 'enforcer', 82, 85, 88], ['Logan OConnor', 25, 'speed', 91, 76, 80], ['Miles Wood', 28, 'speed', 93, 76, 84],
-        ['Parker Kelly', 17, 'enforcer', 80, 70, 86], ['Nikolai Kovalenko', 51, 'speed', 86, 80, 74], ['Joel Kiviranta', 94, 'speed', 85, 76, 76],
-        ['Cale Makar', 8, 'speed', 97, 93, 72], ['Devon Toews', 7, 'speed', 89, 82, 78], ['Samuel Girard', 49, 'speed', 90, 76, 66],
-        ['Josh Manson', 42, 'enforcer', 75, 78, 95], ['Sam Malinski', 70, 'speed', 85, 78, 70], ['Calvin de Haan', 44, 'enforcer', 74, 70, 86]
+        ['Nathan MacKinnon', 29, 'speed', 99, 95, 78], ['Martin Necas', 88, 'speed', 97, 91, 68], ['Nazem Kadri', 91, 'sniper', 84, 90, 84],
+        ['Gabriel Landeskog', 92, 'enforcer', 81, 87, 90], ['Brock Nelson', 11, 'sniper', 83, 92, 76], ['Artturi Lehkonen', 62, 'speed', 87, 85, 76],
+        ['Jaden Schwartz', 17, 'speed', 84, 84, 76], ['Nicolas Roy', 10, 'enforcer', 79, 80, 86], ['Ross Colton', 20, 'enforcer', 82, 85, 88],
+        ['Logan OConnor', 25, 'speed', 91, 77, 80], ['Parker Kelly', 18, 'enforcer', 80, 71, 86], ['Gavin Brindley', 24, 'speed', 91, 82, 66],
+        ['Cale Makar', 8, 'speed', 98, 94, 74], ['Devon Toews', 7, 'speed', 89, 83, 78], ['Brent Burns', 84, 'sniper', 76, 91, 86],
+        ['Brett Kulak', 27, 'speed', 87, 74, 76], ['Sam Malinski', 70, 'speed', 86, 79, 70], ['Josh Manson', 42, 'enforcer', 75, 78, 95]
       ]
     },
     {
       abbr: 'CBJ', name: 'Columbus Blue Jackets', color: '#002654', accent: '#ce1126',
-      goalies: [['Elvis Merzlikins', 90, 'reflex'], ['Daniil Tarasov', 40, 'mur']],
+      goalies: [['Jet Greaves', 73, 'reflex'], ['Cam Talbot', 39, 'mur']],
       skaters: [
-        ['Sean Monahan', 23, 'sniper', 81, 88, 76], ['Kirill Marchenko', 86, 'sniper', 84, 92, 74], ['Adam Fantilli', 19, 'speed', 91, 87, 78],
-        ['Kent Johnson', 91, 'speed', 90, 85, 60], ['Yegor Chinakhov', 59, 'sniper', 90, 91, 66], ['Boone Jenner', 38, 'enforcer', 77, 83, 92],
-        ['Cole Sillinger', 4, 'enforcer', 82, 81, 84], ['Dmitri Voronkov', 10, 'enforcer', 75, 82, 93], ['James van Riemsdyk', 21, 'sniper', 72, 84, 80],
-        ['Justin Danforth', 17, 'speed', 89, 76, 80], ['Sean Kuraly', 7, 'enforcer', 79, 72, 87], ['Mathieu Olivier', 24, 'enforcer', 74, 72, 96],
-        ['Zach Werenski', 8, 'sniper', 88, 91, 80], ['Ivan Provorov', 9, 'enforcer', 82, 80, 85], ['Damon Severson', 78, 'sniper', 82, 83, 78],
-        ['Erik Gudbranson', 44, 'enforcer', 68, 72, 96], ['Jack Johnson', 3, 'enforcer', 72, 70, 86], ['Jordan Harris', 22, 'speed', 84, 72, 72]
+        ['Adam Fantilli', 19, 'speed', 92, 90, 80], ['Matthew Knies', 74, 'enforcer', 87, 88, 92], ['Valeri Nichushkin', 13, 'enforcer', 85, 89, 90],
+        ['Conor Garland', 83, 'speed', 92, 85, 74], ['Sean Monahan', 23, 'sniper', 81, 88, 76], ['Kent Johnson', 91, 'speed', 91, 87, 62],
+        ['Charlie Coyle', 3, 'enforcer', 78, 81, 86], ['Cole Sillinger', 4, 'enforcer', 82, 82, 84], ['Dmitri Voronkov', 10, 'enforcer', 76, 84, 94],
+        ['Danton Heinen', 43, 'speed', 84, 80, 74], ['Mathieu Olivier', 24, 'enforcer', 75, 74, 97], ['Ryan Lomberg', 70, 'enforcer', 86, 68, 92],
+        ['Zach Werenski', 8, 'sniper', 89, 92, 82], ['Ivan Provorov', 9, 'enforcer', 82, 80, 85], ['Denton Mateychuk', 5, 'speed', 89, 82, 74],
+        ['Emil Andrae', 36, 'speed', 86, 78, 74], ['Erik Gudbranson', 44, 'enforcer', 68, 72, 96], ['Jake Christiansen', 2, 'speed', 84, 74, 74]
       ]
     },
     {
       abbr: 'DAL', name: 'Dallas Stars', color: '#006847', accent: '#8f8f8c',
       goalies: [['Jake Oettinger', 29, 'mur'], ['Casey DeSmith', 1, 'reflex']],
       skaters: [
-        ['Jason Robertson', 21, 'sniper', 82, 95, 74], ['Roope Hintz', 24, 'speed', 95, 89, 74], ['Wyatt Johnston', 53, 'sniper', 88, 91, 70],
-        ['Tyler Seguin', 91, 'sniper', 84, 89, 72], ['Jamie Benn', 14, 'enforcer', 75, 84, 93], ['Matt Duchene', 95, 'speed', 90, 87, 66],
-        ['Mason Marchment', 27, 'enforcer', 82, 85, 88], ['Logan Stankoven', 11, 'speed', 92, 85, 70], ['Evgenii Dadonov', 63, 'speed', 86, 82, 64],
-        ['Sam Steel', 18, 'speed', 86, 76, 72], ['Colin Blackwell', 15, 'speed', 87, 74, 76], ['Mavrik Bourque', 22, 'speed', 87, 81, 66],
-        ['Miro Heiskanen', 4, 'speed', 94, 85, 78], ['Thomas Harley', 55, 'speed', 89, 85, 76], ['Esa Lindell', 23, 'enforcer', 76, 74, 89],
-        ['Matt Dumba', 3, 'enforcer', 80, 81, 91], ['Ilya Lyubushkin', 46, 'enforcer', 71, 68, 94], ['Nils Lundkvist', 5, 'speed', 85, 78, 66]
+        ['Mikko Rantanen', 96, 'sniper', 86, 97, 85], ['Jason Robertson', 21, 'sniper', 83, 95, 74], ['Roope Hintz', 24, 'speed', 95, 90, 74],
+        ['Wyatt Johnston', 53, 'sniper', 89, 92, 72], ['Matt Duchene', 95, 'speed', 90, 88, 66], ['Tyler Seguin', 91, 'sniper', 84, 89, 72],
+        ['Jamie Benn', 14, 'enforcer', 75, 84, 93], ['Michael Bunting', 58, 'enforcer', 82, 84, 87], ['Sam Steel', 18, 'speed', 86, 76, 72],
+        ['Radek Faksa', 12, 'enforcer', 77, 74, 88], ['Colin Blackwell', 15, 'speed', 87, 74, 76], ['Oskar Back', 10, 'enforcer', 79, 74, 84],
+        ['Miro Heiskanen', 4, 'speed', 95, 86, 78], ['Thomas Harley', 55, 'speed', 90, 87, 78], ['Esa Lindell', 23, 'enforcer', 76, 74, 89],
+        ['Lian Bichsel', 6, 'enforcer', 76, 74, 96], ['Tyler Myers', 57, 'enforcer', 74, 80, 92], ['Nils Lundkvist', 5, 'speed', 85, 78, 66]
       ]
     },
     {
       abbr: 'DET', name: 'Detroit Red Wings', color: '#ce1126', accent: '#ffffff',
-      goalies: [['Cam Talbot', 39, 'mur'], ['Alex Lyon', 34, 'reflex']],
+      goalies: [['John Gibson', 36, 'mur'], ['Daniil Tarasov', 40, 'reflex']],
       skaters: [
-        ['Dylan Larkin', 71, 'speed', 95, 89, 76], ['Lucas Raymond', 23, 'sniper', 89, 92, 68], ['Alex DeBrincat', 93, 'sniper', 87, 93, 64],
-        ['Patrick Kane', 88, 'sniper', 84, 92, 56], ['JT Compher', 37, 'speed', 84, 81, 76], ['Vladimir Tarasenko', 11, 'sniper', 80, 90, 74],
-        ['Andrew Copp', 18, 'enforcer', 79, 78, 82], ['Michael Rasmussen', 27, 'enforcer', 76, 78, 90], ['Marco Kasper', 92, 'speed', 88, 80, 80],
-        ['Jonatan Berggren', 48, 'speed', 87, 81, 62], ['Joe Veleno', 90, 'speed', 88, 76, 74], ['Tyler Motte', 14, 'speed', 86, 72, 78],
-        ['Moritz Seider', 53, 'enforcer', 83, 84, 95], ['Simon Edvinsson', 77, 'enforcer', 82, 78, 90], ['Ben Chiarot', 8, 'enforcer', 73, 74, 91],
-        ['Erik Gustafsson', 56, 'speed', 84, 80, 68], ['Jeff Petry', 46, 'enforcer', 76, 78, 84], ['Olli Maatta', 2, 'enforcer', 75, 72, 82]
+        ['Dylan Larkin', 71, 'speed', 95, 90, 76], ['Lucas Raymond', 23, 'sniper', 90, 93, 70], ['Alex DeBrincat', 93, 'sniper', 87, 94, 64],
+        ['Viktor Arvidsson', 33, 'speed', 90, 86, 70], ['Marco Kasper', 92, 'speed', 89, 82, 82], ['JT Compher', 37, 'speed', 84, 81, 76],
+        ['Andrew Copp', 18, 'enforcer', 79, 78, 82], ['Michael Rasmussen', 27, 'enforcer', 76, 78, 90], ['Mason Appleton', 22, 'speed', 85, 80, 78],
+        ['Michael Brandsegg-Nygard', 28, 'sniper', 84, 87, 82], ['Elmer Soderblom', 85, 'enforcer', 75, 80, 90], ['Joe Veleno', 90, 'speed', 88, 76, 74],
+        ['Moritz Seider', 53, 'enforcer', 84, 85, 96], ['Simon Edvinsson', 77, 'enforcer', 84, 80, 91], ['Justin Faulk', 72, 'sniper', 81, 87, 82],
+        ['Ben Chiarot', 8, 'enforcer', 73, 74, 91], ['Albert Johansson', 20, 'speed', 86, 76, 76], ['Jacob Bernard-Docker', 24, 'enforcer', 79, 72, 84]
       ]
     },
     {
       abbr: 'EDM', name: 'Edmonton Oilers', color: '#041e42', accent: '#ff4c00',
-      goalies: [['Stuart Skinner', 74, 'mur'], ['Calvin Pickard', 30, 'reflex']],
+      goalies: [['Tristan Jarry', 35, 'mur'], ['Devon Levi', 27, 'reflex']],
       skaters: [
-        ['Connor McDavid', 97, 'speed', 99, 92, 64], ['Leon Draisaitl', 29, 'sniper', 85, 98, 82], ['Zach Hyman', 18, 'enforcer', 83, 89, 88],
-        ['Ryan Nugent-Hopkins', 93, 'speed', 87, 85, 70], ['Jeff Skinner', 53, 'sniper', 86, 89, 62], ['Viktor Arvidsson', 33, 'speed', 90, 86, 70],
-        ['Adam Henrique', 19, 'sniper', 81, 84, 74], ['Evander Kane', 91, 'enforcer', 82, 86, 94], ['Connor Brown', 28, 'speed', 88, 78, 74],
-        ['Mattias Janmark', 13, 'speed', 87, 75, 74], ['Vasily Podkolzin', 92, 'enforcer', 81, 78, 88], ['Corey Perry', 90, 'enforcer', 68, 80, 88],
-        ['Evan Bouchard', 2, 'sniper', 84, 96, 74], ['Mattias Ekholm', 14, 'enforcer', 79, 82, 91], ['Darnell Nurse', 25, 'enforcer', 85, 81, 92],
-        ['Brett Kulak', 27, 'speed', 87, 74, 76], ['Troy Stecher', 51, 'speed', 84, 72, 74], ['Ty Emberson', 49, 'enforcer', 78, 72, 84]
+        ['Connor McDavid', 97, 'speed', 99, 93, 64], ['Leon Draisaitl', 29, 'sniper', 85, 98, 82], ['Zach Hyman', 18, 'enforcer', 83, 90, 88],
+        ['Ryan Nugent-Hopkins', 93, 'speed', 87, 85, 70], ['Trent Frederic', 21, 'enforcer', 78, 79, 91], ['Adam Henrique', 19, 'sniper', 81, 84, 74],
+        ['Evander Kane', 91, 'enforcer', 82, 86, 94], ['Isaac Howard', 22, 'sniper', 89, 89, 66], ['Mattias Janmark', 13, 'speed', 87, 75, 74],
+        ['Vasily Podkolzin', 92, 'enforcer', 81, 78, 88], ['Colton Dach', 28, 'enforcer', 80, 79, 88], ['Kasperi Kapanen', 42, 'speed', 92, 78, 74],
+        ['Evan Bouchard', 2, 'sniper', 84, 96, 74], ['Mattias Ekholm', 14, 'enforcer', 79, 82, 91], ['Jake Walman', 96, 'sniper', 86, 89, 80],
+        ['Shakir Mukhamadullin', 85, 'speed', 86, 81, 80], ['Connor Murphy', 5, 'enforcer', 74, 72, 90], ['Ty Emberson', 49, 'enforcer', 78, 72, 84]
       ]
     },
     {
       abbr: 'FLA', name: 'Florida Panthers', color: '#c8102e', accent: '#041e42',
-      goalies: [['Sergei Bobrovsky', 72, 'reflex'], ['Spencer Knight', 30, 'mur']],
+      goalies: [['Jacob Markstrom', 25, 'mur'], ['Akira Schmid', 40, 'reflex']],
       skaters: [
-        ['Aleksander Barkov', 16, 'sniper', 86, 92, 84], ['Matthew Tkachuk', 19, 'enforcer', 82, 91, 92], ['Sam Reinhart', 13, 'sniper', 85, 96, 74],
-        ['Carter Verhaeghe', 23, 'speed', 92, 91, 72], ['Sam Bennett', 9, 'enforcer', 85, 84, 94], ['Anton Lundell', 15, 'speed', 86, 83, 76],
-        ['Evan Rodrigues', 17, 'speed', 87, 82, 72], ['Eetu Luostarinen', 27, 'enforcer', 83, 78, 84], ['Jesper Boqvist', 70, 'speed', 89, 78, 68],
-        ['A.J. Greer', 10, 'enforcer', 77, 72, 91], ['Tomas Nosek', 92, 'enforcer', 75, 72, 84], ['Jonah Gadjovich', 12, 'enforcer', 70, 70, 95],
-        ['Gustav Forsling', 42, 'speed', 92, 84, 80], ['Aaron Ekblad', 5, 'enforcer', 78, 86, 90], ['Niko Mikkola', 77, 'enforcer', 79, 74, 92],
-        ['Dmitry Kulikov', 7, 'enforcer', 76, 72, 89], ['Nate Schmidt', 88, 'speed', 84, 78, 74], ['Uvis Balinskis', 26, 'speed', 83, 76, 74]
+        ['Aleksander Barkov', 16, 'sniper', 86, 93, 84], ['Matthew Tkachuk', 19, 'enforcer', 82, 91, 93], ['Brady Tkachuk', 7, 'enforcer', 83, 89, 98],
+        ['Sam Reinhart', 13, 'sniper', 85, 96, 74], ['Brad Marchand', 63, 'speed', 86, 88, 84], ['Sam Bennett', 9, 'enforcer', 85, 85, 94],
+        ['Carter Verhaeghe', 23, 'speed', 92, 91, 72], ['Anton Lundell', 15, 'speed', 87, 84, 78], ['Eetu Luostarinen', 27, 'enforcer', 83, 79, 84],
+        ['Tomas Nosek', 92, 'enforcer', 75, 72, 84], ['Jonah Gadjovich', 12, 'enforcer', 70, 70, 95], ['Mackie Samoskevich', 24, 'speed', 90, 85, 66],
+        ['Gustav Forsling', 42, 'speed', 92, 84, 80], ['Seth Jones', 3, 'enforcer', 84, 85, 87], ['Aaron Ekblad', 5, 'enforcer', 78, 86, 90],
+        ['Niko Mikkola', 77, 'enforcer', 79, 74, 92], ['Dmitry Kulikov', 70, 'enforcer', 76, 72, 89], ['Uvis Balinskis', 26, 'speed', 83, 76, 74]
       ]
     },
     {
       abbr: 'LAK', name: 'Los Angeles Kings', color: '#111111', accent: '#a2aaad',
-      goalies: [['Darcy Kuemper', 35, 'mur'], ['David Rittich', 31, 'reflex']],
+      goalies: [['Darcy Kuemper', 35, 'mur'], ['Anton Forsberg', 31, 'reflex']],
       skaters: [
-        ['Anze Kopitar', 11, 'sniper', 80, 89, 82], ['Adrian Kempe', 9, 'speed', 94, 93, 76], ['Kevin Fiala', 22, 'speed', 91, 90, 70],
-        ['Quinton Byfield', 55, 'speed', 92, 86, 84], ['Phillip Danault', 24, 'enforcer', 82, 80, 84], ['Trevor Moore', 12, 'speed', 90, 84, 72],
-        ['Alex Laferriere', 14, 'sniper', 85, 86, 78], ['Warren Foegele', 37, 'speed', 90, 80, 82], ['Tanner Jeannot', 10, 'enforcer', 76, 74, 97],
-        ['Alex Turcotte', 15, 'speed', 88, 79, 72], ['Trevor Lewis', 61, 'enforcer', 77, 72, 84], ['Akil Thomas', 26, 'speed', 85, 78, 72],
-        ['Drew Doughty', 8, 'enforcer', 82, 87, 90], ['Mikey Anderson', 44, 'enforcer', 79, 74, 90], ['Vladislav Gavrikov', 84, 'enforcer', 78, 76, 89],
-        ['Brandt Clarke', 92, 'speed', 89, 84, 70], ['Joel Edmundson', 6, 'enforcer', 70, 74, 95], ['Jordan Spence', 21, 'speed', 87, 78, 68]
+        ['Artemi Panarin', 10, 'sniper', 91, 96, 62], ['Adrian Kempe', 9, 'speed', 94, 94, 76], ['Quinton Byfield', 55, 'speed', 93, 88, 85],
+        ['Kevin Fiala', 22, 'speed', 91, 90, 70], ['Anze Kopitar', 11, 'sniper', 79, 88, 82], ['Mats Zuccarello', 36, 'speed', 86, 85, 62],
+        ['Trevor Moore', 12, 'speed', 90, 84, 72], ['Alex Laferriere', 14, 'sniper', 86, 87, 78], ['Scott Laughton', 21, 'enforcer', 82, 79, 86],
+        ['Erik Haula', 56, 'speed', 85, 80, 78], ['Joel Armia', 40, 'enforcer', 77, 81, 86], ['Corey Perry', 90, 'enforcer', 68, 80, 88],
+        ['Drew Doughty', 8, 'enforcer', 81, 87, 90], ['Brandt Clarke', 92, 'speed', 90, 86, 72], ['Mikey Anderson', 44, 'enforcer', 79, 74, 90],
+        ['Joel Edmundson', 6, 'enforcer', 70, 74, 95], ['Brian Dumoulin', 2, 'enforcer', 73, 68, 85], ['Cody Ceci', 5, 'enforcer', 78, 74, 84]
       ]
     },
     {
       abbr: 'MIN', name: 'Minnesota Wild', color: '#154734', accent: '#a6192e',
-      goalies: [['Filip Gustavsson', 32, 'mur'], ['Marc-Andre Fleury', 29, 'reflex']],
+      goalies: [['Filip Gustavsson', 32, 'mur'], ['Jesper Wallstedt', 30, 'reflex']],
       skaters: [
-        ['Kirill Kaprizov', 97, 'sniper', 93, 97, 72], ['Matt Boldy', 12, 'sniper', 86, 92, 76], ['Joel Eriksson Ek', 14, 'enforcer', 81, 86, 91],
-        ['Mats Zuccarello', 36, 'speed', 87, 85, 62], ['Marco Rossi', 23, 'speed', 89, 85, 68], ['Marcus Johansson', 90, 'speed', 88, 79, 64],
-        ['Ryan Hartman', 38, 'enforcer', 83, 81, 88], ['Marcus Foligno', 17, 'enforcer', 75, 76, 96], ['Yakov Trenin', 13, 'enforcer', 78, 74, 91],
-        ['Frederick Gaudreau', 89, 'speed', 83, 78, 72], ['Marat Khusnutdinov', 22, 'speed', 91, 74, 66], ['Jakub Lauko', 94, 'enforcer', 84, 70, 88],
-        ['Brock Faber', 7, 'speed', 90, 81, 80], ['Jared Spurgeon', 46, 'speed', 87, 82, 74], ['Jonas Brodin', 25, 'speed', 90, 75, 78],
-        ['Jake Middleton', 5, 'enforcer', 74, 74, 93], ['Zach Bogosian', 24, 'enforcer', 72, 74, 91], ['Declan Chisholm', 47, 'speed', 84, 76, 70]
+        ['Kirill Kaprizov', 97, 'sniper', 93, 97, 72], ['Matt Boldy', 12, 'sniper', 87, 93, 76], ['Joel Eriksson Ek', 14, 'enforcer', 81, 87, 91],
+        ['Blake Coleman', 20, 'enforcer', 84, 83, 86], ['Bobby Brink', 10, 'speed', 87, 83, 66], ['Danila Yurov', 22, 'speed', 90, 86, 68],
+        ['Ryan Hartman', 38, 'enforcer', 83, 81, 88], ['Marcus Foligno', 17, 'enforcer', 75, 76, 96], ['Nick Foligno', 71, 'enforcer', 73, 76, 91],
+        ['Yakov Trenin', 13, 'enforcer', 78, 74, 91], ['Michael McCarron', 47, 'enforcer', 70, 72, 95], ['Nico Sturm', 78, 'speed', 85, 74, 82],
+        ['Quinn Hughes', 43, 'speed', 99, 89, 68], ['Brock Faber', 7, 'speed', 91, 82, 80], ['Jonas Brodin', 25, 'speed', 90, 75, 78],
+        ['Jared Spurgeon', 46, 'speed', 87, 82, 74], ['Olli Maatta', 2, 'enforcer', 75, 72, 82], ['Zach Bogosian', 24, 'enforcer', 72, 74, 91]
       ]
     },
     {
       abbr: 'MTL', name: 'Montreal Canadiens', color: '#af1e2d', accent: '#192168',
-      goalies: [['Sam Montembeault', 35, 'mur'], ['Cayden Primeau', 30, 'reflex']],
+      goalies: [['Jakub Dobes', 75, 'mur'], ['Jacob Fowler', 32, 'reflex']],
       skaters: [
-        ['Nick Suzuki', 14, 'sniper', 86, 91, 76], ['Cole Caufield', 13, 'sniper', 90, 95, 58], ['Juraj Slafkovsky', 20, 'enforcer', 82, 86, 91],
-        ['Kirby Dach', 77, 'enforcer', 82, 83, 86], ['Patrik Laine', 92, 'sniper', 79, 96, 74], ['Alex Newhook', 15, 'speed', 93, 81, 68],
-        ['Josh Anderson', 17, 'enforcer', 89, 79, 92], ['Jake Evans', 71, 'speed', 87, 76, 76], ['Christian Dvorak', 28, 'enforcer', 78, 77, 80],
-        ['Joel Armia', 40, 'enforcer', 77, 81, 86], ['Brendan Gallagher', 11, 'enforcer', 81, 81, 88], ['Emil Heineman', 51, 'sniper', 83, 86, 80],
-        ['Mike Matheson', 8, 'speed', 93, 84, 76], ['Lane Hutson', 48, 'speed', 94, 81, 58], ['Kaiden Guhle', 21, 'enforcer', 85, 78, 90],
-        ['David Savard', 58, 'enforcer', 68, 72, 92], ['Arber Xhekaj', 72, 'enforcer', 74, 78, 99], ['Justin Barron', 52, 'speed', 84, 78, 74]
+        ['Nick Suzuki', 14, 'sniper', 87, 92, 76], ['Cole Caufield', 13, 'sniper', 90, 96, 58], ['Juraj Slafkovsky', 20, 'enforcer', 83, 87, 91],
+        ['Ivan Demidov', 93, 'speed', 94, 91, 64], ['Chris Kreider', 19, 'speed', 89, 90, 84], ['Patrik Laine', 92, 'sniper', 79, 96, 74],
+        ['Kirby Dach', 77, 'enforcer', 82, 83, 86], ['Alex Newhook', 15, 'speed', 93, 81, 68], ['Zack Bolduc', 76, 'sniper', 86, 88, 74],
+        ['Josh Anderson', 17, 'enforcer', 89, 79, 92], ['Jake Evans', 71, 'speed', 87, 76, 76], ['Owen Beck', 62, 'speed', 88, 79, 76],
+        ['Lane Hutson', 48, 'speed', 95, 84, 60], ['Noah Dobson', 53, 'sniper', 88, 90, 78], ['Mike Matheson', 8, 'speed', 93, 84, 76],
+        ['Kaiden Guhle', 21, 'enforcer', 85, 78, 90], ['Arber Xhekaj', 72, 'enforcer', 74, 78, 99], ['David Savard', 58, 'enforcer', 68, 72, 92]
       ]
     },
     {
       abbr: 'NSH', name: 'Nashville Predators', color: '#ffb81c', accent: '#041e42',
-      goalies: [['Juuse Saros', 74, 'reflex'], ['Scott Wedgewood', 41, 'mur']],
+      goalies: [['Juuse Saros', 74, 'reflex'], ['Justus Annunen', 29, 'mur']],
       skaters: [
         ['Filip Forsberg', 9, 'sniper', 86, 96, 80], ['Steven Stamkos', 91, 'sniper', 80, 97, 74], ['Jonathan Marchessault', 81, 'sniper', 86, 92, 74],
-        ['Ryan OReilly', 90, 'enforcer', 77, 85, 86], ['Gustav Nyquist', 14, 'speed', 87, 84, 64], ['Tommy Novak', 82, 'speed', 87, 82, 64],
-        ['Colton Sissons', 10, 'enforcer', 81, 78, 85], ['Luke Evangelista', 77, 'speed', 88, 83, 62], ['Philip Tomasino', 26, 'speed', 87, 82, 64],
-        ['Juuso Parssinen', 13, 'enforcer', 79, 78, 84], ['Michael McCarron', 47, 'enforcer', 70, 72, 95], ['Cole Smith', 36, 'enforcer', 79, 72, 90],
-        ['Roman Josi', 59, 'speed', 92, 91, 78], ['Brady Skjei', 76, 'speed', 88, 82, 82], ['Alexandre Carrier', 45, 'speed', 85, 76, 76],
-        ['Jeremy Lauzon', 3, 'enforcer', 76, 72, 98], ['Luke Schenn', 2, 'enforcer', 67, 70, 96], ['Dante Fabbro', 57, 'speed', 81, 76, 78]
+        ['Shane Wright', 51, 'sniper', 87, 88, 72], ['Ryan OReilly', 90, 'enforcer', 77, 85, 86], ['Mavrik Bourque', 22, 'speed', 88, 83, 68],
+        ['Alex Kerfoot', 15, 'speed', 88, 77, 72], ['Fedor Svechkov', 40, 'speed', 86, 81, 72], ['Zachary LHeureux', 68, 'enforcer', 83, 80, 92],
+        ['Philip Tomasino', 26, 'speed', 87, 82, 64], ['Tanner Molendyk', 4, 'speed', 91, 80, 74], ['Joakim Kemell', 25, 'sniper', 86, 88, 68],
+        ['Roman Josi', 59, 'speed', 92, 91, 78], ['Brady Skjei', 76, 'speed', 88, 82, 82], ['Ilya Lyubushkin', 46, 'enforcer', 71, 68, 94],
+        ['Jeremy Lauzon', 3, 'enforcer', 76, 72, 98], ['Jayden Struble', 47, 'enforcer', 82, 74, 90], ['Alexandre Carrier', 45, 'speed', 85, 76, 76]
       ]
     },
     {
       abbr: 'NJD', name: 'New Jersey Devils', color: '#ce1126', accent: '#111111',
-      goalies: [['Jacob Markstrom', 25, 'mur'], ['Jake Allen', 34, 'reflex']],
+      goalies: [['Connor Hellebuyck', 37, 'mur'], ['Jake Allen', 34, 'reflex']],
       skaters: [
-        ['Jack Hughes', 86, 'speed', 96, 92, 56], ['Nico Hischier', 13, 'speed', 89, 88, 76], ['Jesper Bratt', 63, 'speed', 96, 88, 62],
-        ['Timo Meier', 28, 'enforcer', 84, 90, 91], ['Stefan Noesen', 11, 'enforcer', 78, 83, 86], ['Dawson Mercer', 91, 'speed', 88, 84, 72],
-        ['Erik Haula', 56, 'speed', 86, 80, 78], ['Ondrej Palat', 18, 'enforcer', 80, 80, 84], ['Tomas Tatar', 90, 'speed', 84, 81, 66],
-        ['Paul Cotter', 47, 'enforcer', 83, 79, 91], ['Curtis Lazar', 42, 'enforcer', 80, 72, 88], ['Nathan Bastian', 14, 'enforcer', 74, 72, 92],
-        ['Dougie Hamilton', 7, 'sniper', 80, 94, 80], ['Luke Hughes', 43, 'speed', 94, 83, 68], ['Brett Pesce', 22, 'enforcer', 81, 76, 86],
-        ['Brenden Dillon', 5, 'enforcer', 73, 72, 95], ['Jonas Siegenthaler', 71, 'enforcer', 78, 72, 87], ['Johnathan Kovacevic', 8, 'enforcer', 75, 74, 88]
+        ['Jack Hughes', 86, 'speed', 97, 93, 56], ['Nico Hischier', 13, 'speed', 89, 89, 76], ['Jesper Bratt', 63, 'speed', 96, 89, 62],
+        ['Timo Meier', 28, 'enforcer', 84, 90, 91], ['Luke Evangelista', 77, 'speed', 89, 86, 64], ['Stefan Noesen', 11, 'enforcer', 78, 84, 86],
+        ['Anthony Mantha', 39, 'sniper', 77, 87, 82], ['Connor Brown', 16, 'speed', 88, 79, 74], ['Cody Glass', 12, 'speed', 84, 80, 72],
+        ['Jesper Boqvist', 70, 'speed', 89, 78, 68], ['Ondrej Palat', 18, 'enforcer', 80, 80, 84], ['Arseny Gritsyuk', 81, 'sniper', 88, 87, 66],
+        ['Luke Hughes', 43, 'speed', 95, 85, 68], ['Dougie Hamilton', 7, 'sniper', 80, 94, 80], ['Brett Pesce', 22, 'enforcer', 81, 76, 86],
+        ['Brenden Dillon', 5, 'enforcer', 73, 72, 95], ['Jonas Siegenthaler', 71, 'enforcer', 78, 72, 87], ['Declan Chisholm', 47, 'speed', 84, 76, 70]
       ]
     },
     {
       abbr: 'NYI', name: 'New York Islanders', color: '#00539b', accent: '#f47d30',
       goalies: [['Ilya Sorokin', 30, 'reflex'], ['Semyon Varlamov', 40, 'mur']],
       skaters: [
-        ['Mathew Barzal', 13, 'speed', 96, 86, 64], ['Bo Horvat', 14, 'sniper', 84, 91, 80], ['Brock Nelson', 29, 'sniper', 83, 92, 76],
-        ['Kyle Palmieri', 21, 'sniper', 82, 88, 78], ['Anders Lee', 27, 'enforcer', 75, 85, 90], ['Anthony Duclair', 11, 'speed', 93, 85, 64],
-        ['Jean-Gabriel Pageau', 44, 'speed', 85, 79, 80], ['Simon Holmstrom', 10, 'speed', 86, 82, 70], ['Maxim Tsyplakov', 7, 'enforcer', 80, 83, 88],
-        ['Casey Cizikas', 53, 'enforcer', 83, 74, 88], ['Kyle MacLean', 32, 'enforcer', 80, 72, 86], ['Matt Martin', 17, 'enforcer', 66, 66, 97],
-        ['Noah Dobson', 8, 'sniper', 87, 89, 76], ['Alexander Romanov', 28, 'enforcer', 82, 76, 95], ['Ryan Pulock', 6, 'sniper', 77, 92, 88],
-        ['Adam Pelech', 3, 'enforcer', 78, 74, 89], ['Scott Mayfield', 24, 'enforcer', 71, 72, 92], ['Mike Reilly', 2, 'speed', 86, 76, 68]
+        ['Mathew Barzal', 13, 'speed', 96, 87, 64], ['Bo Horvat', 14, 'sniper', 84, 92, 80], ['Kyle Palmieri', 21, 'sniper', 82, 88, 78],
+        ['Anthony Duclair', 11, 'speed', 93, 85, 64], ['Emil Heineman', 51, 'sniper', 84, 87, 80], ['Simon Holmstrom', 10, 'speed', 87, 84, 70],
+        ['Victor Eklund', 72, 'speed', 90, 85, 70], ['Jean-Gabriel Pageau', 44, 'speed', 85, 79, 80], ['Calum Ritchie', 16, 'speed', 88, 84, 74],
+        ['Casey Cizikas', 53, 'enforcer', 83, 74, 88], ['Kyle MacLean', 32, 'enforcer', 80, 72, 86], ['Pierre Engvall', 18, 'speed', 91, 76, 74],
+        ['Matthew Schaefer', 48, 'speed', 95, 86, 74], ['Alexander Romanov', 28, 'enforcer', 82, 76, 95], ['Ryan Pulock', 6, 'sniper', 77, 92, 88],
+        ['Adam Pelech', 3, 'enforcer', 78, 74, 89], ['Tony DeAngelo', 77, 'sniper', 86, 84, 70], ['Logan Stanley', 64, 'enforcer', 68, 76, 96]
       ]
     },
     {
       abbr: 'NYR', name: 'New York Rangers', color: '#0038a8', accent: '#ce1126',
-      goalies: [['Igor Shesterkin', 31, 'reflex'], ['Jonathan Quick', 32, 'mur']],
+      goalies: [['Igor Shesterkin', 31, 'reflex'], ['Arvid Soderblom', 40, 'mur']],
       skaters: [
-        ['Artemi Panarin', 10, 'sniper', 91, 96, 62], ['Mika Zibanejad', 93, 'sniper', 87, 93, 76], ['Chris Kreider', 20, 'speed', 91, 90, 84],
-        ['Vincent Trocheck', 16, 'enforcer', 85, 86, 86], ['Alexis Lafreniere', 13, 'sniper', 86, 90, 78], ['Filip Chytil', 72, 'speed', 91, 84, 72],
-        ['Reilly Smith', 91, 'speed', 85, 83, 70], ['Will Cuylle', 50, 'enforcer', 83, 81, 93], ['Kaapo Kakko', 24, 'enforcer', 80, 81, 82],
-        ['Sam Carrick', 39, 'enforcer', 78, 72, 88], ['Adam Edstrom', 84, 'enforcer', 76, 74, 92], ['Matt Rempe', 73, 'enforcer', 68, 66, 99],
-        ['Adam Fox', 23, 'speed', 88, 86, 72], ['KAndre Miller', 79, 'speed', 90, 81, 86], ['Ryan Lindgren', 55, 'enforcer', 78, 70, 91],
-        ['Braden Schneider', 4, 'enforcer', 80, 76, 90], ['Zac Jones', 6, 'speed', 88, 76, 66], ['Victor Mancini', 90, 'enforcer', 80, 76, 86]
+        ['J.T. Miller', 8, 'enforcer', 85, 92, 92], ['Mika Zibanejad', 93, 'sniper', 87, 93, 76], ['Alexis Lafreniere', 13, 'sniper', 87, 91, 78],
+        ['Will Cuylle', 50, 'enforcer', 84, 83, 94], ['Gabe Perreault', 94, 'sniper', 87, 89, 62], ['Reilly Smith', 91, 'speed', 85, 83, 70],
+        ['Brett Berard', 65, 'speed', 90, 81, 72], ['Jonny Brodzinski', 22, 'speed', 87, 79, 74], ['Adam Edstrom', 84, 'enforcer', 76, 74, 92],
+        ['Matt Rempe', 73, 'enforcer', 68, 66, 99], ['Juuso Parssinen', 71, 'enforcer', 79, 78, 84], ['Taylor Raddysh', 16, 'enforcer', 80, 80, 84],
+        ['Adam Fox', 23, 'speed', 88, 87, 72], ['Sean Durzi', 5, 'speed', 88, 84, 76], ['Marcus Pettersson', 28, 'enforcer', 80, 74, 84],
+        ['Braden Schneider', 4, 'enforcer', 80, 76, 90], ['Scott Morrow', 56, 'speed', 87, 82, 74], ['Urho Vaakanainen', 18, 'enforcer', 80, 72, 82]
       ]
     },
     {
       abbr: 'OTT', name: 'Ottawa Senators', color: '#c52032', accent: '#c2912c',
-      goalies: [['Linus Ullmark', 35, 'mur'], ['Anton Forsberg', 31, 'reflex']],
+      goalies: [['Linus Ullmark', 35, 'mur'], ['Samuel Ersson', 33, 'reflex']],
       skaters: [
-        ['Brady Tkachuk', 7, 'enforcer', 82, 88, 98], ['Tim Stutzle', 18, 'speed', 95, 89, 72], ['Josh Norris', 9, 'sniper', 86, 91, 76],
-        ['Drake Batherson', 19, 'sniper', 85, 90, 76], ['Claude Giroux', 28, 'sniper', 81, 88, 74], ['Shane Pinto', 12, 'sniper', 85, 86, 78],
-        ['Ridly Greig', 71, 'enforcer', 85, 80, 88], ['David Perron', 57, 'sniper', 76, 85, 82], ['Michael Amadio', 22, 'speed', 82, 80, 74],
-        ['Nick Cousins', 21, 'enforcer', 80, 75, 84], ['Noah Gregor', 73, 'speed', 93, 74, 74], ['Zack MacEwen', 17, 'enforcer', 72, 70, 94],
-        ['Jake Sanderson', 85, 'speed', 93, 84, 80], ['Thomas Chabot', 72, 'speed', 88, 83, 76], ['Artem Zub', 2, 'enforcer', 80, 74, 89],
-        ['Nick Jensen', 3, 'speed', 87, 74, 78], ['Tyler Kleven', 43, 'enforcer', 74, 74, 94], ['Travis Hamonic', 23, 'enforcer', 70, 72, 88]
+        ['Tim Stutzle', 18, 'speed', 96, 90, 72], ['Dylan Cozens', 24, 'speed', 89, 86, 80], ['William Eklund', 70, 'speed', 91, 87, 68],
+        ['Drake Batherson', 19, 'sniper', 85, 90, 76], ['Fabian Zetterlund', 20, 'sniper', 87, 89, 82], ['Shane Pinto', 12, 'sniper', 85, 87, 78],
+        ['Claude Giroux', 28, 'sniper', 80, 87, 74], ['Andre Burakovsky', 95, 'speed', 88, 86, 66], ['Ridly Greig', 71, 'enforcer', 85, 81, 88],
+        ['Michael Amadio', 22, 'speed', 82, 80, 74], ['Warren Foegele', 37, 'speed', 90, 81, 82], ['Nick Cousins', 21, 'enforcer', 80, 75, 84],
+        ['Jake Sanderson', 85, 'speed', 94, 86, 80], ['Thomas Chabot', 72, 'speed', 88, 83, 76], ['Carter Yakemchuk', 44, 'enforcer', 84, 87, 90],
+        ['Artem Zub', 2, 'enforcer', 80, 74, 89], ['Jordan Spence', 26, 'speed', 87, 78, 68], ['Tyler Kleven', 43, 'enforcer', 74, 74, 94]
       ]
     },
     {
       abbr: 'PHI', name: 'Philadelphia Flyers', color: '#f74902', accent: '#111111',
-      goalies: [['Samuel Ersson', 33, 'reflex'], ['Ivan Fedotov', 82, 'mur']],
+      goalies: [['Joseph Woll', 60, 'reflex'], ['Dan Vladar', 80, 'mur']],
       skaters: [
-        ['Travis Konecny', 11, 'speed', 93, 91, 80], ['Matvei Michkov', 39, 'sniper', 88, 94, 62], ['Owen Tippett', 74, 'speed', 94, 91, 78],
-        ['Sean Couturier', 14, 'enforcer', 76, 82, 86], ['Tyson Foerster', 71, 'sniper', 82, 90, 76], ['Joel Farabee', 86, 'speed', 87, 84, 74],
-        ['Morgan Frost', 48, 'speed', 87, 82, 66], ['Scott Laughton', 21, 'enforcer', 82, 78, 86], ['Bobby Brink', 10, 'speed', 86, 81, 64],
-        ['Noah Cates', 27, 'enforcer', 81, 76, 82], ['Garnet Hathaway', 19, 'enforcer', 78, 72, 96], ['Nicolas Deslauriers', 44, 'enforcer', 68, 66, 98],
-        ['Travis Sanheim', 6, 'speed', 88, 82, 82], ['Cam York', 8, 'speed', 87, 80, 74], ['Jamie Drysdale', 9, 'speed', 92, 79, 68],
-        ['Rasmus Ristolainen', 55, 'enforcer', 75, 80, 95], ['Nick Seeler', 24, 'enforcer', 76, 70, 91], ['Egor Zamula', 5, 'enforcer', 76, 74, 84]
+        ['Matvei Michkov', 39, 'sniper', 90, 96, 64], ['Travis Konecny', 11, 'speed', 93, 92, 80], ['Trevor Zegras', 46, 'speed', 92, 87, 60],
+        ['Owen Tippett', 74, 'speed', 94, 91, 78], ['Tyson Foerster', 71, 'sniper', 83, 91, 76], ['Porter Martone', 17, 'enforcer', 85, 89, 88],
+        ['Sean Couturier', 14, 'enforcer', 76, 82, 86], ['Christian Dvorak', 28, 'enforcer', 78, 78, 80], ['Noah Cates', 27, 'enforcer', 81, 77, 82],
+        ['Noel Acciari', 52, 'enforcer', 77, 72, 92], ['Carl Grundstrom', 91, 'enforcer', 80, 76, 89], ['Garnet Hathaway', 19, 'enforcer', 78, 72, 96],
+        ['Travis Sanheim', 6, 'speed', 88, 82, 82], ['Cam York', 8, 'speed', 87, 80, 74], ['Jamie Drysdale', 9, 'speed', 92, 80, 68],
+        ['David Jiricek', 24, 'enforcer', 81, 84, 88], ['Rasmus Ristolainen', 55, 'enforcer', 75, 80, 95], ['Simon Benoit', 2, 'enforcer', 74, 68, 95]
       ]
     },
     {
       abbr: 'PIT', name: 'Pittsburgh Penguins', color: '#fcb514', accent: '#111111',
-      goalies: [['Tristan Jarry', 35, 'reflex'], ['Alex Nedeljkovic', 39, 'mur']],
+      goalies: [['Sergei Murashov', 30, 'reflex'], ['Alex Nedeljkovic', 39, 'mur']],
       skaters: [
-        ['Sidney Crosby', 87, 'sniper', 88, 95, 82], ['Evgeni Malkin', 71, 'sniper', 82, 94, 82], ['Bryan Rust', 17, 'speed', 90, 88, 74],
-        ['Rickard Rakell', 67, 'sniper', 85, 89, 72], ['Michael Bunting', 8, 'enforcer', 82, 84, 86], ['Drew OConnor', 10, 'speed', 90, 80, 78],
-        ['Lars Eller', 20, 'enforcer', 78, 80, 82], ['Anthony Beauvillier', 72, 'speed', 89, 81, 66], ['Cody Glass', 19, 'speed', 84, 79, 72],
-        ['Kevin Hayes', 13, 'enforcer', 72, 81, 82], ['Noel Acciari', 55, 'enforcer', 77, 72, 92], ['Blake Lizotte', 46, 'speed', 89, 74, 76],
-        ['Erik Karlsson', 65, 'speed', 92, 89, 68], ['Kris Letang', 58, 'speed', 89, 86, 82], ['Marcus Pettersson', 28, 'enforcer', 80, 74, 84],
-        ['Matt Grzelcyk', 24, 'speed', 87, 76, 68], ['Ryan Graves', 27, 'enforcer', 76, 76, 88], ['Jack St. Ivany', 3, 'enforcer', 75, 70, 86]
+        ['Sidney Crosby', 87, 'sniper', 88, 95, 82], ['Evgeni Malkin', 71, 'sniper', 81, 93, 82], ['Rickard Rakell', 67, 'sniper', 85, 90, 72],
+        ['Bryan Rust', 17, 'speed', 90, 88, 74], ['Yegor Chinakhov', 59, 'sniper', 90, 91, 66], ['Nicholas Robertson', 89, 'sniper', 88, 88, 64],
+        ['Rutger McGroarty', 2, 'enforcer', 83, 84, 86], ['Tommy Novak', 82, 'speed', 87, 83, 64], ['Hendrix Lapierre', 29, 'speed', 89, 81, 66],
+        ['Ville Koivunen', 41, 'speed', 88, 84, 64], ['Justin Brazeau', 55, 'enforcer', 72, 80, 88], ['Blake Lizotte', 46, 'speed', 89, 74, 76],
+        ['Erik Karlsson', 65, 'speed', 91, 89, 68], ['Kris Letang', 58, 'speed', 88, 86, 82], ['Samuel Girard', 49, 'speed', 90, 77, 66],
+        ['Ryan Graves', 27, 'enforcer', 76, 76, 88], ['Owen Pickering', 38, 'speed', 84, 74, 82], ['Declan Carlile', 4, 'enforcer', 78, 72, 84]
       ]
     },
     {
       abbr: 'SJS', name: 'San Jose Sharks', color: '#006d75', accent: '#ea7200',
-      goalies: [['Mackenzie Blackwood', 29, 'mur'], ['Vitek Vanecek', 41, 'reflex']],
+      goalies: [['Yaroslav Askarov', 30, 'reflex'], ['Alex Georgiev', 40, 'mur']],
       skaters: [
-        ['Macklin Celebrini', 71, 'speed', 92, 91, 74], ['William Eklund', 72, 'speed', 91, 86, 66], ['Tyler Toffoli', 73, 'sniper', 79, 92, 74],
-        ['Mikael Granlund', 64, 'speed', 86, 84, 70], ['Will Smith', 2, 'speed', 90, 86, 62], ['Fabian Zetterlund', 20, 'sniper', 86, 88, 82],
-        ['Alex Wennberg', 21, 'speed', 84, 78, 72], ['Barclay Goodrow', 23, 'enforcer', 78, 74, 88], ['Luke Kunin', 11, 'enforcer', 81, 78, 88],
-        ['Nico Sturm', 7, 'speed', 85, 74, 82], ['Klim Kostin', 10, 'enforcer', 76, 76, 94], ['Carl Grundstrom', 91, 'enforcer', 80, 76, 89],
-        ['Jake Walman', 96, 'sniper', 86, 89, 78], ['Mario Ferraro', 38, 'enforcer', 84, 74, 89], ['Cody Ceci', 4, 'enforcer', 78, 74, 84],
-        ['Jan Rutta', 84, 'enforcer', 74, 74, 86], ['Henry Thrun', 3, 'speed', 83, 74, 74], ['Timothy Liljegren', 37, 'speed', 84, 78, 76]
+        ['Macklin Celebrini', 71, 'speed', 94, 93, 76], ['Will Smith', 2, 'speed', 92, 89, 64], ['Michael Misa', 77, 'speed', 93, 90, 68],
+        ['Tyler Toffoli', 73, 'sniper', 79, 92, 74], ['Mason Marchment', 27, 'enforcer', 82, 85, 89], ['Kiefer Sherwood', 44, 'enforcer', 86, 79, 97],
+        ['Collin Graf', 51, 'speed', 88, 82, 68], ['Igor Chernyshov', 24, 'sniper', 86, 87, 78], ['Ty Dellandrea', 53, 'enforcer', 83, 76, 86],
+        ['Barclay Goodrow', 23, 'enforcer', 78, 74, 88], ['Brett Leason', 20, 'enforcer', 75, 74, 82], ['Zack Ostapchuk', 38, 'enforcer', 81, 74, 88],
+        ['Darnell Nurse', 25, 'enforcer', 85, 81, 93], ['Dmitry Orlov', 9, 'enforcer', 81, 82, 89], ['Sam Dickinson', 6, 'speed', 90, 84, 78],
+        ['Henry Thrun', 3, 'speed', 83, 74, 74], ['Timothy Liljegren', 37, 'speed', 84, 78, 76], ['Jan Rutta', 84, 'enforcer', 74, 74, 86]
       ]
     },
     {
       abbr: 'SEA', name: 'Seattle Kraken', color: '#001628', accent: '#99d9d9',
       goalies: [['Joey Daccord', 35, 'reflex'], ['Philipp Grubauer', 31, 'mur']],
       skaters: [
-        ['Jared McCann', 19, 'sniper', 87, 93, 70], ['Matty Beniers', 10, 'speed', 90, 84, 72], ['Jordan Eberle', 7, 'sniper', 84, 88, 66],
-        ['Chandler Stephenson', 9, 'speed', 93, 82, 72], ['Oliver Bjorkstrand', 22, 'sniper', 84, 90, 70], ['Shane Wright', 51, 'sniper', 86, 86, 70],
-        ['Jaden Schwartz', 17, 'speed', 84, 83, 76], ['Eeli Tolvanen', 20, 'sniper', 83, 89, 82], ['Andre Burakovsky', 95, 'speed', 88, 86, 66],
-        ['Yanni Gourde', 37, 'enforcer', 87, 78, 86], ['Brandon Tanev', 13, 'speed', 93, 74, 90], ['Tye Kartye', 52, 'enforcer', 82, 80, 91],
+        ['Jared McCann', 19, 'sniper', 87, 93, 70], ['Matty Beniers', 10, 'speed', 90, 85, 72], ['Kaapo Kakko', 84, 'enforcer', 82, 84, 84],
+        ['Chandler Stephenson', 9, 'speed', 93, 82, 72], ['Bobby McMann', 74, 'speed', 90, 86, 82], ['Berkly Catton', 27, 'speed', 93, 86, 62],
+        ['Jordan Eberle', 7, 'sniper', 83, 88, 66], ['Eeli Tolvanen', 20, 'sniper', 83, 89, 82], ['Matthew Wood', 15, 'sniper', 82, 87, 80],
+        ['Frederick Gaudreau', 89, 'speed', 83, 78, 72], ['Tye Kartye', 52, 'enforcer', 82, 80, 91], ['Ben Meyers', 26, 'speed', 85, 74, 76],
         ['Vince Dunn', 29, 'speed', 89, 86, 78], ['Brandon Montour', 62, 'speed', 91, 88, 82], ['Adam Larsson', 6, 'enforcer', 77, 78, 94],
-        ['Jamie Oleksiak', 24, 'enforcer', 72, 76, 95], ['Ryker Evans', 41, 'speed', 87, 78, 76], ['Will Borgen', 3, 'enforcer', 78, 74, 91]
+        ['Ryan Lindgren', 55, 'enforcer', 78, 70, 92], ['Ryker Evans', 41, 'speed', 87, 79, 76], ['Josh Mahura', 28, 'enforcer', 80, 74, 84]
       ]
     },
     {
       abbr: 'STL', name: 'St. Louis Blues', color: '#002f87', accent: '#fcb514',
       goalies: [['Jordan Binnington', 50, 'reflex'], ['Joel Hofer', 30, 'mur']],
       skaters: [
-        ['Robert Thomas', 18, 'speed', 92, 88, 72], ['Jordan Kyrou', 25, 'speed', 96, 91, 62], ['Pavel Buchnevich', 89, 'sniper', 85, 91, 76],
-        ['Brayden Schenn', 10, 'enforcer', 80, 85, 92], ['Jake Neighbours', 63, 'enforcer', 82, 86, 90], ['Dylan Holloway', 81, 'speed', 91, 84, 80],
-        ['Brandon Saad', 20, 'sniper', 84, 85, 74], ['Zack Bolduc', 76, 'sniper', 85, 87, 72], ['Alexandre Texier', 9, 'speed', 88, 80, 72],
-        ['Oskar Sundqvist', 70, 'enforcer', 75, 76, 86], ['Alexey Toropchenko', 13, 'enforcer', 84, 74, 92], ['Nathan Walker', 26, 'enforcer', 85, 72, 88],
-        ['Colton Parayko', 55, 'enforcer', 80, 91, 93], ['Philip Broberg', 6, 'speed', 91, 82, 78], ['Justin Faulk', 72, 'sniper', 81, 87, 82],
-        ['Nick Leddy', 4, 'speed', 88, 76, 72], ['Ryan Suter', 22, 'enforcer', 73, 74, 84], ['Matthew Kessel', 51, 'enforcer', 77, 74, 84]
+        ['Robert Thomas', 18, 'speed', 92, 89, 72], ['Jordan Kyrou', 25, 'speed', 96, 91, 62], ['Pavel Buchnevich', 89, 'sniper', 85, 91, 76],
+        ['Mason McTavish', 23, 'enforcer', 82, 87, 88], ['Dylan Holloway', 81, 'speed', 92, 86, 80], ['Connor McMichael', 24, 'speed', 90, 87, 74],
+        ['Jake Neighbours', 63, 'enforcer', 83, 87, 90], ['Jimmy Snuggerud', 21, 'sniper', 86, 91, 70], ['Dalibor Dvorsky', 54, 'sniper', 85, 88, 74],
+        ['Pius Suter', 44, 'speed', 85, 83, 72], ['Jonatan Berggren', 48, 'speed', 87, 81, 62], ['Alexey Toropchenko', 13, 'enforcer', 84, 74, 92],
+        ['Colton Parayko', 55, 'enforcer', 80, 91, 93], ['Philip Broberg', 6, 'speed', 92, 83, 78], ['Cam Fowler', 17, 'speed', 86, 81, 74],
+        ['Brandon Carlo', 26, 'enforcer', 74, 72, 89], ['Justin Barron', 52, 'speed', 84, 78, 74], ['Theo Lindstein', 27, 'speed', 86, 76, 74]
       ]
     },
     {
       abbr: 'TBL', name: 'Tampa Bay Lightning', color: '#002868', accent: '#ffffff',
-      goalies: [['Andrei Vasilevskiy', 88, 'mur'], ['Jonas Johansson', 31, 'reflex']],
+      goalies: [['Andrei Vasilevskiy', 88, 'mur'], ['Dennis Hildeby', 35, 'reflex']],
       skaters: [
         ['Nikita Kucherov', 86, 'sniper', 90, 98, 66], ['Brayden Point', 21, 'speed', 96, 93, 70], ['Jake Guentzel', 59, 'sniper', 88, 94, 70],
-        ['Brandon Hagel', 38, 'speed', 92, 88, 78], ['Anthony Cirelli', 71, 'speed', 89, 83, 82], ['Nick Paul', 20, 'enforcer', 80, 84, 88],
-        ['Conor Geekie', 14, 'enforcer', 81, 83, 86], ['Mitchell Chaffee', 41, 'enforcer', 81, 80, 86], ['Michael Eyssimont', 23, 'enforcer', 86, 76, 88],
-        ['Luke Glendening', 11, 'enforcer', 81, 70, 86], ['Zemgus Girgensons', 28, 'enforcer', 79, 72, 88], ['Cam Atkinson', 13, 'speed', 85, 81, 64],
+        ['Brandon Hagel', 38, 'speed', 93, 89, 78], ['Anthony Cirelli', 71, 'speed', 89, 84, 82], ['Conor Geekie', 14, 'enforcer', 82, 84, 88],
+        ['Oliver Bjorkstrand', 22, 'sniper', 84, 90, 70], ['Yanni Gourde', 37, 'enforcer', 87, 79, 86], ['Gage Goncalves', 93, 'speed', 87, 81, 70],
+        ['Mitchell Chaffee', 41, 'enforcer', 81, 80, 86], ['Zemgus Girgensons', 28, 'enforcer', 79, 72, 88], ['Jansen Harkins', 12, 'enforcer', 81, 74, 84],
         ['Victor Hedman', 77, 'sniper', 85, 92, 90], ['Ryan McDonagh', 27, 'enforcer', 80, 76, 89], ['Erik Cernak', 81, 'enforcer', 76, 76, 95],
-        ['JJ Moser', 90, 'speed', 86, 78, 78], ['Darren Raddysh', 43, 'sniper', 82, 85, 76], ['Emil Lilleberg', 78, 'enforcer', 76, 72, 92]
+        ['JJ Moser', 90, 'speed', 87, 79, 78], ['Emil Lilleberg', 78, 'enforcer', 77, 72, 93], ['Max Crozier', 65, 'enforcer', 81, 76, 84]
       ]
     },
     {
       abbr: 'TOR', name: 'Toronto Maple Leafs', color: '#00205b', accent: '#ffffff',
-      goalies: [['Anthony Stolarz', 41, 'mur'], ['Joseph Woll', 60, 'reflex']],
+      goalies: [['Anthony Stolarz', 41, 'mur'], ['Elvis Merzlikins', 90, 'reflex']],
       skaters: [
-        ['Auston Matthews', 34, 'sniper', 87, 99, 78], ['Mitch Marner', 16, 'speed', 93, 88, 66], ['William Nylander', 88, 'speed', 95, 93, 66],
-        ['John Tavares', 91, 'sniper', 79, 91, 80], ['Matthew Knies', 23, 'enforcer', 85, 85, 91], ['Max Domi', 11, 'speed', 88, 82, 80],
-        ['Bobby McMann', 74, 'speed', 90, 85, 82], ['Max Pacioretty', 67, 'sniper', 77, 89, 82], ['Nicholas Robertson', 89, 'sniper', 88, 87, 64],
-        ['Pontus Holmberg', 29, 'speed', 84, 76, 74], ['David Kampf', 64, 'enforcer', 81, 70, 82], ['Ryan Reaves', 75, 'enforcer', 64, 66, 99],
-        ['Morgan Rielly', 44, 'speed', 90, 85, 74], ['Chris Tanev', 8, 'enforcer', 77, 70, 91], ['Oliver Ekman-Larsson', 95, 'sniper', 83, 85, 78],
-        ['Jake McCabe', 22, 'enforcer', 79, 76, 94], ['Simon Benoit', 2, 'enforcer', 74, 68, 95], ['Conor Timmins', 25, 'speed', 82, 78, 76]
+        ['Auston Matthews', 34, 'sniper', 87, 99, 78], ['William Nylander', 88, 'speed', 95, 94, 66], ['Kirill Marchenko', 86, 'sniper', 86, 94, 76],
+        ['Gavin McKenna', 72, 'speed', 96, 93, 62], ['John Tavares', 91, 'sniper', 79, 91, 80], ['Nick Paul', 20, 'enforcer', 81, 84, 89],
+        ['Easton Cowan', 53, 'speed', 91, 85, 72], ['Max Domi', 11, 'speed', 88, 82, 80], ['Miles Wood', 28, 'speed', 93, 77, 85],
+        ['Colton Sissons', 10, 'enforcer', 81, 78, 85], ['Pontus Holmberg', 29, 'speed', 84, 76, 74], ['David Kampf', 64, 'enforcer', 81, 70, 82],
+        ['Morgan Rielly', 44, 'speed', 90, 85, 74], ['Chris Tanev', 8, 'enforcer', 77, 70, 91], ['Jake McCabe', 22, 'enforcer', 79, 76, 94],
+        ['Oliver Ekman-Larsson', 95, 'sniper', 83, 85, 78], ['Darren Raddysh', 43, 'sniper', 83, 86, 76], ['Nick Blankenburg', 7, 'speed', 87, 76, 76]
       ]
     },
     {
-      abbr: 'UTA', name: 'Utah Hockey Club', color: '#6cace4', accent: '#111111',
-      goalies: [['Connor Ingram', 39, 'reflex'], ['Karel Vejmelka', 70, 'mur']],
+      abbr: 'UTA', name: 'Utah Mammoth', color: '#6cace4', accent: '#111111',
+      goalies: [['Karel Vejmelka', 70, 'mur'], ['Sebastian Cossa', 33, 'reflex']],
       skaters: [
-        ['Clayton Keller', 9, 'speed', 93, 91, 62], ['Logan Cooley', 92, 'speed', 95, 86, 64], ['Dylan Guenther', 11, 'sniper', 88, 94, 68],
-        ['Nick Schmaltz', 8, 'speed', 89, 86, 64], ['Barrett Hayton', 27, 'sniper', 83, 85, 78], ['Lawson Crouse', 67, 'enforcer', 80, 84, 92],
-        ['Matias Maccelli', 63, 'speed', 90, 80, 60], ['Nick Bjugstad', 17, 'enforcer', 76, 82, 88], ['Alex Kerfoot', 15, 'speed', 88, 77, 72],
+        ['Clayton Keller', 9, 'speed', 93, 92, 62], ['Logan Cooley', 92, 'speed', 95, 88, 64], ['Dylan Guenther', 11, 'sniper', 89, 95, 68],
+        ['Vincent Trocheck', 16, 'enforcer', 85, 86, 87], ['Nick Schmaltz', 8, 'speed', 89, 86, 64], ['Anders Lee', 72, 'enforcer', 75, 85, 90],
+        ['Barrett Hayton', 27, 'sniper', 83, 85, 78], ['Lawson Crouse', 67, 'enforcer', 80, 84, 92], ['Daniil But', 50, 'sniper', 83, 87, 82],
         ['Jack McBain', 22, 'enforcer', 78, 78, 93], ['Kevin Stenlund', 82, 'enforcer', 77, 74, 86], ['Liam OBrien', 38, 'enforcer', 72, 68, 97],
-        ['Mikhail Sergachev', 98, 'sniper', 86, 89, 86], ['Sean Durzi', 50, 'speed', 87, 83, 76], ['John Marino', 6, 'speed', 85, 75, 80],
-        ['Michael Kesselring', 7, 'enforcer', 83, 82, 89], ['Ian Cole', 28, 'enforcer', 74, 72, 88], ['Juuso Valimaki', 4, 'speed', 83, 76, 78]
+        ['Mikhail Sergachev', 98, 'sniper', 86, 90, 86], ['MacKenzie Weegar', 52, 'enforcer', 82, 86, 91], ['John Marino', 6, 'speed', 85, 75, 80],
+        ['Dmitry Simashev', 26, 'enforcer', 84, 78, 90], ['Nate Schmidt', 88, 'speed', 84, 78, 74], ['Andrew Peeke', 20, 'enforcer', 73, 68, 86]
       ]
     },
     {
       abbr: 'VAN', name: 'Vancouver Canucks', color: '#00205b', accent: '#00843d',
-      goalies: [['Thatcher Demko', 35, 'mur'], ['Kevin Lankinen', 32, 'reflex']],
+      goalies: [['Kevin Lankinen', 32, 'reflex'], ['Thatcher Demko', 35, 'mur']],
       skaters: [
-        ['Elias Pettersson', 40, 'sniper', 89, 94, 72], ['J.T. Miller', 9, 'enforcer', 85, 92, 91], ['Brock Boeser', 6, 'sniper', 81, 95, 72],
-        ['Jake DeBrusk', 74, 'speed', 90, 87, 74], ['Conor Garland', 8, 'speed', 92, 84, 72], ['Dakota Joshua', 81, 'enforcer', 80, 81, 94],
-        ['Pius Suter', 24, 'speed', 84, 82, 72], ['Nils Hoglander', 21, 'speed', 89, 82, 76], ['Danton Heinen', 20, 'speed', 84, 80, 74],
-        ['Teddy Blueger', 53, 'enforcer', 82, 74, 82], ['Kiefer Sherwood', 44, 'enforcer', 86, 78, 97], ['Daniel Sprong', 10, 'sniper', 87, 88, 60],
-        ['Quinn Hughes', 43, 'speed', 98, 88, 66], ['Filip Hronek', 17, 'sniper', 86, 91, 82], ['Carson Soucy', 7, 'enforcer', 76, 74, 90],
-        ['Tyler Myers', 57, 'enforcer', 75, 80, 91], ['Vincent Desharnais', 73, 'enforcer', 69, 68, 95], ['Erik Brannstrom', 26, 'speed', 88, 76, 68]
+        ['Elias Pettersson', 40, 'sniper', 89, 94, 72], ['Brock Boeser', 6, 'sniper', 81, 95, 72], ['Marco Rossi', 23, 'speed', 90, 86, 68],
+        ['Jake DeBrusk', 74, 'speed', 90, 88, 74], ['Jonathan Lekkerimaki', 46, 'sniper', 88, 92, 62], ['Liam Ohgren', 28, 'speed', 88, 84, 74],
+        ['Filip Chytil', 72, 'speed', 91, 84, 72], ['Drew OConnor', 18, 'speed', 90, 80, 78], ['Paul Cotter', 47, 'enforcer', 83, 79, 91],
+        ['Brendan Gallagher', 11, 'enforcer', 80, 81, 88], ['Nils Hoglander', 21, 'speed', 89, 82, 76], ['Aatu Raty', 54, 'enforcer', 81, 80, 82],
+        ['Zeev Buium', 24, 'speed', 93, 85, 72], ['Filip Hronek', 17, 'sniper', 86, 91, 82], ['Tom Willander', 5, 'speed', 90, 78, 80],
+        ['Jamie Oleksiak', 67, 'enforcer', 72, 76, 95], ['Luke Schenn', 2, 'enforcer', 67, 70, 96], ['Victor Mancini', 90, 'enforcer', 80, 76, 86]
       ]
     },
     {
       abbr: 'VGK', name: 'Vegas Golden Knights', color: '#b4975a', accent: '#333f42',
-      goalies: [['Adin Hill', 33, 'mur'], ['Ilya Samsonov', 35, 'reflex']],
+      goalies: [['Adin Hill', 33, 'mur'], ['Carter Hart', 79, 'reflex']],
       skaters: [
-        ['Jack Eichel', 9, 'speed', 94, 94, 74], ['Mark Stone', 61, 'sniper', 79, 92, 84], ['Tomas Hertl', 48, 'enforcer', 80, 88, 88],
-        ['William Karlsson', 71, 'speed', 90, 87, 74], ['Ivan Barbashev', 49, 'enforcer', 85, 85, 90], ['Pavel Dorofeyev', 16, 'sniper', 85, 89, 68],
-        ['Victor Olofsson', 95, 'sniper', 83, 91, 62], ['Nicolas Roy', 10, 'enforcer', 79, 80, 86], ['Brett Howden', 21, 'enforcer', 83, 78, 85],
-        ['Keegan Kolesar', 55, 'enforcer', 81, 74, 96], ['Alexander Holtz', 26, 'sniper', 83, 87, 66], ['Tanner Pearson', 70, 'enforcer', 78, 79, 82],
-        ['Alex Pietrangelo', 7, 'enforcer', 82, 86, 88], ['Shea Theodore', 27, 'speed', 91, 88, 72], ['Noah Hanifin', 15, 'speed', 89, 84, 80],
-        ['Brayden McNabb', 3, 'enforcer', 74, 74, 95], ['Zach Whitecloud', 2, 'enforcer', 80, 74, 88], ['Nicolas Hague', 14, 'enforcer', 72, 78, 94]
+        ['Jack Eichel', 9, 'speed', 94, 94, 74], ['Mitch Marner', 93, 'speed', 94, 90, 66], ['Mark Stone', 61, 'sniper', 79, 92, 84],
+        ['Tomas Hertl', 48, 'enforcer', 80, 89, 88], ['William Karlsson', 71, 'speed', 90, 87, 74], ['Ivan Barbashev', 49, 'enforcer', 85, 86, 90],
+        ['Pavel Dorofeyev', 16, 'sniper', 86, 91, 68], ['Brett Howden', 21, 'enforcer', 84, 79, 86], ['Keegan Kolesar', 55, 'enforcer', 81, 74, 96],
+        ['Alexander Holtz', 26, 'sniper', 83, 87, 66], ['Brandon Saad', 20, 'sniper', 84, 85, 74], ['Tanner Pearson', 70, 'enforcer', 78, 79, 82],
+        ['Shea Theodore', 27, 'speed', 91, 88, 72], ['Noah Hanifin', 15, 'speed', 89, 84, 80], ['Rasmus Andersson', 4, 'sniper', 83, 87, 82],
+        ['Alex Pietrangelo', 7, 'enforcer', 81, 86, 88], ['Brayden McNabb', 3, 'enforcer', 74, 74, 95], ['Nicolas Hague', 14, 'enforcer', 72, 78, 94]
       ]
     },
     {
       abbr: 'WSH', name: 'Washington Capitals', color: '#c8102e', accent: '#041e42',
-      goalies: [['Charlie Lindgren', 79, 'reflex'], ['Logan Thompson', 48, 'mur']],
+      goalies: [['Logan Thompson', 48, 'mur'], ['Charlie Lindgren', 79, 'reflex']],
       skaters: [
-        ['Alex Ovechkin', 8, 'sniper', 76, 99, 88], ['Dylan Strome', 17, 'sniper', 83, 90, 72], ['Tom Wilson', 43, 'enforcer', 84, 84, 99],
-        ['Connor McMichael', 24, 'speed', 90, 86, 74], ['Pierre-Luc Dubois', 80, 'enforcer', 82, 84, 90], ['Aliaksei Protas', 21, 'enforcer', 84, 82, 88],
-        ['Andrew Mangiapane', 88, 'speed', 88, 84, 74], ['Hendrix Lapierre', 29, 'speed', 89, 80, 66], ['Jakub Vrana', 15, 'speed', 90, 86, 62],
-        ['Nic Dowd', 26, 'enforcer', 79, 75, 88], ['Brandon Duhaime', 22, 'enforcer', 84, 72, 92], ['Taylor Raddysh', 16, 'enforcer', 80, 80, 84],
-        ['John Carlson', 74, 'sniper', 82, 92, 82], ['Jakob Chychrun', 6, 'sniper', 86, 91, 84], ['Rasmus Sandin', 38, 'speed', 87, 80, 74],
-        ['Matt Roy', 3, 'enforcer', 80, 78, 88], ['Martin Fehervary', 42, 'enforcer', 86, 74, 92], ['Trevor van Riemsdyk', 57, 'enforcer', 77, 74, 82]
+        ['Alex Ovechkin', 8, 'sniper', 75, 99, 88], ['Tom Wilson', 43, 'enforcer', 84, 85, 99], ['Dylan Strome', 17, 'sniper', 83, 91, 72],
+        ['Pierre-Luc Dubois', 80, 'enforcer', 83, 85, 90], ['Aliaksei Protas', 21, 'enforcer', 85, 84, 88], ['Ryan Leonard', 9, 'enforcer', 89, 87, 88],
+        ['Ivan Miroshnichenko', 63, 'sniper', 87, 88, 78], ['Anthony Beauvillier', 72, 'speed', 89, 82, 66], ['Nic Dowd', 26, 'enforcer', 79, 75, 88],
+        ['Brandon Duhaime', 22, 'enforcer', 84, 72, 92], ['Sonny Milano', 15, 'speed', 87, 81, 64], ['Ethen Frank', 53, 'speed', 94, 82, 66],
+        ['Jakob Chychrun', 6, 'sniper', 87, 92, 84], ['Rasmus Sandin', 38, 'speed', 88, 81, 74], ['Matt Roy', 3, 'enforcer', 80, 78, 88],
+        ['Martin Fehervary', 42, 'enforcer', 86, 74, 92], ['Cole Hutson', 44, 'speed', 92, 83, 62], ['Trevor van Riemsdyk', 57, 'enforcer', 77, 74, 82]
       ]
     },
     {
       abbr: 'WPG', name: 'Winnipeg Jets', color: '#041e42', accent: '#004c97',
-      goalies: [['Connor Hellebuyck', 37, 'mur'], ['Eric Comrie', 1, 'reflex']],
+      goalies: [['Stuart Skinner', 74, 'mur'], ['Nico Daws', 50, 'reflex']],
       skaters: [
-        ['Mark Scheifele', 55, 'sniper', 87, 94, 76], ['Kyle Connor', 81, 'speed', 95, 95, 64], ['Nikolaj Ehlers', 27, 'speed', 96, 89, 64],
-        ['Gabriel Vilardi', 13, 'sniper', 81, 91, 80], ['Cole Perfetti', 91, 'sniper', 85, 88, 66], ['Nino Niederreiter', 62, 'enforcer', 80, 86, 88],
-        ['Adam Lowry', 17, 'enforcer', 78, 78, 95], ['Vladislav Namestnikov', 7, 'speed', 86, 80, 74], ['Mason Appleton', 22, 'speed', 85, 79, 78],
-        ['Alex Iafallo', 9, 'speed', 85, 80, 76], ['Morgan Barron', 36, 'enforcer', 81, 76, 89], ['Rasmus Kupari', 15, 'speed', 90, 74, 76],
-        ['Josh Morrissey', 44, 'speed', 92, 88, 76], ['Neal Pionk', 4, 'enforcer', 85, 84, 89], ['Dylan DeMelo', 2, 'enforcer', 80, 74, 84],
-        ['Dylan Samberg', 54, 'enforcer', 80, 74, 89], ['Colin Miller', 6, 'sniper', 80, 88, 82], ['Logan Stanley', 64, 'enforcer', 68, 76, 96]
+        ['Mark Scheifele', 55, 'sniper', 87, 94, 76], ['Kyle Connor', 81, 'speed', 95, 95, 64], ['Dawson Mercer', 18, 'speed', 89, 85, 72],
+        ['Gabriel Vilardi', 13, 'sniper', 81, 91, 80], ['Cole Perfetti', 91, 'sniper', 86, 89, 66], ['Nino Niederreiter', 62, 'enforcer', 80, 86, 88],
+        ['Adam Lowry', 17, 'enforcer', 78, 78, 95], ['Nick Bjugstad', 27, 'enforcer', 76, 82, 88], ['Vladislav Namestnikov', 7, 'speed', 86, 80, 74],
+        ['Alex Iafallo', 9, 'speed', 85, 80, 76], ['Morgan Barron', 36, 'enforcer', 81, 76, 89], ['Brad Lambert', 93, 'speed', 94, 83, 64],
+        ['Josh Morrissey', 44, 'speed', 92, 88, 76], ['Neal Pionk', 4, 'enforcer', 85, 84, 89], ['Dylan Samberg', 54, 'enforcer', 80, 74, 89],
+        ['Dylan DeMelo', 2, 'enforcer', 80, 74, 84], ['Mario Ferraro', 38, 'enforcer', 84, 74, 89], ['Jack St. Ivany', 3, 'enforcer', 75, 70, 86]
       ]
     }
   ];
