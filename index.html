@@ -150,8 +150,8 @@
 
     #activePlayerPill {
       position: fixed;
-      top: max(10px, env(safe-area-inset-top));
-      left: max(10px, env(safe-area-inset-left));
+      top: max(11px, env(safe-area-inset-top));
+      left: calc(max(10px, env(safe-area-inset-left)) + 48px);
       z-index: 11;
       pointer-events: none;
       background: rgba(8, 18, 36, 0.84);
@@ -182,7 +182,7 @@
       .clock-pill { font-size: 15px; min-width: 58px; padding: 2px 9px; }
     }
 
-    #muteBtn, #pauseBtn {
+    #muteBtn, #pauseBtn, #fullscreenBtn {
       position: fixed;
       top: max(8px, env(safe-area-inset-top));
       right: max(10px, env(safe-area-inset-right));
@@ -203,6 +203,11 @@
       transition: transform 0.12s ease, opacity 0.2s ease;
     }
 
+    #fullscreenBtn {
+      right: auto;
+      left: max(10px, env(safe-area-inset-left));
+    }
+
     #pauseBtn {
       right: calc(max(10px, env(safe-area-inset-right)) + 48px);
       font-size: 16px;
@@ -215,7 +220,7 @@
       pointer-events: auto;
     }
 
-    #muteBtn:active, #pauseBtn:active {
+    #muteBtn:active, #pauseBtn:active, #fullscreenBtn:active {
       transform: scale(0.92);
     }
 
@@ -242,7 +247,7 @@
       .scoreboard { padding: 3px 10px; gap: 7px; }
       .score-num { font-size: 17px; }
       .clock-pill { font-size: 14px; min-width: 54px; }
-      #muteBtn, #pauseBtn { width: 34px; height: 34px; font-size: 15px; }
+      #muteBtn, #pauseBtn, #fullscreenBtn { width: 34px; height: 34px; font-size: 15px; }
       #pauseBtn { right: calc(max(10px, env(safe-area-inset-right)) + 42px); }
     }
 
@@ -1018,6 +1023,12 @@
     </div>
   </div>
 
+  <button id="fullscreenBtn" aria-label="Helskärm" title="Helskärm av/på">
+    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+      <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+    </svg>
+  </button>
   <button id="pauseBtn" aria-label="Pausa match" title="Pausa match (P / Esc)">⏸</button>
   <button id="muteBtn" aria-label="Ljud av/på" title="Ljud av/på">🔊</button>
 
@@ -2447,6 +2458,7 @@
   const scoreBlueEl = document.getElementById('scoreBlue');
   const scoreRedEl = document.getElementById('scoreRed');
   const clockDisplayEl = document.getElementById('clockDisplay');
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
   const pauseBtn = document.getElementById('pauseBtn');
   const muteBtn = document.getElementById('muteBtn');
 
@@ -2610,6 +2622,61 @@
     sfx.toggleMute();
     updateMuteIcon();
   });
+
+  function isFullscreenActive() {
+    return Boolean(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.msFullscreenElement
+    );
+  }
+
+  function updateFullscreenIcon() {
+    const active = isFullscreenActive();
+    fullscreenBtn.title = active ? 'Avsluta helskärm' : 'Slå på helskärm';
+    fullscreenBtn.innerHTML = active
+      ? `<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>`
+      : `<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>`;
+  }
+
+  function toggleFullscreen() {
+    const docEl = document.documentElement;
+    if (!isFullscreenActive()) {
+      const req = docEl && (docEl.requestFullscreen || docEl.webkitRequestFullscreen || docEl.msRequestFullscreen);
+      if (req) {
+        try {
+          const res = req.call(docEl);
+          if (res && typeof res.catch === 'function') res.catch(() => {});
+        } catch (_) {}
+      }
+    } else {
+      const exit = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+      if (exit) {
+        try {
+          const res = exit.call(document);
+          if (res && typeof res.catch === 'function') res.catch(() => {});
+        } catch (_) {}
+      }
+    }
+  }
+
+  fullscreenBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    sfx.unlock();
+    sfx.playUiClick();
+    toggleFullscreen();
+  });
+
+  if (document.addEventListener) {
+    const onFsChange = () => {
+      updateFullscreenIcon();
+      resizeCanvas();
+      setTimeout(resizeCanvas, 120);
+    };
+    document.addEventListener('fullscreenchange', onFsChange);
+    document.addEventListener('webkitfullscreenchange', onFsChange);
+  }
+  updateFullscreenIcon();
 
   function updateStartHighScoreUI() {
     startHighScoreEl.innerHTML =
