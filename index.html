@@ -182,7 +182,7 @@
       .clock-pill { font-size: 15px; min-width: 58px; padding: 2px 9px; }
     }
 
-    #muteBtn {
+    #muteBtn, #pauseBtn {
       position: fixed;
       top: max(8px, env(safe-area-inset-top));
       right: max(10px, env(safe-area-inset-right));
@@ -200,11 +200,50 @@
       cursor: pointer;
       pointer-events: auto;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-      transition: transform 0.12s ease;
+      transition: transform 0.12s ease, opacity 0.2s ease;
     }
 
-    #muteBtn:active {
+    #pauseBtn {
+      right: calc(max(10px, env(safe-area-inset-right)) + 48px);
+      font-size: 16px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #pauseBtn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #muteBtn:active, #pauseBtn:active {
       transform: scale(0.92);
+    }
+
+    /* Compact mobile landscape layout when laying the phone sideways */
+    @media (max-height: 500px) {
+      .card {
+        max-height: 96vh;
+        padding: 10px 14px;
+        border-radius: 16px;
+      }
+      .title { font-size: 22px !important; }
+      .subtitle { margin: 2px 0 5px; font-size: 11px; }
+      .diff-list {
+        gap: 6px;
+        margin: 6px 0 8px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .diff-card { padding: 8px 11px; gap: 10px; }
+      .diff-icon { width: 34px; height: 34px; font-size: 18px; }
+      .diff-title { font-size: 14px; }
+      .diff-desc { font-size: 11px; }
+      .btn-primary, .btn-secondary { padding: 10px 14px; font-size: 14px; }
+      .scoreboard { padding: 3px 10px; gap: 7px; }
+      .score-num { font-size: 17px; }
+      .clock-pill { font-size: 14px; min-width: 54px; }
+      #muteBtn, #pauseBtn { width: 34px; height: 34px; font-size: 15px; }
+      #pauseBtn { right: calc(max(10px, env(safe-area-inset-right)) + 42px); }
     }
 
     /* Overlay Screens */
@@ -979,6 +1018,7 @@
     </div>
   </div>
 
+  <button id="pauseBtn" aria-label="Pausa match" title="Pausa match (P / Esc)">⏸</button>
   <button id="muteBtn" aria-label="Ljud av/på" title="Ljud av/på">🔊</button>
 
   <!-- START / DIFFICULTY, NHL TEAM & FULL ROSTER SELECTION SCREEN -->
@@ -1128,6 +1168,19 @@
             <button type="button" id="playBtn" class="btn-primary">SPELA MATCH</button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAUSE SCREEN (auto-shown when minimizing/locking screen or pressing Pause) -->
+  <div id="pauseScreen" class="overlay hidden">
+    <div class="card" style="max-width:390px;">
+      <div class="badge">MATCH PAUSAD</div>
+      <div class="result-banner" style="font-size:26px;color:#ffffff;margin-bottom:4px;">PAUS</div>
+      <div id="pauseScoreText" style="font-size:15px;font-weight:800;color:#9ed2ff;margin-bottom:16px;">EDM 0 – 0 FLA • 02:00</div>
+      <div class="btn-row" style="flex-direction:column;gap:10px;">
+        <button type="button" id="resumeBtn" class="btn-primary">FORTSÄTT SPELA</button>
+        <button type="button" id="quitToMenuBtn" class="btn-secondary">AVSLUTA TILL MENY</button>
       </div>
     </div>
   </div>
@@ -2394,9 +2447,14 @@
   const scoreBlueEl = document.getElementById('scoreBlue');
   const scoreRedEl = document.getElementById('scoreRed');
   const clockDisplayEl = document.getElementById('clockDisplay');
+  const pauseBtn = document.getElementById('pauseBtn');
   const muteBtn = document.getElementById('muteBtn');
 
   const startScreen = document.getElementById('startScreen');
+  const pauseScreen = document.getElementById('pauseScreen');
+  const pauseScoreText = document.getElementById('pauseScoreText');
+  const resumeBtn = document.getElementById('resumeBtn');
+  const quitToMenuBtn = document.getElementById('quitToMenuBtn');
   const gameOverScreen = document.getElementById('gameOverScreen');
   const stepDifficultySelect = document.getElementById('stepDifficultySelect');
   const diffEasyBtn = document.getElementById('diffEasyBtn');
@@ -2472,18 +2530,24 @@
   };
 
   function resizeCanvas() {
-    view.w = window.innerWidth;
-    view.h = window.innerHeight;
+    const vp = window.visualViewport;
+    view.w = Math.round(vp ? vp.width : window.innerWidth);
+    view.h = Math.round(vp ? vp.height : window.innerHeight);
     view.dpr = Math.min(window.devicePixelRatio || 1, 2.5);
     canvas.width = Math.round(view.w * view.dpr);
     canvas.height = Math.round(view.h * view.dpr);
     view.portrait = view.h > view.w * 1.04;
 
-    // Show a comfortable zoomed-in view (~1280x740 logical ice) so players stay big & crisp on the larger 1920x1040 rink!
+    // Smooth responsive scaling in both portrait & landscape mobile (when laying the phone down sideways!)
     if (view.portrait) {
       view.scale = Math.min(view.w / 700, view.h / 1160);
       view.centerX = view.w / 2;
       view.centerY = view.h * 0.48;
+    } else if (view.h < 520) {
+      // Compact landscape phone view: maximize ice visibility while keeping skaters crisp
+      view.scale = Math.min(view.w / 1240, view.h / 660);
+      view.centerX = view.w / 2;
+      view.centerY = view.h / 2 + 8;
     } else {
       view.scale = Math.min(view.w / 1280, view.h / 730);
       view.centerX = view.w / 2;
@@ -2491,10 +2555,11 @@
     }
 
     const minDim = Math.min(view.w, view.h);
-    const primR = Math.max(36, Math.min(48, minDim * 0.11));
+    const primR = Math.max(34, Math.min(48, minDim * 0.11));
     const secR = Math.round(primR * 0.78);
-    const marginX = Math.max(22, view.w * 0.055);
-    const marginY = Math.max(22, view.h * 0.048);
+    // Extra side margin in landscape phone mode to clear screen notches / rounded corners
+    const marginX = (!view.portrait && view.h < 520) ? Math.max(30, view.w * 0.065) : Math.max(22, view.w * 0.055);
+    const marginY = (!view.portrait && view.h < 520) ? Math.max(16, view.h * 0.05) : Math.max(22, view.h * 0.048);
 
     view.btnPrimary = {
       x: view.w - marginX - primR,
@@ -2509,12 +2574,30 @@
     view.joyDefault = {
       x: marginX + primR * 1.25,
       y: view.h - marginY - primR * 1.1,
-      r: Math.max(46, Math.min(60, minDim * 0.135))
+      r: Math.max(44, Math.min(60, minDim * 0.135))
     };
   }
 
+  function handleViewportChange() {
+    resizeCanvas();
+    if (typeof resetActiveInputs === 'function') resetActiveInputs();
+  }
+
   window.addEventListener('resize', resizeCanvas);
-  window.addEventListener('orientationchange', () => setTimeout(resizeCanvas, 120));
+  window.addEventListener('orientationchange', () => {
+    handleViewportChange();
+    setTimeout(handleViewportChange, 120);
+    setTimeout(handleViewportChange, 320);
+  });
+  if (window.visualViewport && window.visualViewport.addEventListener) {
+    window.visualViewport.addEventListener('resize', resizeCanvas);
+  }
+  if (typeof screen !== 'undefined' && screen.orientation && screen.orientation.addEventListener) {
+    screen.orientation.addEventListener('change', () => {
+      handleViewportChange();
+      setTimeout(handleViewportChange, 150);
+    });
+  }
   resizeCanvas();
 
   function updateMuteIcon() {
@@ -3003,6 +3086,21 @@
     }
   });
 
+  function resetActiveInputs() {
+    input.keys.clear();
+    input.joyTouchId = null;
+    input.primaryTouchId = null;
+    input.secondaryTouchId = null;
+    input.joyVecX = 0;
+    input.joyVecY = 0;
+    input.primaryHeld = false;
+    input.primaryJustPressed = false;
+    input.primaryJustReleased = false;
+    input.secondaryJustPressed = false;
+    input.mousePrimaryHeld = false;
+    mouseJoyActive = false;
+  }
+
   canvas.addEventListener('contextmenu', (e) => e.preventDefault());
 
   window.addEventListener('keydown', (e) => {
@@ -3013,6 +3111,14 @@
       e.preventDefault();
     }
 
+    if (game.state === 'PAUSED' && (code === 'Escape' || code === 'KeyP' || code === 'Space' || code === 'Enter')) {
+      resumeMatch();
+      return;
+    }
+    if (game.state === 'PLAYING' && (code === 'Escape' || code === 'KeyP')) {
+      pauseMatch();
+      return;
+    }
     if (game.state === 'START' && !stepRosterSelect.classList.contains('step-hidden') && selectedSkaterIds.length === 3 && code === 'Enter') {
       startMatch();
       return;
@@ -3313,27 +3419,68 @@
     game.shakeTime = 0;
     game.hitStop = 0;
 
-    input.primaryHeld = false;
-    input.primaryJustPressed = false;
-    input.primaryJustReleased = false;
-    input.secondaryJustPressed = false;
+    resetActiveInputs();
 
     setupEntities();
     sfx.playWhistle();
 
     startScreen.classList.add('hidden');
+    pauseScreen.classList.add('hidden');
     gameOverScreen.classList.add('hidden');
     hudEl.classList.add('visible');
     activePlayerPill.classList.add('visible');
+    pauseBtn.classList.add('visible');
     updateHudDom();
+  }
+
+  function pauseMatch() {
+    if (game.state !== 'PLAYING') return;
+    game.state = 'PAUSED';
+    resetActiveInputs();
+    if (sfx.ctx && sfx.ctx.state === 'running' && sfx.ctx.suspend) {
+      sfx.ctx.suspend().catch(() => {});
+    }
+    const blueTeam = getTeamByAbbr(selectedBlueAbbr);
+    const redTeam = getTeamByAbbr(selectedRedAbbr);
+    pauseScoreText.textContent =
+      `${blueTeam.abbr} ${game.scoreBlue} – ${game.scoreRed} ${redTeam.abbr} • ${clockDisplayEl.textContent}`;
+    pauseBtn.classList.remove('visible');
+    pauseScreen.classList.remove('hidden');
+  }
+
+  function resumeMatch() {
+    if (game.state !== 'PAUSED') return;
+    sfx.unlock();
+    sfx.playUiClick();
+    resetActiveInputs();
+    game.state = 'PLAYING';
+    lastTime = performance.now();
+    pauseScreen.classList.add('hidden');
+    pauseBtn.classList.add('visible');
+  }
+
+  function quitToMenu() {
+    sfx.unlock();
+    sfx.playUiClick();
+    resetActiveInputs();
+    game.state = 'START';
+    pauseScreen.classList.add('hidden');
+    hudEl.classList.remove('visible');
+    activePlayerPill.classList.remove('visible');
+    pauseBtn.classList.remove('visible');
+    startScreen.classList.remove('hidden');
+    showStartStep('difficulty');
   }
 
   function endMatch() {
     game.state = 'GAMEOVER';
     game.gameOverGrace = 0.85;
+    resetActiveInputs();
     sfx.playBuzzer();
     hudEl.classList.remove('visible');
     activePlayerPill.classList.remove('visible');
+    pauseBtn.classList.remove('visible');
+    pauseScreen.classList.add('hidden');
 
     let isNewRecord = false;
     if (game.scoreBlue > saveData.bestGoals) {
@@ -3383,6 +3530,27 @@
 
   playBtn.addEventListener('click', startMatch);
   playAgainBtn.addEventListener('click', startMatch);
+  pauseBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    pauseMatch();
+  });
+  resumeBtn.addEventListener('click', resumeMatch);
+  quitToMenuBtn.addEventListener('click', quitToMenu);
+
+  // Auto-pause safely whenever the user lowers/locks the screen or switches tabs/apps
+  if (document.addEventListener) {
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && game.state === 'PLAYING') {
+        pauseMatch();
+      }
+    });
+  }
+  window.addEventListener('pagehide', () => {
+    if (game.state === 'PLAYING') pauseMatch();
+  });
+  window.addEventListener('blur', () => {
+    if (game.state === 'PLAYING') pauseMatch();
+  });
   changeTeamBtn.addEventListener('click', () => {
     sfx.unlock();
     sfx.playUiClick();
