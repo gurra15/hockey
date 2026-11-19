@@ -1699,6 +1699,7 @@
     goalScorerText: '',
     faceoffDelay: 0,
     gameOverGrace: 0,
+    autoSwitchCooldown: 0,
     bgDemoTime: 0
   };
 
@@ -2065,8 +2066,61 @@
     }
 
     game.activeIndex = bestIdx;
+    if (cycle) game.autoSwitchCooldown = 0.85;
     sfx.playUiClick();
     updateHudDom();
+  }
+
+  // Automatically control the Blue skater closest to the puck (with smooth anti-flicker hysteresis)
+  function autoSelectClosestBlueSkater(dt) {
+    game.autoSwitchCooldown = Math.max(0, game.autoSwitchCooldown - dt);
+    const p = game.puck;
+
+    // If a Blue skater carries the puck, always control the puck carrier
+    if (p.owner && p.owner.team === 'blue' && isOnIce(p.owner)) {
+      if (game.activeIndex !== p.owner.slotIndex) {
+        game.activeIndex = p.owner.slotIndex;
+        updateHudDom();
+      }
+      return;
+    }
+
+    const curr = getActiveBlueSkater();
+    let bestIdx = game.activeIndex;
+    let bestDist = Infinity;
+    let currDist = Infinity;
+
+    for (let i = 0; i < 3; i++) {
+      const s = game.skaters[i];
+      if (!isOnIce(s)) continue;
+      const d = Math.hypot(s.x - p.x, s.y - p.y) + (s.stunTimer > 0 ? 260 : 0);
+      if (i === game.activeIndex) currDist = d;
+      if (d < bestDist) {
+        bestDist = d;
+        bestIdx = i;
+      }
+    }
+
+    if (bestIdx === game.activeIndex) return;
+
+    // Immediate switch if current skater was knocked over the boards
+    if (!curr || !isOnIce(curr)) {
+      game.activeIndex = bestIdx;
+      game.autoSwitchCooldown = 0.2;
+      updateHudDom();
+      return;
+    }
+
+    // Don't interrupt an active body-check lunge; apply hysteresis so control doesn't flicker
+    if (game.autoSwitchCooldown <= 0 && curr.checkTimer <= 0) {
+      if (curr.stunTimer > 0 || bestDist + 48 < currDist) {
+        curr.isCharging = false;
+        curr.chargeTime = 0;
+        game.activeIndex = bestIdx;
+        game.autoSwitchCooldown = 0.22;
+        updateHudDom();
+      }
+    }
   }
 
   // Compute exact distance & outward normal to the nearest rink board (straight walls + rounded corners)
@@ -2297,6 +2351,7 @@
 
     if (skater.team === 'blue') {
       game.activeIndex = bestMate.slotIndex;
+      game.autoSwitchCooldown = 0.45;
       updateHudDom();
     }
   }
@@ -3073,11 +3128,8 @@
     }
     updateHudDom();
 
-    let active = getActiveBlueSkater();
-    if (!isOnIce(active)) {
-      switchToBestBlueSkater(true);
-      active = getActiveBlueSkater();
-    }
+    autoSelectClosestBlueSkater(dt);
+    const active = getActiveBlueSkater();
     const moveVec = getPlayerMoveVector();
 
     if (isOnIce(active) && active.stunTimer <= 0) {
