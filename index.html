@@ -508,6 +508,129 @@
       color: #ffffff;
     }
 
+    /* Difficulty Selection Step */
+    .diff-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 12px 0 14px;
+    }
+
+    .diff-card {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      width: 100%;
+      padding: 14px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      cursor: pointer;
+      text-align: left;
+      transition: transform 0.1s ease, border-color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .diff-card:hover {
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .diff-card:active {
+      transform: scale(0.98);
+    }
+
+    .diff-card.easy { border-color: rgba(76, 230, 138, 0.42); }
+    .diff-card.medium { border-color: rgba(255, 204, 51, 0.48); }
+    .diff-card.hard { border-color: rgba(255, 85, 102, 0.5); }
+
+    .diff-card.selected.easy {
+      background: rgba(46, 204, 113, 0.18);
+      border-color: #4ce68a;
+      box-shadow: 0 0 0 1px rgba(76, 230, 138, 0.35), 0 6px 18px rgba(46, 204, 113, 0.22);
+    }
+
+    .diff-card.selected.medium {
+      background: rgba(255, 204, 51, 0.16);
+      border-color: #ffcc33;
+      box-shadow: 0 0 0 1px rgba(255, 204, 51, 0.35), 0 6px 18px rgba(255, 204, 51, 0.2);
+    }
+
+    .diff-card.selected.hard {
+      background: rgba(255, 59, 78, 0.2);
+      border-color: #ff5566;
+      box-shadow: 0 0 0 1px rgba(255, 85, 102, 0.35), 0 6px 18px rgba(255, 59, 78, 0.24);
+    }
+
+    .diff-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      background: rgba(0, 0, 0, 0.28);
+      flex-shrink: 0;
+    }
+
+    .diff-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .diff-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .diff-title {
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+    }
+
+    .diff-tag {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #dbeeff;
+    }
+
+    .diff-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      line-height: 1.3;
+    }
+
+    /* Crisp SVG Team Logo Container (no text/letters) */
+    .team-logo-box {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.48));
+    }
+
+    .team-logo-box.sm {
+      width: 26px;
+      height: 26px;
+    }
+
+    .team-logo-box svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
     /* Scrollable Lineup Picker */
     .roster-scroll {
       flex: 1 1 auto;
@@ -858,19 +981,75 @@
 
   <button id="muteBtn" aria-label="Ljud av/på" title="Ljud av/på">🔊</button>
 
-  <!-- START / NHL TEAM & FULL ROSTER SELECTION SCREEN -->
+  <!-- START / DIFFICULTY, NHL TEAM & FULL ROSTER SELECTION SCREEN -->
   <div id="startScreen" class="overlay">
     <div class="card">
-      <!-- STEP 1: CHOOSE FROM ALL 32 NHL TEAMS -->
-      <div id="stepTeamSelect" style="display:flex;flex-direction:column;min-height:0;flex:1;">
+      <!-- STEP 0: DIFFICULTY SELECTION (ALWAYS SHOWN FIRST!) -->
+      <div id="stepDifficultySelect" style="display:flex;flex-direction:column;min-height:0;flex:1;">
         <div class="card-header">
           <div class="badge">ALLA 32 NHL-LAG • 2026/27 TRUPPER • 3 MOT 3</div>
           <h1 class="title">ICE BLITZ NHL</h1>
-          <p class="subtitle">Välj ditt NHL-lag och motståndare ur listan nedan!</p>
+          <p class="subtitle">Välj svårighetsgrad innan du väljer ditt NHL-lag!</p>
+        </div>
+
+        <div class="diff-list" id="diffList">
+          <button type="button" class="diff-card easy" data-diff="easy" id="diffEasyBtn">
+            <span class="diff-icon">🟢</span>
+            <span class="diff-info">
+              <span class="diff-title-row">
+                <span class="diff-title" style="color:#5ef09b;">LÄTT</span>
+                <span class="diff-tag">Rookie</span>
+              </span>
+              <span class="diff-desc">Lugnare motståndare, färre tacklingar och enklare att överlista målvakten.</span>
+            </span>
+          </button>
+
+          <button type="button" class="diff-card medium selected" data-diff="medium" id="diffMediumBtn">
+            <span class="diff-icon">🟡</span>
+            <span class="diff-info">
+              <span class="diff-title-row">
+                <span class="diff-title" style="color:#ffd85c;">MEDEL</span>
+                <span class="diff-tag">Pro</span>
+              </span>
+              <span class="diff-desc">Balanserad NHL-arkad med jämna, snabba och roliga 2-minutersmatcher.</span>
+            </span>
+          </button>
+
+          <button type="button" class="diff-card hard" data-diff="hard" id="diffHardBtn">
+            <span class="diff-icon">🔴</span>
+            <span class="diff-info">
+              <span class="diff-title-row">
+                <span class="diff-title" style="color:#ff6b7a;">SVÅR</span>
+                <span class="diff-tag">All-Star</span>
+              </span>
+              <span class="diff-desc">Blixtsnabba stjärnor, brutala sargtacklingar och reflexsnabba målvakter!</span>
+            </span>
+          </button>
+        </div>
+
+        <div class="card-footer">
+          <div class="highscore-strip" id="startHighScore">
+            <span>🏆 Rekord: 0 mål</span>
+            <span>•</span>
+            <span>🥇 Vinster: 0</span>
+          </div>
+          <div class="btn-row">
+            <button type="button" id="nextToTeamsBtn" class="btn-primary">VÄLJ NHL-LAG (32) →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 1: CHOOSE FROM ALL 32 NHL TEAMS (WITH VECTOR LOGOS — NO LETTERS!) -->
+      <div id="stepTeamSelect" class="step-hidden" style="display:flex;flex-direction:column;min-height:0;flex:1;">
+        <div class="card-header">
+          <div class="roster-topbar">
+            <button type="button" id="backToDiffBtn" class="back-chip">← Svårighetsgrad</button>
+            <span class="badge" id="activeDiffBadge" style="margin-bottom:0;">🟡 MEDEL</span>
+          </div>
 
           <div class="matchup-bar">
             <button type="button" id="slotBlueBtn" class="matchup-slot editing">
-              <span class="team-swatch" id="slotBlueSwatch">EDM</span>
+              <span class="team-logo-box" id="slotBlueSwatch"></span>
               <span class="matchup-slot-info">
                 <span class="matchup-slot-lbl">Ditt lag</span>
                 <span class="matchup-slot-name" id="slotBlueName">Edmonton Oilers</span>
@@ -878,7 +1057,7 @@
             </button>
             <span class="matchup-vs">VS</span>
             <button type="button" id="slotRedBtn" class="matchup-slot">
-              <span class="team-swatch" id="slotRedSwatch">FLA</span>
+              <span class="team-logo-box" id="slotRedSwatch"></span>
               <span class="matchup-slot-info">
                 <span class="matchup-slot-lbl">Motståndare</span>
                 <span class="matchup-slot-name" id="slotRedName">Florida Panthers</span>
@@ -886,7 +1065,7 @@
             </button>
           </div>
 
-          <input type="text" id="teamSearchInput" class="search-box" placeholder="🔍 Sök NHL-lag (t.ex. Toronto, Detroit, EDM)..." autocomplete="off">
+          <input type="text" id="teamSearchInput" class="search-box" placeholder="🔍 Sök NHL-lag (t.ex. Toronto, Detroit, Oilers)..." autocomplete="off">
         </div>
 
         <div class="roster-scroll" id="teamListScroll">
@@ -898,11 +1077,6 @@
         </div>
 
         <div class="card-footer">
-          <div class="highscore-strip" id="startHighScore">
-            <span>🏆 Rekord: 0 mål</span>
-            <span>•</span>
-            <span>🥇 Vinster: 0</span>
-          </div>
           <div class="btn-row">
             <button type="button" id="nextToRosterBtn" class="btn-primary">VÄLJ SPELARE (20) →</button>
           </div>
@@ -915,7 +1089,7 @@
           <div class="roster-topbar">
             <button type="button" id="backToTeamsBtn" class="back-chip">← Alla 32 lag</button>
             <div class="roster-team-pill" id="rosterTeamPill">
-              <span class="team-swatch" id="rosterTeamSwatch" style="width:24px;height:24px;font-size:8.5px;">EDM</span>
+              <span class="team-logo-box sm" id="rosterTeamSwatch"></span>
               <span id="rosterTeamTitle">Edmonton Oilers</span>
             </div>
           </div>
@@ -961,7 +1135,7 @@
   <!-- GAME OVER SCREEN -->
   <div id="gameOverScreen" class="overlay hidden">
     <div class="card" style="max-width:440px;">
-      <div class="badge">SLUTSIGNAL • 2:00</div>
+      <div class="badge" id="gameOverBadge">SLUTSIGNAL • 2:00 • MEDEL</div>
       <div id="resultBanner" class="result-banner result-win">SEGER!</div>
 
       <div class="final-score-box">
@@ -1576,7 +1750,250 @@
     };
   }
 
-  // Selected NHL Teams, Full Lineup & Position Mode
+  // Difficulty presets affecting opponent AI speed, shooting accuracy, checking aggression & goalie reflexes
+  const DIFFICULTIES = {
+    easy: {
+      id: 'easy',
+      label: 'LÄTT',
+      badge: '🟢 LÄTT',
+      oppSpeedMul: 0.72,
+      oppShotDelay: 0.55,
+      oppShotSpread: 195,
+      oppCheckMul: 0.40,
+      oppGoalieMul: 0.70
+    },
+    medium: {
+      id: 'medium',
+      label: 'MEDEL',
+      badge: '🟡 MEDEL',
+      oppSpeedMul: 0.90,
+      oppShotDelay: 0.0,
+      oppShotSpread: 125,
+      oppCheckMul: 1.0,
+      oppGoalieMul: 1.0
+    },
+    hard: {
+      id: 'hard',
+      label: 'SVÅR',
+      badge: '🔴 SVÅR',
+      oppSpeedMul: 1.06,
+      oppShotDelay: -0.24,
+      oppShotSpread: 60,
+      oppCheckMul: 1.75,
+      oppGoalieMul: 1.28
+    }
+  };
+
+  // Custom procedural SVG emblems for ALL 32 NHL teams — pure vector logos, ZERO letters!
+  function getTeamLogoSvg(team) {
+    const c = team.color;
+    const a = team.accent;
+    const w = '#ffffff';
+    const d = '#0e1726';
+    let inner = '';
+
+    switch (team.abbr) {
+      case 'ANA': // Webbed duck foot / masked crest
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${a}" stroke-width="3.5"/>
+          <path d="M18 44 Q24 22 32 14 Q40 22 46 44 Q39 38 32 45 Q25 38 18 44 Z" fill="${a}" stroke="${d}" stroke-width="2"/>
+          <path d="M23 36 L32 20 L41 36" fill="none" stroke="${d}" stroke-width="2.6" stroke-linecap="round"/>`;
+        break;
+      case 'BOS': // Iconic spoked wheel
+        inner = `<circle cx="32" cy="32" r="28" fill="${d}" stroke="${c}" stroke-width="4"/>
+          <circle cx="32" cy="32" r="21" fill="none" stroke="${c}" stroke-width="3.5"/>
+          <g stroke="${c}" stroke-width="3.2">
+            <line x1="32" y1="7" x2="32" y2="57"/><line x1="7" y1="32" x2="57" y2="32"/>
+            <line x1="14" y1="14" x2="50" y2="50"/><line x1="50" y1="14" x2="14" y2="50"/>
+          </g>
+          <circle cx="32" cy="32" r="10" fill="${c}" stroke="${d}" stroke-width="2.5"/>`;
+        break;
+      case 'BUF': // Crossed sabres & charging buffalo silhouette
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${a}" stroke-width="3.5"/>
+          <path d="M16 48 L48 16 M48 48 L16 16" stroke="${w}" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M18 33 Q22 20 34 21 Q44 22 46 31 Q41 34 38 38 L24 38 Z" fill="${a}" stroke="${d}" stroke-width="1.8"/>
+          <path d="M43 24 Q49 20 47 16" fill="none" stroke="${w}" stroke-width="2.5" stroke-linecap="round"/>`;
+        break;
+      case 'CGY': // Blazing flame
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${a}" stroke-width="3.5"/>
+          <path d="M32 10 C42 20 49 28 45 41 C42 49 36 53 32 53 C24 53 17 45 19 35 C20 29 24 27 25 22 C28 26 28 29 30 27 C31 20 30 15 32 10 Z" fill="${a}" stroke="${w}" stroke-width="2"/>
+          <path d="M32 25 C37 31 39 38 35 45 C32 48 27 45 27 39 C27 34 30 30 32 25 Z" fill="${w}"/>`;
+        break;
+      case 'CAR': // Swirling hurricane vortex
+        inner = `<circle cx="32" cy="32" r="28" fill="${d}" stroke="${c}" stroke-width="3.5"/>
+          <path d="M14 26 Q24 10 46 16 Q34 20 34 28 Z" fill="${c}" stroke="${w}" stroke-width="1.5"/>
+          <path d="M50 38 Q40 54 18 48 Q30 44 30 36 Z" fill="${c}" stroke="${w}" stroke-width="1.5"/>
+          <ellipse cx="32" cy="32" rx="13" ry="10" fill="${c}" stroke="${w}" stroke-width="2"/>
+          <circle cx="32" cy="32" r="5" fill="${d}"/>`;
+        break;
+      case 'CHI': // Four-color feathered crest
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${w}" stroke-width="3"/>
+          <path d="M26 14 Q44 12 52 22 Q40 24 30 24 Z" fill="#2ecc71" stroke="${d}" stroke-width="1.5"/>
+          <path d="M28 23 Q46 22 54 32 Q42 34 30 32 Z" fill="#ffcc33" stroke="${d}" stroke-width="1.5"/>
+          <path d="M26 32 Q44 34 50 44 Q38 43 28 40 Z" fill="#ff4757" stroke="${d}" stroke-width="1.5"/>
+          <path d="M22 40 Q38 44 43 52 Q30 50 22 46 Z" fill="#ff9f43" stroke="${d}" stroke-width="1.5"/>
+          <circle cx="24" cy="33" r="11" fill="${d}" stroke="${w}" stroke-width="2"/>`;
+        break;
+      case 'COL': // Snow-capped mountain peak & avalanche wave
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${a}" stroke-width="3.5"/>
+          <polygon points="32,12 50,48 14,48" fill="${a}" stroke="${w}" stroke-width="2"/>
+          <polygon points="32,12 39,26 32,23 25,26" fill="${w}"/>
+          <path d="M16 42 Q32 28 48 39" fill="none" stroke="${w}" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="44" cy="43" r="4.5" fill="${d}" stroke="${w}" stroke-width="1.5"/>`;
+        break;
+      case 'CBJ': // Star & dynamic ribbon banner
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${a}" stroke-width="3.5"/>
+          <path d="M13 42 Q26 16 51 22 Q38 30 48 45 Q30 39 13 42 Z" fill="${a}" stroke="${w}" stroke-width="1.8"/>
+          <polygon points="32,14 35.5,24 46,24 37.5,30 40.5,40 32,34 23.5,40 26.5,30 18,24 28.5,24" fill="${w}" stroke="${d}" stroke-width="1.5"/>`;
+        break;
+      case 'DAL': // Victory green 5-point star
+        inner = `<circle cx="32" cy="32" r="28" fill="${d}" stroke="${c}" stroke-width="4"/>
+          <polygon points="32,9 38.5,23.5 54,25 42,35.5 45.5,51 32,43 18.5,51 22,35.5 10,25 25.5,23.5" fill="${c}" stroke="${w}" stroke-width="2.5"/>
+          <polygon points="32,18 35.5,26.5 44,27.5 37.5,33.5 39.5,42 32,37.5 24.5,42 26.5,33.5 20,27.5 28.5,26.5" fill="${w}"/>`;
+        break;
+      case 'DET': // Iconic winged wheel
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${w}" stroke-width="3"/>
+          <path d="M24 30 L52 16 L46 25 L54 24 L45 32 L52 33 L36 39 Z" fill="${w}" stroke="${c}" stroke-width="1.2"/>
+          <circle cx="24" cy="36" r="11" fill="${w}" stroke="${c}" stroke-width="2.5"/>
+          <circle cx="24" cy="36" r="6" fill="${c}" stroke="${w}" stroke-width="2"/>
+          <line x1="15" y1="36" x2="33" y2="36" stroke="${w}" stroke-width="2"/>
+          <line x1="24" y1="27" x2="24" y2="45" stroke="${w}" stroke-width="2"/>`;
+        break;
+      case 'EDM': // Iconic oil drop crest
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${a}" stroke-width="4"/>
+          <circle cx="32" cy="32" r="21" fill="none" stroke="${w}" stroke-width="2"/>
+          <path d="M32 12 C42 26 45 33 45 39 C45 46.5 39.2 52 32 52 C24.8 52 19 46.5 19 39 C19 33 22 26 32 12 Z" fill="${a}" stroke="${w}" stroke-width="2.2"/>
+          <path d="M26 39 Q27 45 32 46" fill="none" stroke="${w}" stroke-width="2.5" stroke-linecap="round"/>`;
+        break;
+      case 'FLA': // Golden shield with panther crest & claw marks
+        inner = `<path d="M12 12 L52 12 L52 33 Q52 50 32 58 Q12 50 12 33 Z" fill="${c}" stroke="#d4af37" stroke-width="3.5"/>
+          <path d="M18 22 L46 22 L44 35 Q42 46 32 51 Q22 46 20 35 Z" fill="${a}"/>
+          <path d="M22 27 L27 42 M32 25 L32 44 M42 27 L37 42" stroke="#d4af37" stroke-width="3.2" stroke-linecap="round"/>`;
+        break;
+      case 'LAK': // Royal 5-point crown on shield
+        inner = `<path d="M12 13 L52 13 L50 37 Q48 49 32 57 Q16 49 14 37 Z" fill="${c}" stroke="${a}" stroke-width="3.5"/>
+          <path d="M18 42 L16 24 L25 32 L32 20 L39 32 L48 24 L46 42 Z" fill="${w}" stroke="${a}" stroke-width="2"/>
+          <rect x="18" y="42" width="28" height="4.5" rx="2" fill="${a}"/>`;
+        break;
+      case 'MIN': // Forest wilderness silhouette, golden star & river
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="#d9a441" stroke-width="3.5"/>
+          <path d="M10 38 Q22 30 34 36 Q44 41 54 33 L54 48 Q42 56 32 56 Q20 56 10 46 Z" fill="${a}"/>
+          <polygon points="22,36 27,20 32,36" fill="${d}"/>
+          <polygon points="31,37 37,18 43,37" fill="${d}"/>
+          <circle cx="44" cy="21" r="5" fill="#ffd43b"/>
+          <path d="M16 44 Q32 37 48 44" fill="none" stroke="${w}" stroke-width="2.8" stroke-linecap="round"/>`;
+        break;
+      case 'MTL': // Classic red/white/blue oval rings + championship star
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${w}" stroke-width="3"/>
+          <ellipse cx="32" cy="32" rx="22" ry="15" fill="none" stroke="${w}" stroke-width="4.5"/>
+          <ellipse cx="32" cy="32" rx="15" ry="9.5" fill="${a}" stroke="${w}" stroke-width="2"/>
+          <polygon points="32,24 34,29 39.5,29 35,32.5 36.8,38 32,34.8 27.2,38 29,32.5 24.5,29 30,29" fill="${w}"/>`;
+        break;
+      case 'NSH': // Sabre-tooth predator fangs & fierce eyes
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${a}" stroke-width="4"/>
+          <path d="M15 26 Q24 14 38 16 Q49 18 51 30 Q46 39 36 42 L20 38 Z" fill="${a}"/>
+          <polygon points="25,37 29,51 33,38" fill="${w}"/>
+          <polygon points="37,37 41,49 44,36" fill="${w}"/>
+          <polygon points="24,25 32,27 25,30" fill="${c}"/>
+          <polygon points="36,26 44,24 42,30" fill="${c}"/>`;
+        break;
+      case 'NJD': // Horns & sharp trident tail
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${a}" stroke-width="4"/>
+          <path d="M20 26 Q14 14 23 12 Q24 20 28 23" fill="${a}" stroke="${w}" stroke-width="1.8"/>
+          <path d="M44 26 Q50 14 41 12 Q40 20 36 23" fill="${a}" stroke="${w}" stroke-width="1.8"/>
+          <circle cx="32" cy="32" r="11" fill="${a}" stroke="${w}" stroke-width="2.2"/>
+          <path d="M24 44 Q32 54 44 46 L48 40 L41 42" fill="none" stroke="${w}" stroke-width="3" stroke-linecap="round"/>`;
+        break;
+      case 'NYI': // Island wave, hockey stick & 4 dynasty stripes
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${a}" stroke-width="3.5"/>
+          <path d="M12 40 Q22 33 32 38 Q42 43 52 36" fill="none" stroke="${w}" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M22 14 L34 42 L48 39" fill="none" stroke="${a}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="44" cy="24" r="5" fill="${a}" stroke="${w}" stroke-width="1.8"/>`;
+        break;
+      case 'NYR': // Heraldic shield with diagonal sash
+        inner = `<path d="M12 12 L52 12 L52 34 Q52 50 32 58 Q12 50 12 34 Z" fill="${c}" stroke="${w}" stroke-width="3"/>
+          <path d="M17 16 L47 46" stroke="${a}" stroke-width="9" stroke-linecap="round"/>
+          <path d="M17 16 L47 46" stroke="${w}" stroke-width="2.5" stroke-dasharray="5 4"/>`;
+        break;
+      case 'OTT': // Roman centurion helmet with red/gold plume
+        inner = `<circle cx="32" cy="32" r="28" fill="${d}" stroke="${a}" stroke-width="3.5"/>
+          <path d="M16 24 Q28 8 48 16 Q42 24 38 28 Q26 24 16 24 Z" fill="${c}" stroke="${a}" stroke-width="1.8"/>
+          <path d="M22 28 Q34 24 42 33 L40 48 L24 48 L22 36 Z" fill="${a}" stroke="${w}" stroke-width="1.8"/>
+          <rect x="29" y="34" width="11" height="4" rx="1.5" fill="${d}"/>`;
+        break;
+      case 'PHI': // Iconic orange/black winged puck
+        inner = `<circle cx="32" cy="32" r="28" fill="${d}" stroke="${c}" stroke-width="3.5"/>
+          <path d="M32 22 L54 17 L48 25 L55 28 L46 34 L52 38 L34 40 Z" fill="${w}" stroke="${c}" stroke-width="1.8"/>
+          <circle cx="24" cy="32" r="11" fill="${c}" stroke="${w}" stroke-width="2.5"/>
+          <circle cx="24" cy="32" r="4.5" fill="${d}"/>`;
+        break;
+      case 'PIT': // Gold triangle crest with skating penguin & stick
+        inner = `<polygon points="32,8 57,52 7,52" fill="${c}" stroke="${w}" stroke-width="2.5" stroke-linejoin="round"/>
+          <ellipse cx="32" cy="35" rx="9" ry="12" fill="${d}"/>
+          <ellipse cx="33" cy="36" rx="4.5" ry="8" fill="${w}"/>
+          <polygon points="38,27 46,29 38,32" fill="#ff7b1c"/>
+          <path d="M18 44 L45 36 L48 41" fill="none" stroke="${c}" stroke-width="2.8" stroke-linecap="round"/>`;
+        break;
+      case 'SJS': // Shark fin & jaws chomping stick over triangle
+        inner = `<polygon points="32,9 56,51 8,51" fill="${c}" stroke="${a}" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M20 44 Q24 20 40 16 Q35 28 46 36 L20 44 Z" fill="${d}" stroke="${w}" stroke-width="2"/>
+          <line x1="16" y1="36" x2="48" y2="42" stroke="${a}" stroke-width="3.5" stroke-linecap="round"/>`;
+        break;
+      case 'SEA': // Kraken tentacle & glowing red eye
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${a}" stroke-width="3.5"/>
+          <path d="M18 46 Q14 30 28 24 Q42 18 46 28 Q50 38 36 42 Q26 44 26 36 Q26 30 34 30" fill="none" stroke="${a}" stroke-width="5.5" stroke-linecap="round"/>
+          <circle cx="36" cy="24" r="4" fill="#ff3b4e"/>`;
+        break;
+      case 'STL': // Iconic winged musical eighth-note
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${a}" stroke-width="3.5"/>
+          <path d="M30 42 L30 16 L50 13 L45 20 L51 22 L43 27 L48 30 L34 32" fill="${a}" stroke="${w}" stroke-width="1.6" stroke-linejoin="round"/>
+          <ellipse cx="24" cy="43" rx="9" ry="6.5" transform="rotate(-18 24 43)" fill="${a}" stroke="${w}" stroke-width="2"/>`;
+        break;
+      case 'TBL': // Iconic electric lightning bolt
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${w}" stroke-width="3.5"/>
+          <circle cx="32" cy="32" r="20" fill="none" stroke="${w}" stroke-width="2.5"/>
+          <polygon points="36,10 19,35 31,35 26,54 46,28 33,28" fill="${w}" stroke="${c}" stroke-width="1.5"/>`;
+        break;
+      case 'TOR': // Sharp Canadian maple leaf
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${w}" stroke-width="3.5"/>
+          <path d="M32 11 L36 22 L43 19 L40 27 L49 28 L42 35 L45 41 L35 40 L34 51 L30 51 L29 40 L19 41 L22 35 L15 28 L24 27 L21 19 L28 22 Z" fill="${w}"/>`;
+        break;
+      case 'UTA': // Woolly mammoth silhouette with curved white tusks
+        inner = `<circle cx="32" cy="32" r="28" fill="${d}" stroke="${c}" stroke-width="3.5"/>
+          <polygon points="10,44 24,24 34,35 42,22 54,44" fill="${c}" opacity="0.45"/>
+          <circle cx="32" cy="29" r="12" fill="${c}" stroke="${w}" stroke-width="1.8"/>
+          <path d="M23 34 Q16 44 26 48 M41 34 Q48 44 38 48" fill="none" stroke="${w}" stroke-width="3.8" stroke-linecap="round"/>
+          <path d="M32 34 L32 45" stroke="${d}" stroke-width="4" stroke-linecap="round"/>`;
+        break;
+      case 'VAN': // Orca whale breaching over icy waves
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${a}" stroke-width="3.5"/>
+          <path d="M16 42 Q18 20 34 16 Q48 16 48 30 Q40 26 32 32 Q28 38 22 44 Z" fill="${w}" stroke="${d}" stroke-width="1.6"/>
+          <path d="M27 20 L33 12 L34 20" fill="${w}"/>
+          <path d="M12 45 Q24 38 34 45 Q44 50 52 43" fill="none" stroke="${a}" stroke-width="4" stroke-linecap="round"/>`;
+        break;
+      case 'VGK': // Golden Knight helmet visor on shield
+        inner = `<path d="M13 11 L51 11 L51 34 Q51 50 32 58 Q13 50 13 34 Z" fill="${a}" stroke="${c}" stroke-width="3.5"/>
+          <path d="M19 18 L45 18 L43 38 L32 48 L21 38 Z" fill="${c}" stroke="${d}" stroke-width="2"/>
+          <polygon points="24,25 40,25 32,45" fill="${d}"/>`;
+        break;
+      case 'WSH': // Soaring eagle wings & three stars
+        inner = `<circle cx="32" cy="32" r="28" fill="${a}" stroke="${c}" stroke-width="3.5"/>
+          <path d="M12 36 Q22 22 32 30 Q42 22 52 36 Q42 36 32 44 Q22 36 12 36 Z" fill="${w}" stroke="${c}" stroke-width="2"/>
+          <circle cx="22" cy="20" r="2.6" fill="${c}"/><circle cx="32" cy="16" r="3" fill="${w}"/><circle cx="42" cy="20" r="2.6" fill="${c}"/>`;
+        break;
+      case 'WPG': // Stealth fighter jet over roundel & red maple leaf
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="#a8b8cc" stroke-width="3.5"/>
+          <circle cx="32" cy="32" r="21" fill="${a}" stroke="${w}" stroke-width="2"/>
+          <polygon points="32,12 37,27 50,35 37,37 36,49 32,45 28,49 27,37 14,35 27,27" fill="${w}" stroke="${d}" stroke-width="1.4"/>`;
+        break;
+      default:
+        inner = `<circle cx="32" cy="32" r="28" fill="${c}" stroke="${a}" stroke-width="3.5"/>
+          <circle cx="32" cy="32" r="12" fill="${a}"/>`;
+    }
+    return `<svg viewBox="0 0 64 64" aria-hidden="true">${inner}</svg>`;
+  }
+
+  // Selected Difficulty, NHL Teams, Full Lineup & Position Mode
+  let selectedDifficulty = 'medium'; // 'easy' | 'medium' | 'hard'
   let selectedBlueAbbr = 'EDM';
   let selectedRedAbbr = 'FLA';
   let editingSlot = 'blue'; // 'blue' | 'red'
@@ -1981,6 +2398,14 @@
 
   const startScreen = document.getElementById('startScreen');
   const gameOverScreen = document.getElementById('gameOverScreen');
+  const stepDifficultySelect = document.getElementById('stepDifficultySelect');
+  const diffEasyBtn = document.getElementById('diffEasyBtn');
+  const diffMediumBtn = document.getElementById('diffMediumBtn');
+  const diffHardBtn = document.getElementById('diffHardBtn');
+  const nextToTeamsBtn = document.getElementById('nextToTeamsBtn');
+  const backToDiffBtn = document.getElementById('backToDiffBtn');
+  const activeDiffBadge = document.getElementById('activeDiffBadge');
+  const gameOverBadge = document.getElementById('gameOverBadge');
   const stepTeamSelect = document.getElementById('stepTeamSelect');
   const stepRosterSelect = document.getElementById('stepRosterSelect');
   const slotBlueBtn = document.getElementById('slotBlueBtn');
@@ -2109,18 +2534,29 @@
   }
   updateStartHighScoreUI();
 
-  function styleSwatch(el, team) {
-    el.textContent = team.abbr;
-    el.style.background = team.color;
-    el.style.borderColor = team.accent;
-    el.style.color = colorDistance(team.color, '#ffffff') < 145 ? '#111111' : '#ffffff';
+  function renderTeamLogo(el, team) {
+    el.innerHTML = getTeamLogoSvg(team);
+  }
+
+  function updateDifficultyUI() {
+    const diff = DIFFICULTIES[selectedDifficulty] || DIFFICULTIES.medium;
+    diffEasyBtn.classList.toggle('selected', selectedDifficulty === 'easy');
+    diffMediumBtn.classList.toggle('selected', selectedDifficulty === 'medium');
+    diffHardBtn.classList.toggle('selected', selectedDifficulty === 'hard');
+    activeDiffBadge.textContent = diff.badge;
   }
 
   function showStartStep(step) {
+    const onDiff = step === 'difficulty';
     const onTeams = step === 'teams';
+    const onRoster = step === 'roster';
+    stepDifficultySelect.classList.toggle('step-hidden', !onDiff);
     stepTeamSelect.classList.toggle('step-hidden', !onTeams);
-    stepRosterSelect.classList.toggle('step-hidden', onTeams);
-    if (onTeams) {
+    stepRosterSelect.classList.toggle('step-hidden', !onRoster);
+    if (onDiff) {
+      updateDifficultyUI();
+    } else if (onTeams) {
+      updateDifficultyUI();
       renderTeamPicker();
     } else {
       rosterRoleFilter = 'all';
@@ -2128,13 +2564,38 @@
     }
   }
 
+  [
+    [diffEasyBtn, 'easy'],
+    [diffMediumBtn, 'medium'],
+    [diffHardBtn, 'hard']
+  ].forEach(([btn, key]) => {
+    btn.addEventListener('click', () => {
+      sfx.unlock();
+      sfx.playUiClick();
+      selectedDifficulty = key;
+      updateDifficultyUI();
+    });
+  });
+
+  nextToTeamsBtn.addEventListener('click', () => {
+    sfx.unlock();
+    sfx.playUiClick();
+    showStartStep('teams');
+  });
+
+  backToDiffBtn.addEventListener('click', () => {
+    sfx.unlock();
+    sfx.playUiClick();
+    showStartStep('difficulty');
+  });
+
   function renderTeamPicker() {
     const blueT = getTeamByAbbr(selectedBlueAbbr);
     const redT = getTeamByAbbr(selectedRedAbbr);
 
-    styleSwatch(slotBlueSwatch, blueT);
+    renderTeamLogo(slotBlueSwatch, blueT);
     slotBlueName.textContent = blueT.name;
-    styleSwatch(slotRedSwatch, redT);
+    renderTeamLogo(slotRedSwatch, redT);
     slotRedName.textContent = redT.name;
 
     slotBlueBtn.classList.toggle('editing', editingSlot === 'blue');
@@ -2156,10 +2617,9 @@
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'team-tile' + (isBlue ? ' selected-blue' : '') + (isRed ? ' selected-red' : '');
-      const textCol = colorDistance(t.color, '#ffffff') < 145 ? '#111111' : '#ffffff';
       const meta = isBlue && isRed ? 'Ditt lag & Motst.' : (isBlue ? '✓ Ditt lag' : (isRed ? '⚔️ Motståndare' : `${t.goalies.length + t.skaters.length} spelare`));
       btn.innerHTML = `
-        <span class="team-swatch" style="background:${t.color};border-color:${t.accent};color:${textCol};">${t.abbr}</span>
+        <span class="team-logo-box">${getTeamLogoSvg(t)}</span>
         <div style="min-width:0;flex:1;">
           <div class="team-tile-name">${t.name}</div>
           <div class="team-tile-meta">${meta}</div>
@@ -2184,7 +2644,7 @@
     }
 
     const totalPlayers = blueT.goalies.length + blueT.skaters.length;
-    nextToRosterBtn.textContent = `VÄLJ SPELARE I ${blueT.abbr} (${totalPlayers}) →`;
+    nextToRosterBtn.textContent = `VÄLJ SPELARE (${totalPlayers}) →`;
   }
 
   slotBlueBtn.addEventListener('click', () => {
@@ -2218,7 +2678,7 @@
   // Build interactive Full Team Roster Picker (2 Goalies + ALL 18 Skaters of selected NHL team!)
   function renderLineupPicker() {
     const blueTeam = getTeamByAbbr(selectedBlueAbbr);
-    styleSwatch(rosterTeamSwatch, blueTeam);
+    renderTeamLogo(rosterTeamSwatch, blueTeam);
     rosterTeamTitle.textContent = blueTeam.name;
     skaterSectionTitle.textContent = `🏒 Hela truppen (välj 3 av ${blueTeam.skaters.length})`;
 
@@ -2369,6 +2829,7 @@
     updateControlModeUI();
   });
 
+  updateDifficultyUI();
   updateControlModeUI();
   renderTeamPicker();
   renderLineupPicker();
@@ -2896,6 +3357,8 @@
       resultBannerEl.className = 'result-banner result-draw';
     }
 
+    const diff = DIFFICULTIES[selectedDifficulty] || DIFFICULTIES.medium;
+    gameOverBadge.textContent = `SLUTSIGNAL • 2:00 • ${diff.label}`;
     const blueTeam = getTeamByAbbr(selectedBlueAbbr);
     const redTeam = getTeamByAbbr(selectedRedAbbr);
     finalBlueNameEl.textContent = blueTeam.name.toUpperCase();
@@ -2926,7 +3389,7 @@
     game.state = 'START';
     gameOverScreen.classList.add('hidden');
     startScreen.classList.remove('hidden');
-    showStartStep('teams');
+    showStartStep('difficulty');
   });
   changePlayersBtn.addEventListener('click', () => {
     sfx.unlock();
@@ -3391,6 +3854,8 @@
 
     const p = game.puck;
     const isBlue = skater.team === 'blue';
+    const diff = DIFFICULTIES[selectedDifficulty] || DIFFICULTIES.medium;
+    const oppSpdMul = isBlue ? 1.0 : diff.oppSpeedMul;
     const attackDir = isBlue ? 1 : -1;
     const oppGoalX = isBlue ? RIGHT_GOAL_X : LEFT_GOAL_X;
     const ownGoalX = isBlue ? LEFT_GOAL_X : RIGHT_GOAL_X;
@@ -3406,7 +3871,7 @@
 
       targetX = oppGoalX - attackDir * (skater.arch.id === 'sniper' ? 360 : 210);
       targetY = RINK_CY + laneOffset * 0.55;
-      speedFactor = 0.87;
+      speedFactor = 0.87 * oppSpdMul;
 
       skater.aiShootTimer -= dt;
       const inShootRange = skater.arch.id === 'sniper' ? distToGoal < 560 : distToGoal < 390;
@@ -3414,11 +3879,13 @@
 
       if (inShootRange && onGoodSide && skater.aiShootTimer <= 0) {
         const power = skater.arch.id === 'sniper' ? 0.65 + Math.random() * 0.3 : 0.4 + Math.random() * 0.35;
-        const spreadY = (Math.random() - 0.5) * (skater.arch.id === 'sniper' ? 105 : 145);
+        const baseSpread = isBlue ? 105 : diff.oppShotSpread;
+        const spreadY = (Math.random() - 0.5) * (skater.arch.id === 'sniper' ? baseSpread * 0.8 : baseSpread * 1.15);
         const ax = oppGoalX - skater.x;
         const ay = (RINK_CY + spreadY) - skater.y;
         releaseShot(skater, power, ax, ay);
-        skater.aiShootTimer = 0.72 + Math.random() * 0.65;
+        const extraDelay = isBlue ? 0 : diff.oppShotDelay;
+        skater.aiShootTimer = Math.max(0.32, 0.72 + extraDelay + Math.random() * 0.65);
         return;
       }
 
@@ -3443,7 +3910,7 @@
         targetX = Math.max(200, Math.min(RINK_W - 200, carrier.x + attackDir * 240));
         targetY = RINK_CY + sideSign * 265;
       }
-      speedFactor = 0.89;
+      speedFactor = 0.89 * oppSpdMul;
     } else {
       const teamSkaters = game.skaters.filter(s => s.team === skater.team && isOnIce(s));
       let chaser = teamSkaters[0];
@@ -3462,12 +3929,13 @@
       if (skater === chaser || isEnforcerHunting) {
         targetX = p.x + p.vx * 0.14;
         targetY = p.y + p.vy * 0.14;
-        speedFactor = isBlue ? 0.93 : 0.90;
+        speedFactor = isBlue ? 0.93 : (0.90 * oppSpdMul);
 
         if (p.owner && p.owner.team !== skater.team && isOnIce(p.owner) && skater.checkCooldown <= 0) {
           const distOpp = Math.hypot(p.owner.x - skater.x, p.owner.y - skater.y);
           const checkRange = skater.arch.id === 'enforcer' ? 130 : 90;
-          const checkChance = skater.arch.id === 'enforcer' ? 0.13 : 0.05;
+          const baseChance = skater.arch.id === 'enforcer' ? 0.13 : 0.05;
+          const checkChance = baseChance * (isBlue ? 1.0 : diff.oppCheckMul);
           if (distOpp < checkRange && Math.random() < checkChance) {
             performCheck(skater, p.owner.x - skater.x, p.owner.y - skater.y);
             return;
@@ -3478,7 +3946,7 @@
         const slotY = RINK_CY + (p.y - RINK_CY) * 0.45 + (skater.slotIndex === 1 ? -120 : 120);
         targetX = slotX;
         targetY = Math.max(120, Math.min(RINK_H - 120, slotY));
-        speedFactor = 0.83;
+        speedFactor = 0.83 * oppSpdMul;
       }
     }
 
@@ -3964,8 +4432,10 @@
         const clampY = Math.max(GOAL_TOP + 24, Math.min(GOAL_BOT - 24, p.y));
         const targetY = puckThreat ? clampY : RINK_CY + (p.y - RINK_CY) * 0.15;
         const dy = targetY - g.y;
-        const maxGoalieSpd = g.speed;
-        const desiredVy = Math.max(-maxGoalieSpd, Math.min(maxGoalieSpd, dy * 5.2));
+        const diff = DIFFICULTIES[selectedDifficulty] || DIFFICULTIES.medium;
+        const goalieMul = isLeft ? 1.0 : diff.oppGoalieMul;
+        const maxGoalieSpd = g.speed * goalieMul;
+        const desiredVy = Math.max(-maxGoalieSpd, Math.min(maxGoalieSpd, dy * (5.2 * goalieMul)));
         g.vy += (desiredVy - g.vy) * Math.min(1, dt * 8.5);
         g.y += g.vy * dt;
         g.y = Math.max(GOAL_TOP + 20, Math.min(GOAL_BOT - 20, g.y));
