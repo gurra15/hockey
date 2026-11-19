@@ -1251,7 +1251,7 @@
   const LEFT_GOAL_X = GOAL_LINE_OFFSET;
   const RIGHT_GOAL_X = RINK_W - GOAL_LINE_OFFSET;
   const GOAL_W = 54;
-  const GOAL_H = 178;
+  const GOAL_H = 152;
   const GOAL_TOP = RINK_CY - GOAL_H / 2;
   const GOAL_BOT = RINK_CY + GOAL_H / 2;
   const POST_R = 7;
@@ -1719,8 +1719,8 @@
         number: g[1],
         style: isReflex ? '🧤 Reflex' : '🧱 Mur',
         desc: isReflex ? 'Blixtsnabb i sidled' : 'Täcker hela målet',
-        speed: isReflex ? 224 : 176,
-        radius: isReflex ? 15.5 : 19.2,
+        speed: isReflex ? 255 : 215,
+        radius: isReflex ? 17.5 : 20.5,
         statSpeed: isReflex ? 95 : 75,
         statSize: isReflex ? 74 : 96
       };
@@ -4053,7 +4053,7 @@
         const ay = (RINK_CY + spreadY) - skater.y;
         releaseShot(skater, power, ax, ay);
         const extraDelay = isBlue ? 0 : diff.oppShotDelay;
-        skater.aiShootTimer = Math.max(0.32, 0.72 + extraDelay + Math.random() * 0.65);
+        skater.aiShootTimer = Math.max(0.55, 0.98 + extraDelay + Math.random() * 0.7);
         return;
       }
 
@@ -4594,40 +4594,59 @@
         g.x = Math.max(LEFT_GOAL_X + 10, Math.min(LEFT_GOAL_X + 126, g.x));
         g.y = Math.max(GOAL_TOP - 36, Math.min(GOAL_BOT + 36, g.y));
       } else {
-        const homeX = isLeft ? LEFT_GOAL_X + 24 : RIGHT_GOAL_X - 24;
-        const puckThreat = isLeft ? (p.x < RINK_CX + 140) : (p.x > RINK_CX - 140);
+        const goalX = isLeft ? LEFT_GOAL_X : RIGHT_GOAL_X;
+        const homeX = isLeft ? LEFT_GOAL_X + 26 : RIGHT_GOAL_X - 26;
+        const puckThreat = isLeft ? (p.x < RINK_CX + 180) : (p.x > RINK_CX - 180);
 
-        const clampY = Math.max(GOAL_TOP + 24, Math.min(GOAL_BOT - 24, p.y));
-        const targetY = puckThreat ? clampY : RINK_CY + (p.y - RINK_CY) * 0.15;
+        // Blend current puck height with partial trajectory read so goalies make big saves yet remain beatable by snipes & one-timers
+        let aimY = p.y;
+        const incoming = !p.owner && (isLeft ? (p.vx < -140 && p.x > LEFT_GOAL_X) : (p.vx > 140 && p.x < RIGHT_GOAL_X));
+        if (incoming) {
+          const tReach = Math.min(0.42, Math.abs((g.x - p.x) / p.vx));
+          const predictedY = p.y + p.vy * tReach;
+          aimY = p.y * 0.55 + predictedY * 0.45;
+        } else if (puckThreat) {
+          const dxNet = Math.max(45, Math.abs(p.x - goalX));
+          const stepOut = 22;
+          aimY = RINK_CY + (p.y - RINK_CY) * Math.min(0.84, (stepOut / dxNet) * 2.2 + 0.44);
+        }
+
+        const clampY = Math.max(GOAL_TOP + 22, Math.min(GOAL_BOT - 22, aimY));
+        const targetY = (puckThreat || incoming) ? clampY : RINK_CY + (p.y - RINK_CY) * 0.14;
         const dy = targetY - g.y;
         const diff = DIFFICULTIES[selectedDifficulty] || DIFFICULTIES.medium;
-        const goalieMul = isLeft ? 1.0 : diff.oppGoalieMul;
+        const goalieMul = isLeft ? 1.04 : diff.oppGoalieMul;
         const maxGoalieSpd = g.speed * goalieMul;
-        const desiredVy = Math.max(-maxGoalieSpd, Math.min(maxGoalieSpd, dy * (5.2 * goalieMul)));
-        g.vy += (desiredVy - g.vy) * Math.min(1, dt * 8.5);
+        const desiredVy = Math.max(-maxGoalieSpd, Math.min(maxGoalieSpd, dy * (6.4 * goalieMul)));
+        g.vy += (desiredVy - g.vy) * Math.min(1, dt * 11.0);
         g.y += g.vy * dt;
-        g.y = Math.max(GOAL_TOP + 20, Math.min(GOAL_BOT - 20, g.y));
+        g.y = Math.max(GOAL_TOP + 18, Math.min(GOAL_BOT - 18, g.y));
 
-        const challenge = puckThreat ? 10 : 0;
+        // Step out to challenge the shooter and shrink open corners
+        const challenge = incoming ? 10 : (puckThreat ? 16 : 4);
         const targetX = isLeft ? homeX + challenge : homeX - challenge;
-        g.x += (targetX - g.x) * Math.min(1, dt * 7);
+        g.x += (targetX - g.x) * Math.min(1, dt * 8.5);
       }
 
       if (!p.owner && game.goalPause <= 0) {
         const dx = p.x - g.x;
         const pdy = p.y - g.y;
-        const d = Math.hypot(dx, pdy);
-        const diveReach = g.diveTimer > 0 ? 11 : 0;
-        const minD = g.radius + diveReach + p.radius;
-        if (d < minD && d > 0.0001) {
-          const nx = dx / d;
-          const ny = pdy / d;
-          p.x = g.x + nx * (minD + 1);
-          p.y = g.y + ny * (minD + 1);
+        const diveReach = g.diveTimer > 0 ? 14 : 0;
+        // Elliptical pad-stack save hitbox matching the goalie's real leg pads & glove reach
+        const rx = g.radius * 0.96 + diveReach * 0.65 + p.radius;
+        const ry = g.radius * 1.26 + diveReach * 1.15 + p.radius;
+        const normDist = Math.hypot(dx / rx, pdy / ry);
 
+        if (normDist < 1.0 && normDist > 0.0001) {
+          const pushScale = 1.04 / normDist;
+          p.x = g.x + dx * pushScale;
+          p.y = g.y + pdy * pushScale;
+
+          // Deflect rebounds crisply out toward the corners (away from the front of the net!)
           const outDir = isLeft ? 1 : -1;
-          const speed = Math.max(330, Math.hypot(p.vx, p.vy) * 0.58);
-          const deflectY = (pdy / minD) * 0.85 + (Math.random() - 0.5) * 0.35;
+          const speed = Math.max(380, Math.hypot(p.vx, p.vy) * 0.62);
+          const sideSign = Math.abs(pdy) > 4 ? Math.sign(pdy) : (Math.random() < 0.5 ? -1 : 1);
+          const deflectY = sideSign * (0.75 + Math.random() * 0.55);
           const dl = Math.hypot(outDir, deflectY) || 1;
           p.vx = (outDir / dl) * speed;
           p.vy = (deflectY / dl) * speed;
@@ -5415,7 +5434,7 @@
     const padStroke = isDiving ? '#ffd43b' : (tv.textDark ? tv.dark : tv.primary);
     const padColor = g.hitFlash > 0 ? '#ffffff' : '#f4f8ff';
 
-    const padH = g.radius * (isDiving ? 3.7 : 2.8);
+    const padH = g.radius * (isDiving ? 3.2 : 2.55);
     ctx.fillStyle = padColor;
     ctx.strokeStyle = padStroke;
     ctx.lineWidth = isDiving ? 3.2 : 2.5;
