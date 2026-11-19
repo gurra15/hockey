@@ -279,6 +279,41 @@
       line-height: 1.3;
     }
 
+    .mode-switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+      margin: 4px 0 8px;
+      padding: 4px;
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.34);
+      border: 1px solid rgba(135, 200, 255, 0.2);
+    }
+
+    .mode-btn {
+      border: 1.5px solid transparent;
+      border-radius: 10px;
+      padding: 9px 10px;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      color: var(--text-muted);
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .mode-btn:active {
+      transform: scale(0.97);
+    }
+
+    .mode-btn.active {
+      color: #ffffff;
+      background: linear-gradient(145deg, rgba(30, 136, 255, 0.48), rgba(14, 78, 178, 0.56));
+      border-color: #62beff;
+      box-shadow: 0 3px 12px rgba(22, 120, 245, 0.32);
+    }
+
     /* Scrollable Lineup Picker */
     .roster-scroll {
       flex: 1 1 auto;
@@ -635,7 +670,11 @@
       <div class="card-header">
         <div class="badge">3 MOT 3 • 2 MINUTER • STOR IS &amp; SARGTACKLINGAR</div>
         <h1 class="title">ICE BLITZ 3v3</h1>
-        <p class="subtitle">Välj din målvakt och 3 utespelare ur truppen — tackla motståndare över sargen!</p>
+        <p class="subtitle">Välj om du vill spela som utespelare eller målvakt och ta ut ditt lag!</p>
+        <div class="mode-switch" role="group" aria-label="Välj position">
+          <button type="button" id="modeSkaterBtn" class="mode-btn active">🏒 Spela Utespelare</button>
+          <button type="button" id="modeGoalieBtn" class="mode-btn">🧤 Spela Målvakt</button>
+        </div>
       </div>
 
       <div class="roster-scroll" id="rosterScroll">
@@ -653,7 +692,7 @@
       </div>
 
       <div class="card-footer">
-        <div class="controls-compact">
+        <div class="controls-compact" id="controlsCompact">
           📱 <strong>Styr:</strong> Vänster tumme • <strong>SKJUT/TACKLA</strong> &amp; <strong>PASSA/BYT</strong> &nbsp;|&nbsp; ⌨️ <strong>WASD</strong> + <strong>SPACE</strong> + <strong>SHIFT</strong>
         </div>
         <div class="highscore-strip" id="startHighScore">
@@ -690,7 +729,7 @@
       <div class="stats-row">
         <div class="stat-tile">
           <div class="stat-tile-val" id="statShots">0</div>
-          <div class="stat-tile-lbl">Skott</div>
+          <div class="stat-tile-lbl" id="statPrimaryLbl">Skott</div>
         </div>
         <div class="stat-tile">
           <div class="stat-tile-val" id="statChecks">0</div>
@@ -852,7 +891,8 @@
     { firstName: 'Robin',  lastName: 'Fransson',  number: 71, role: 'enforcer', spdMul: 1.04, shtMul: 0.96, chkMul: 0.98 }
   ];
 
-  // Selected lineup state (defaults: Holm + Lindström, Bergström, Viklund)
+  // Selected lineup & position mode ('skater' | 'goalie')
+  let selectedControlMode = 'skater';
   let selectedGoalieId = 'g1';
   let selectedSkaterIds = ['s1', 's4', 's8'];
 
@@ -1230,6 +1270,9 @@
 
   const startScreen = document.getElementById('startScreen');
   const gameOverScreen = document.getElementById('gameOverScreen');
+  const modeSkaterBtn = document.getElementById('modeSkaterBtn');
+  const modeGoalieBtn = document.getElementById('modeGoalieBtn');
+  const controlsCompactEl = document.getElementById('controlsCompact');
   const goalieGrid = document.getElementById('goalieGrid');
   const skaterGrid = document.getElementById('skaterGrid');
   const goalieCountBadge = document.getElementById('goalieCountBadge');
@@ -1244,6 +1287,7 @@
   const finalBlueEl = document.getElementById('finalBlue');
   const finalRedEl = document.getElementById('finalRed');
   const statShotsEl = document.getElementById('statShots');
+  const statPrimaryLblEl = document.getElementById('statPrimaryLbl');
   const statChecksEl = document.getElementById('statChecks');
   const statOverBoardsEl = document.getElementById('statOverBoards');
   const statBestGoalsEl = document.getElementById('statBestGoals');
@@ -1426,6 +1470,33 @@
     playBtn.textContent = ready ? 'SPELA' : `VÄLJ 3 UTESPELARE (${selectedSkaterIds.length}/3)`;
   }
 
+  function updateControlModeUI() {
+    const isGoalie = selectedControlMode === 'goalie';
+    modeSkaterBtn.classList.toggle('active', !isGoalie);
+    modeGoalieBtn.classList.toggle('active', isGoalie);
+    if (isGoalie) {
+      controlsCompactEl.innerHTML =
+        '🧤 <strong>Målvakt:</strong> Styr i målgården • <strong>DYK</strong> (SPACE) för slängräddning &amp; <strong>RENSA</strong> (SHIFT) för att passa bort pucken.';
+    } else {
+      controlsCompactEl.innerHTML =
+        '📱 <strong>Styr:</strong> Vänster tumme • <strong>SKJUT/TACKLA</strong> &amp; <strong>PASSA/BYT</strong> &nbsp;|&nbsp; ⌨️ <strong>WASD</strong> + <strong>SPACE</strong> + <strong>SHIFT</strong>';
+    }
+  }
+
+  modeSkaterBtn.addEventListener('click', () => {
+    sfx.unlock();
+    sfx.playUiClick();
+    selectedControlMode = 'skater';
+    updateControlModeUI();
+  });
+
+  modeGoalieBtn.addEventListener('click', () => {
+    sfx.unlock();
+    sfx.playUiClick();
+    selectedControlMode = 'goalie';
+    updateControlModeUI();
+  });
+
   randomTeamBtn.addEventListener('click', () => {
     sfx.unlock();
     sfx.playUiClick();
@@ -1435,6 +1506,7 @@
     renderLineupPicker();
   });
 
+  updateControlModeUI();
   renderLineupPicker();
 
   // =========================================================================
@@ -1678,10 +1750,12 @@
   // =========================================================================
   const game = {
     state: 'START',
+    controlMode: 'skater', // 'skater' | 'goalie'
     timeLeft: MATCH_DURATION,
     scoreBlue: 0,
     scoreRed: 0,
     shotsBlue: 0,
+    savesBlue: 0,
     checksBlue: 0,
     overBoardsBlue: 0,
     skaters: [],
@@ -1772,10 +1846,15 @@
       speed: profile.speed,
       x: team === 'blue' ? LEFT_GOAL_X + 24 : RIGHT_GOAL_X - 24,
       y: RINK_CY,
+      vx: 0,
       vy: 0,
       radius: profile.radius,
       hitFlash: 0,
-      saveAnim: 0
+      saveAnim: 0,
+      diveTimer: 0,
+      diveCooldown: 0,
+      pokeTimer: 0,
+      pokeCooldown: 0
     };
   }
 
@@ -1857,8 +1936,12 @@
 
     game.goalies[0].x = LEFT_GOAL_X + 24;
     game.goalies[0].y = RINK_CY;
+    game.goalies[0].vx = 0; game.goalies[0].vy = 0;
+    game.goalies[0].diveTimer = 0; game.goalies[0].diveCooldown = 0;
+    game.goalies[0].pokeTimer = 0; game.goalies[0].pokeCooldown = 0;
     game.goalies[1].x = RIGHT_GOAL_X - 24;
     game.goalies[1].y = RINK_CY;
+    game.goalies[1].vx = 0; game.goalies[1].vy = 0;
 
     const p = game.puck;
     p.x = RINK_CX; p.y = RINK_CY;
@@ -1876,10 +1959,12 @@
     sfx.unlock();
     sfx.playUiClick();
     game.state = 'PLAYING';
+    game.controlMode = selectedControlMode;
     game.timeLeft = MATCH_DURATION;
     game.scoreBlue = 0;
     game.scoreRed = 0;
     game.shotsBlue = 0;
+    game.savesBlue = 0;
     game.checksBlue = 0;
     game.overBoardsBlue = 0;
     game.particles.length = 0;
@@ -1936,7 +2021,13 @@
 
     finalBlueEl.textContent = String(game.scoreBlue);
     finalRedEl.textContent = String(game.scoreRed);
-    statShotsEl.textContent = String(game.shotsBlue);
+    if (game.controlMode === 'goalie') {
+      statPrimaryLblEl.textContent = 'Räddningar';
+      statShotsEl.textContent = String(game.savesBlue);
+    } else {
+      statPrimaryLblEl.textContent = 'Skott';
+      statShotsEl.textContent = String(game.shotsBlue);
+    }
     statChecksEl.textContent = String(game.checksBlue);
     statOverBoardsEl.textContent = String(game.overBoardsBlue);
     statBestGoalsEl.textContent = String(saveData.bestGoals);
@@ -1966,10 +2057,16 @@
     clockDisplayEl.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
     clockDisplayEl.classList.toggle('urgent', secs <= 15 && secs > 0);
 
-    const active = game.skaters[game.activeIndex];
-    if (active) {
-      activePlayerIcon.textContent = active.arch.icon;
-      activePlayerText.textContent = `${active.fullName} #${active.number}`;
+    if (game.controlMode === 'goalie' && game.goalies[0]) {
+      const g = game.goalies[0];
+      activePlayerIcon.textContent = '🧤';
+      activePlayerText.textContent = `${g.fullName} #${g.number}`;
+    } else {
+      const active = game.skaters[game.activeIndex];
+      if (active) {
+        activePlayerIcon.textContent = active.arch.icon;
+        activePlayerText.textContent = `${active.fullName} #${active.number}`;
+      }
     }
   }
 
@@ -2857,34 +2954,134 @@
     spawnParticles(gx, RINK_CY, 24, '#ffd43b', 75, 360, 2.5, 6, 0.78);
   }
 
-  function updateGoalies(dt) {
+  function performGoalieDive(g, moveVec) {
+    if (g.diveCooldown > 0) return;
+    let dx = moveVec.x;
+    let dy = moveVec.y;
+    const len = Math.hypot(dx, dy);
+    if (len > 0.15) {
+      dx /= len;
+      dy /= len;
+    } else {
+      // Auto-dive laterally toward the puck's height if no stick direction held
+      const pdy = game.puck.y - g.y;
+      dx = 0.25;
+      dy = Math.abs(pdy) > 8 ? Math.sign(pdy) : 0;
+      const l2 = Math.hypot(dx, dy) || 1;
+      dx /= l2;
+      dy /= l2;
+    }
+    const diveSpeed = g.speed * 2.55;
+    g.vx = dx * diveSpeed;
+    g.vy = dy * diveSpeed;
+    g.diveTimer = 0.28;
+    g.diveCooldown = 0.56;
+    spawnIceSpray(g.x, g.y, Math.atan2(-dy, -dx), 10);
+    sfx.playSkateScrape();
+  }
+
+  function performGoalieClear(g) {
+    if (g.pokeCooldown > 0) return;
+    g.pokeTimer = 0.22;
+    g.pokeCooldown = 0.48;
+    sfx.playPass();
+
+    const p = game.puck;
+    const d = Math.hypot(p.x - g.x, p.y - g.y);
+    if (d < g.radius + 78 && game.goalPause <= 0) {
+      // Knock loose from any opponent right in the crease!
+      if (p.owner && p.owner.team !== g.team) {
+        p.owner.hasPuck = false;
+        p.owner.pickupCooldown = 0.55;
+        p.owner.stunTimer = Math.max(p.owner.stunTimer, 0.35);
+        p.owner = null;
+      }
+      if (!p.owner) {
+        // Aim crisp outlet pass toward an open Blue skater up ice
+        const mates = game.skaters.filter(s => s.team === 'blue' && isOnIce(s));
+        let targetX = RINK_CX + 180;
+        let targetY = g.y < RINK_CY ? RINK_CY - 140 : RINK_CY + 140;
+        if (mates.length > 0) {
+          mates.sort((a, b) => b.x - a.x);
+          targetX = mates[0].x + mates[0].vx * 0.22;
+          targetY = mates[0].y + mates[0].vy * 0.22;
+        }
+        const dx = targetX - p.x;
+        const dy = targetY - p.y;
+        const dist = Math.hypot(dx, dy) || 1;
+        const clearSpd = Math.max(660, Math.min(920, dist * 1.45 + 320));
+        p.vx = (dx / dist) * clearSpd;
+        p.vy = (dy / dist) * clearSpd;
+        p.firePower = 0;
+        p.lastTouchedBy = null;
+        g.saveAnim = 0.22;
+        game.savesBlue += 1;
+        spawnParticles(p.x, p.y, 10, '#72d8ff', 60, 230, 2, 4.5, 0.32);
+        spawnPopup(g.x + 26, g.y - 30, 'RENSNING!', '#72d8ff', 15);
+      }
+    }
+  }
+
+  function updateGoalies(dt, playerMoveVec = null) {
     const p = game.puck;
     for (const g of game.goalies) {
       g.hitFlash = Math.max(0, g.hitFlash - dt);
       g.saveAnim = Math.max(0, g.saveAnim - dt);
+      g.diveTimer = Math.max(0, g.diveTimer - dt);
+      g.diveCooldown = Math.max(0, g.diveCooldown - dt);
+      g.pokeTimer = Math.max(0, g.pokeTimer - dt);
+      g.pokeCooldown = Math.max(0, g.pokeCooldown - dt);
 
       const isLeft = g.team === 'blue';
-      const homeX = isLeft ? LEFT_GOAL_X + 24 : RIGHT_GOAL_X - 24;
-      const puckThreat = isLeft ? (p.x < RINK_CX + 140) : (p.x > RINK_CX - 140);
+      const isHumanGoalie = isLeft && game.controlMode === 'goalie' && game.state === 'PLAYING';
 
-      const clampY = Math.max(GOAL_TOP + 24, Math.min(GOAL_BOT - 24, p.y));
-      const targetY = puckThreat ? clampY : RINK_CY + (p.y - RINK_CY) * 0.15;
-      const dy = targetY - g.y;
-      const maxGoalieSpd = g.speed;
-      const desiredVy = Math.max(-maxGoalieSpd, Math.min(maxGoalieSpd, dy * 5.2));
-      g.vy += (desiredVy - g.vy) * Math.min(1, dt * 8.5);
-      g.y += g.vy * dt;
-      g.y = Math.max(GOAL_TOP + 20, Math.min(GOAL_BOT - 20, g.y));
+      if (isHumanGoalie && playerMoveVec) {
+        if (g.diveTimer > 0) {
+          const drag = Math.exp(-3.4 * dt);
+          g.vx *= drag;
+          g.vy *= drag;
+        } else {
+          const mag = Math.min(1, Math.hypot(playerMoveVec.x, playerMoveVec.y));
+          const maxSpd = g.speed * 1.55;
+          if (mag > 0.05) {
+            const blend = 1 - Math.exp(-12 * dt);
+            g.vx += (playerMoveVec.x * maxSpd - g.vx) * blend;
+            g.vy += (playerMoveVec.y * maxSpd - g.vy) * blend;
+          } else {
+            const stopDrag = Math.exp(-9 * dt);
+            g.vx *= stopDrag;
+            g.vy *= stopDrag;
+          }
+        }
+        g.x += g.vx * dt;
+        g.y += g.vy * dt;
+        // Generous goalie crease & challenge box
+        g.x = Math.max(LEFT_GOAL_X + 10, Math.min(LEFT_GOAL_X + 126, g.x));
+        g.y = Math.max(GOAL_TOP - 36, Math.min(GOAL_BOT + 36, g.y));
+      } else {
+        const homeX = isLeft ? LEFT_GOAL_X + 24 : RIGHT_GOAL_X - 24;
+        const puckThreat = isLeft ? (p.x < RINK_CX + 140) : (p.x > RINK_CX - 140);
 
-      const challenge = puckThreat ? 10 : 0;
-      const targetX = isLeft ? homeX + challenge : homeX - challenge;
-      g.x += (targetX - g.x) * Math.min(1, dt * 7);
+        const clampY = Math.max(GOAL_TOP + 24, Math.min(GOAL_BOT - 24, p.y));
+        const targetY = puckThreat ? clampY : RINK_CY + (p.y - RINK_CY) * 0.15;
+        const dy = targetY - g.y;
+        const maxGoalieSpd = g.speed;
+        const desiredVy = Math.max(-maxGoalieSpd, Math.min(maxGoalieSpd, dy * 5.2));
+        g.vy += (desiredVy - g.vy) * Math.min(1, dt * 8.5);
+        g.y += g.vy * dt;
+        g.y = Math.max(GOAL_TOP + 20, Math.min(GOAL_BOT - 20, g.y));
+
+        const challenge = puckThreat ? 10 : 0;
+        const targetX = isLeft ? homeX + challenge : homeX - challenge;
+        g.x += (targetX - g.x) * Math.min(1, dt * 7);
+      }
 
       if (!p.owner && game.goalPause <= 0) {
         const dx = p.x - g.x;
         const pdy = p.y - g.y;
         const d = Math.hypot(dx, pdy);
-        const minD = g.radius + p.radius;
+        const diveReach = g.diveTimer > 0 ? 11 : 0;
+        const minD = g.radius + diveReach + p.radius;
         if (d < minD && d > 0.0001) {
           const nx = dx / d;
           const ny = pdy / d;
@@ -2892,18 +3089,25 @@
           p.y = g.y + ny * (minD + 1);
 
           const outDir = isLeft ? 1 : -1;
-          const speed = Math.max(310, Math.hypot(p.vx, p.vy) * 0.56);
+          const speed = Math.max(330, Math.hypot(p.vx, p.vy) * 0.58);
           const deflectY = (pdy / minD) * 0.85 + (Math.random() - 0.5) * 0.35;
           const dl = Math.hypot(outDir, deflectY) || 1;
           p.vx = (outDir / dl) * speed;
           p.vy = (deflectY / dl) * speed;
           p.firePower = 0;
 
-          g.hitFlash = 0.18;
-          g.saveAnim = 0.25;
+          if (isLeft) game.savesBlue += 1;
+          const wasDiveSave = g.diveTimer > 0;
+          g.hitFlash = 0.2;
+          g.saveAnim = 0.28;
           sfx.playSave();
-          spawnParticles(p.x, p.y, 11, '#ffffff', 60, 220, 2, 4.5, 0.3);
-          spawnPopup(g.x, g.y - 32, `RÄDDNING — ${g.lastName.toUpperCase()}!`, '#a8e6ff', 14);
+          spawnParticles(p.x, p.y, wasDiveSave ? 18 : 11, wasDiveSave ? '#ffd43b' : '#ffffff', 65, 250, 2, 5, 0.35);
+          if (wasDiveSave) {
+            triggerShake(6, 0.14);
+            spawnPopup(g.x + 12, g.y - 34, `MONSTERRÄDDNING!`, '#ffd43b', 16);
+          } else {
+            spawnPopup(g.x, g.y - 32, `RÄDDNING — ${g.lastName.toUpperCase()}!`, '#a8e6ff', 14);
+          }
         }
       }
     }
@@ -3033,13 +3237,22 @@
 
     if (game.state === 'PLAYING' && game.puck) {
       const p = game.puck;
-      const active = getActiveBlueSkater();
-      if (active && isOnIce(active) && game.goalPause <= 0) {
-        targetX = p.x * 0.62 + active.x * 0.38;
-        targetY = p.y * 0.62 + active.y * 0.38;
+      if (game.controlMode === 'goalie' && game.goalies[0]) {
+        const g = game.goalies[0];
+        // Keep your goalie & net clearly in frame while showing incoming attacks down the ice
+        const halfVisX = (view.portrait ? view.h : view.w) / (2 * view.scale);
+        const maxCamXForNet = Math.max(LEFT_GOAL_X, (LEFT_GOAL_X - 65) + halfVisX);
+        targetX = Math.min(maxCamXForNet, g.x * 0.52 + p.x * 0.48);
+        targetY = g.y * 0.42 + p.y * 0.58;
       } else {
-        targetX = p.x;
-        targetY = p.y;
+        const active = getActiveBlueSkater();
+        if (active && isOnIce(active) && game.goalPause <= 0) {
+          targetX = p.x * 0.62 + active.x * 0.38;
+          targetY = p.y * 0.62 + active.y * 0.38;
+        } else {
+          targetX = p.x;
+          targetY = p.y;
+        }
       }
     }
 
@@ -3128,37 +3341,51 @@
     }
     updateHudDom();
 
-    autoSelectClosestBlueSkater(dt);
-    const active = getActiveBlueSkater();
     const moveVec = getPlayerMoveVector();
+    let active = null;
 
-    if (isOnIce(active) && active.stunTimer <= 0) {
-      if (active.hasPuck && game.puck.owner === active) {
+    if (game.controlMode === 'goalie') {
+      const g = game.goalies[0];
+      if (g) {
         if (input.primaryJustPressed) {
-          active.isCharging = true;
-          active.chargeTime = 0;
-        }
-        if (active.isCharging && input.primaryHeld) {
-          active.chargeTime = Math.min(1, active.chargeTime + dt * active.arch.chargeRate);
-        }
-        if (active.isCharging && (input.primaryJustReleased || !input.primaryHeld)) {
-          releaseShot(active, active.chargeTime, moveVec.x, moveVec.y);
+          performGoalieDive(g, moveVec);
         }
         if (input.secondaryJustPressed) {
-          performPass(active, moveVec.x, moveVec.y);
-        }
-      } else {
-        active.isCharging = false;
-        active.chargeTime = 0;
-        if (input.primaryJustPressed) {
-          performCheck(active, moveVec.x, moveVec.y);
-        }
-        if (input.secondaryJustPressed) {
-          switchToBestBlueSkater(true);
+          performGoalieClear(g);
         }
       }
-    } else if (input.secondaryJustPressed) {
-      switchToBestBlueSkater(true);
+    } else {
+      autoSelectClosestBlueSkater(dt);
+      active = getActiveBlueSkater();
+
+      if (isOnIce(active) && active.stunTimer <= 0) {
+        if (active.hasPuck && game.puck.owner === active) {
+          if (input.primaryJustPressed) {
+            active.isCharging = true;
+            active.chargeTime = 0;
+          }
+          if (active.isCharging && input.primaryHeld) {
+            active.chargeTime = Math.min(1, active.chargeTime + dt * active.arch.chargeRate);
+          }
+          if (active.isCharging && (input.primaryJustReleased || !input.primaryHeld)) {
+            releaseShot(active, active.chargeTime, moveVec.x, moveVec.y);
+          }
+          if (input.secondaryJustPressed) {
+            performPass(active, moveVec.x, moveVec.y);
+          }
+        } else {
+          active.isCharging = false;
+          active.chargeTime = 0;
+          if (input.primaryJustPressed) {
+            performCheck(active, moveVec.x, moveVec.y);
+          }
+          if (input.secondaryJustPressed) {
+            switchToBestBlueSkater(true);
+          }
+        }
+      } else if (input.secondaryJustPressed) {
+        switchToBestBlueSkater(true);
+      }
     }
 
     input.primaryJustPressed = false;
@@ -3178,7 +3405,7 @@
         continue;
       }
 
-      if (s === active) {
+      if (active && s === active) {
         applySkaterMovement(s, moveVec.x, moveVec.y, dt);
       } else {
         updateSkaterAI(s, dt);
@@ -3252,7 +3479,7 @@
             p.lastTouchedBy = s;
             s.hasPuck = true;
             p.firePower = 0;
-            if (s.team === 'blue') {
+            if (s.team === 'blue' && game.controlMode === 'skater') {
               game.activeIndex = s.slotIndex;
               updateHudDom();
             }
@@ -3261,7 +3488,7 @@
         }
       }
 
-      updateGoalies(subDt);
+      updateGoalies(subDt, moveVec);
     }
 
     const p = game.puck;
@@ -3605,19 +3832,54 @@
     ctx.save();
     ctx.translate(g.x, g.y);
 
+    const isBlue = g.team === 'blue';
+    const isHumanGoalie = isBlue && game.controlMode === 'goalie' && game.state === 'PLAYING';
+    const isDiving = g.diveTimer > 0;
+
+    // Controlled goalie highlight ring + dive aura
+    if (isHumanGoalie) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(0, 0, g.radius + (isDiving ? 17 : 11), 0, Math.PI * 2);
+      ctx.strokeStyle = isDiving ? '#ffd43b' : '#35e0ff';
+      ctx.lineWidth = isDiving ? 4.5 : 3.2;
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Goalie stick poke-check sweep visual
+    if (g.pokeTimer > 0) {
+      ctx.save();
+      const sweep = Math.sin((g.pokeTimer / 0.22) * Math.PI);
+      const reach = 38 + sweep * 36;
+      ctx.strokeStyle = '#3d2817';
+      ctx.lineWidth = 4.5;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(4, 10);
+      ctx.lineTo(reach, 4 - sweep * 14);
+      ctx.stroke();
+      ctx.strokeStyle = '#35e0ff';
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.moveTo(reach - 2, 4 - sweep * 14);
+      ctx.lineTo(reach + 10, -10 - sweep * 14);
+      ctx.stroke();
+      ctx.restore();
+    }
+
     ctx.fillStyle = 'rgba(10, 28, 52, 0.25)';
     ctx.beginPath();
-    ctx.ellipse(2, 5, g.radius + 3, g.radius + 8, 0, 0, Math.PI * 2);
+    ctx.ellipse(2, 5, g.radius + 3, g.radius + (isDiving ? 16 : 8), 0, 0, Math.PI * 2);
     ctx.fill();
 
-    const isBlue = g.team === 'blue';
     const primary = g.hitFlash > 0 ? '#ffffff' : (isBlue ? '#1570e6' : '#e0293d');
     const padColor = g.hitFlash > 0 ? '#ffffff' : '#f4f8ff';
 
-    const padH = g.radius * 2.8;
+    const padH = g.radius * (isDiving ? 3.7 : 2.8);
     ctx.fillStyle = padColor;
-    ctx.strokeStyle = primary;
-    ctx.lineWidth = 2.5;
+    ctx.strokeStyle = isDiving ? '#ffd43b' : primary;
+    ctx.lineWidth = isDiving ? 3.2 : 2.5;
     traceRoundedRect(ctx, -10.5, -padH / 2, 21, padH, 8);
     ctx.fill();
     ctx.stroke();
@@ -3969,7 +4231,8 @@
   }
 
   function drawVirtualControls() {
-    const active = getActiveBlueSkater();
+    const isGoalieMode = game.controlMode === 'goalie';
+    const active = isGoalieMode ? null : getActiveBlueSkater();
     const hasPuck = active && active.hasPuck;
     const baseOpacity = (view.isTouchDevice || input.usedTouch) ? 0.9 : 0.58;
 
@@ -3999,9 +4262,9 @@
     ctx.stroke();
 
     const bp = view.btnPrimary;
-    const primColor = hasPuck ? '#ff7b1c' : '#e5394b';
-    const primLabel = hasPuck ? 'SKJUT' : 'TACKLA';
-    const primSub = (!view.isTouchDevice && !input.usedTouch) ? 'SPACE' : (hasPuck ? 'HÅLL' : '');
+    const primColor = isGoalieMode ? '#00b4d8' : (hasPuck ? '#ff7b1c' : '#e5394b');
+    const primLabel = isGoalieMode ? 'DYK' : (hasPuck ? 'SKJUT' : 'TACKLA');
+    const primSub = (!view.isTouchDevice && !input.usedTouch) ? 'SPACE' : (!isGoalieMode && hasPuck ? 'HÅLL' : '');
 
     ctx.beginPath();
     ctx.arc(bp.x, bp.y, bp.r, 0, Math.PI * 2);
@@ -4033,8 +4296,8 @@
     }
 
     const bs = view.btnSecondary;
-    const secColor = hasPuck ? '#1c96f2' : '#3a669c';
-    const secLabel = hasPuck ? 'PASSA' : 'BYT';
+    const secColor = isGoalieMode ? '#1c96f2' : (hasPuck ? '#1c96f2' : '#3a669c');
+    const secLabel = isGoalieMode ? 'RENSA' : (hasPuck ? 'PASSA' : 'BYT');
     const secSub = (!view.isTouchDevice && !input.usedTouch) ? 'SHIFT' : '';
 
     ctx.beginPath();
@@ -4087,7 +4350,7 @@
     for (const g of game.goalies) drawGoalie(g);
     drawPuck();
 
-    const active = getActiveBlueSkater();
+    const active = game.controlMode === 'skater' ? getActiveBlueSkater() : null;
     // Draw skaters currently on the ice first
     for (const s of game.skaters) {
       if (isOnIce(s)) drawSkater(s, s === active);
