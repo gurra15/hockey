@@ -643,7 +643,7 @@
   <!-- Minimalist Top HUD -->
   <div id="activePlayerPill">
     <span id="activePlayerIcon">⚡</span>
-    <span id="activePlayerText">Viktor Lindström #99</span>
+    <span id="activePlayerText">Connor McDavid #97</span>
   </div>
 
   <div id="hud">
@@ -832,63 +832,63 @@
     }
   };
 
-  // Player's Full Squad: 2 Goalies + 10 Skaters (all with First & Last Names!)
+  // Player's Full NHL Squad: 2 Goalies + 10 Skaters (real NHL names & jersey numbers!)
   const BLUE_GOALIES = [
     {
       id: 'g1',
-      firstName: 'Henrik',
-      lastName: 'Holm',
-      number: 30,
+      firstName: 'Igor',
+      lastName: 'Shesterkin',
+      number: 31,
       style: '🧤 Reflex',
       desc: 'Blixtsnabb i sidled',
       speed: 225,
       radius: 15.5,
-      statSpeed: 95,
-      statSize: 72
+      statSpeed: 96,
+      statSize: 74
     },
     {
       id: 'g2',
-      firstName: 'Filip',
-      lastName: 'Sjöberg',
-      number: 1,
+      firstName: 'Connor',
+      lastName: 'Hellebuyck',
+      number: 37,
       style: '🧱 Mur',
       desc: 'Täcker hela målet',
       speed: 175,
       radius: 19.5,
-      statSpeed: 74,
-      statSize: 96
+      statSpeed: 76,
+      statSize: 97
     }
   ];
 
   const BLUE_SKATERS = [
-    { id: 's1',  firstName: 'Viktor',  lastName: 'Lindström', number: 99, role: 'speed',    spdMul: 1.06, shtMul: 0.96, chkMul: 0.92, bars: [99, 64, 52] },
-    { id: 's2',  firstName: 'Emil',    lastName: 'Forsberg',  number: 14, role: 'speed',    spdMul: 1.03, shtMul: 1.02, chkMul: 0.96, bars: [94, 72, 58] },
-    { id: 's3',  firstName: 'Noah',    lastName: 'Karlsson',  number: 77, role: 'speed',    spdMul: 1.00, shtMul: 1.08, chkMul: 1.00, bars: [90, 78, 62] },
-    { id: 's4',  firstName: 'Lukas',   lastName: 'Bergström', number: 19, role: 'sniper',   spdMul: 0.98, shtMul: 1.07, chkMul: 0.95, bars: [74, 99, 64] },
-    { id: 's5',  firstName: 'Oscar',   lastName: 'Nyström',   number: 88, role: 'sniper',   spdMul: 1.03, shtMul: 1.03, chkMul: 0.92, bars: [80, 95, 62] },
-    { id: 's6',  firstName: 'William', lastName: 'Ekholm',    number: 10, role: 'sniper',   spdMul: 1.06, shtMul: 0.98, chkMul: 1.02, bars: [84, 89, 70] },
-    { id: 's7',  firstName: 'Anton',   lastName: 'Sandberg',  number: 27, role: 'sniper',   spdMul: 0.95, shtMul: 1.05, chkMul: 1.12, bars: [70, 94, 78] },
-    { id: 's8',  firstName: 'Erik',    lastName: 'Viklund',   number: 21, role: 'enforcer', spdMul: 0.98, shtMul: 0.98, chkMul: 1.08, bars: [66, 74, 99] },
-    { id: 's9',  firstName: 'Magnus',  lastName: 'Björk',     number: 44, role: 'enforcer', spdMul: 0.94, shtMul: 1.04, chkMul: 1.12, bars: [62, 79, 98] },
-    { id: 's10', firstName: 'Hampus',  lastName: 'Hedlund',   number: 55, role: 'enforcer', spdMul: 1.07, shtMul: 0.96, chkMul: 0.98, bars: [76, 72, 91] }
+    { id: 's1',  firstName: 'Connor', lastName: 'McDavid',    number: 97, role: 'speed',    spdMul: 1.07, shtMul: 0.99, chkMul: 0.92, bars: [99, 82, 55] },
+    { id: 's2',  firstName: 'Nathan', lastName: 'MacKinnon',  number: 29, role: 'speed',    spdMul: 1.04, shtMul: 1.04, chkMul: 0.98, bars: [96, 86, 65] },
+    { id: 's3',  firstName: 'Jack',   lastName: 'Hughes',     number: 86, role: 'speed',    spdMul: 1.02, shtMul: 1.02, chkMul: 0.90, bars: [94, 80, 52] },
+    { id: 's4',  firstName: 'Alex',   lastName: 'Ovechkin',   number: 8,  role: 'sniper',   spdMul: 0.95, shtMul: 1.08, chkMul: 1.12, bars: [72, 99, 82] },
+    { id: 's5',  firstName: 'Auston', lastName: 'Matthews',   number: 34, role: 'sniper',   spdMul: 1.01, shtMul: 1.06, chkMul: 0.98, bars: [81, 97, 68] },
+    { id: 's6',  firstName: 'Filip',  lastName: 'Forsberg',   number: 9,  role: 'sniper',   spdMul: 1.03, shtMul: 1.02, chkMul: 1.04, bars: [83, 93, 74] },
+    { id: 's7',  firstName: 'David',  lastName: 'Pastrnak',   number: 88, role: 'sniper',   spdMul: 1.04, shtMul: 1.04, chkMul: 0.94, bars: [85, 95, 62] },
+    { id: 's8',  firstName: 'Tom',    lastName: 'Wilson',     number: 43, role: 'enforcer', spdMul: 1.01, shtMul: 0.99, chkMul: 1.09, bars: [74, 75, 99] },
+    { id: 's9',  firstName: 'Ryan',   lastName: 'Reaves',     number: 75, role: 'enforcer', spdMul: 0.93, shtMul: 0.95, chkMul: 1.14, bars: [62, 68, 99] },
+    { id: 's10', firstName: 'Brady',  lastName: 'Tkachuk',    number: 7,  role: 'enforcer', spdMul: 1.05, shtMul: 1.03, chkMul: 1.04, bars: [78, 82, 94] }
   ];
 
-  // Opponent Roster Pool (all with First & Last Names!)
+  // Opponent NHL Roster Pool (real NHL names & jersey numbers!)
   const RED_GOALIES = [
-    { id: 'rg1', firstName: 'Kasper', lastName: 'Dahl', number: 35, style: '🧤 Reflex', speed: 190, radius: 16.5 },
-    { id: 'rg2', firstName: 'Jesper', lastName: 'Lind', number: 40, style: '🧱 Mur', speed: 165, radius: 18.5 }
+    { id: 'rg1', firstName: 'Andrei', lastName: 'Vasilevskiy', number: 88, style: '🧤 Reflex', speed: 192, radius: 17.5 },
+    { id: 'rg2', firstName: 'Jeremy', lastName: 'Swayman',     number: 1,  style: '🧱 Mur',    speed: 174, radius: 18.0 }
   ];
 
   const RED_SKATERS = [
-    { firstName: 'Elias',  lastName: 'Lundqvist', number: 97, role: 'speed',    spdMul: 1.00, shtMul: 1.00, chkMul: 0.95 },
-    { firstName: 'Albin',  lastName: 'Wallin',    number: 24, role: 'speed',    spdMul: 1.03, shtMul: 0.96, chkMul: 0.92 },
-    { firstName: 'Theo',   lastName: 'Ström',     number: 11, role: 'speed',    spdMul: 0.99, shtMul: 1.03, chkMul: 0.98 },
-    { firstName: 'Hugo',   lastName: 'Engström',  number: 91, role: 'sniper',   spdMul: 1.00, shtMul: 1.03, chkMul: 0.96 },
-    { firstName: 'Felix',  lastName: 'Åkerman',   number: 17, role: 'sniper',   spdMul: 1.02, shtMul: 1.00, chkMul: 0.98 },
-    { firstName: 'Oliver', lastName: 'Håkansson', number: 64, role: 'sniper',   spdMul: 0.97, shtMul: 1.05, chkMul: 1.02 },
-    { firstName: 'Axel',   lastName: 'Blomqvist', number: 33, role: 'enforcer', spdMul: 1.00, shtMul: 0.98, chkMul: 1.04 },
-    { firstName: 'Johan',  lastName: 'Nordström', number: 82, role: 'enforcer', spdMul: 0.96, shtMul: 1.02, chkMul: 1.06 },
-    { firstName: 'Robin',  lastName: 'Fransson',  number: 71, role: 'enforcer', spdMul: 1.04, shtMul: 0.96, chkMul: 0.98 }
+    { firstName: 'Cale',    lastName: 'Makar',     number: 8,  role: 'speed',    spdMul: 1.03, shtMul: 1.02, chkMul: 0.94 },
+    { firstName: 'Mathew',  lastName: 'Barzal',    number: 13, role: 'speed',    spdMul: 1.02, shtMul: 0.97, chkMul: 0.92 },
+    { firstName: 'Dylan',   lastName: 'Larkin',    number: 71, role: 'speed',    spdMul: 1.01, shtMul: 1.01, chkMul: 0.98 },
+    { firstName: 'Nikita',  lastName: 'Kucherov',  number: 86, role: 'sniper',   spdMul: 1.00, shtMul: 1.05, chkMul: 0.94 },
+    { firstName: 'Kirill',  lastName: 'Kaprizov',  number: 97, role: 'sniper',   spdMul: 1.03, shtMul: 1.02, chkMul: 0.96 },
+    { firstName: 'Leon',    lastName: 'Draisaitl', number: 29, role: 'sniper',   spdMul: 0.98, shtMul: 1.06, chkMul: 1.04 },
+    { firstName: 'Matthew', lastName: 'Tkachuk',   number: 19, role: 'enforcer', spdMul: 1.01, shtMul: 1.02, chkMul: 1.03 },
+    { firstName: 'Radko',   lastName: 'Gudas',     number: 7,  role: 'enforcer', spdMul: 0.96, shtMul: 0.96, chkMul: 1.09 },
+    { firstName: 'Arber',   lastName: 'Xhekaj',    number: 72, role: 'enforcer', spdMul: 0.97, shtMul: 0.98, chkMul: 1.10 }
   ];
 
   // Selected lineup & position mode ('skater' | 'goalie')
