@@ -314,6 +314,200 @@
       box-shadow: 0 3px 12px rgba(22, 120, 245, 0.32);
     }
 
+    .matchup-bar {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 7px;
+      margin: 6px 0 8px;
+    }
+
+    .matchup-slot {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-main);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .matchup-slot.editing {
+      border-color: #62beff;
+      background: rgba(30, 136, 255, 0.22);
+      box-shadow: 0 0 0 1px rgba(98, 190, 255, 0.3);
+    }
+
+    .matchup-slot-info {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .matchup-slot-lbl {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .matchup-slot-name {
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .matchup-vs {
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--text-muted);
+    }
+
+    .team-swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9.5px;
+      font-weight: 900;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
+      border: 2px solid rgba(255, 255, 255, 0.55);
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 11px;
+      border: 1px solid rgba(135, 200, 255, 0.28);
+      background: rgba(0, 0, 0, 0.34);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      outline: none;
+      margin-bottom: 6px;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    .search-box::placeholder {
+      color: #7c97b8;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+
+    .team-tile {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 9px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1.5px solid rgba(255, 255, 255, 0.09);
+      color: #ffffff;
+      cursor: pointer;
+      text-align: left;
+      transition: transform 0.08s ease, border-color 0.14s ease, background 0.14s ease;
+    }
+
+    .team-tile:active { transform: scale(0.97); }
+
+    .team-tile.selected-blue {
+      border-color: #55b6ff;
+      background: rgba(28, 128, 255, 0.25);
+    }
+
+    .team-tile.selected-red {
+      border-color: #ff6274;
+      background: rgba(229, 43, 64, 0.22);
+    }
+
+    .team-tile-name {
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.15;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .team-tile-meta {
+      font-size: 9.5px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 7px;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      border: 1px solid rgba(135, 200, 255, 0.24);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 10.5px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .filter-pill.active {
+      background: rgba(30, 136, 255, 0.34);
+      border-color: #62beff;
+      color: #ffffff;
+    }
+
+    .step-hidden {
+      display: none !important;
+    }
+
+    .roster-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .back-chip {
+      border: 1px solid rgba(145, 205, 255, 0.32);
+      background: rgba(255, 255, 255, 0.08);
+      color: #d6ebff;
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .roster-team-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #ffffff;
+    }
+
     /* Scrollable Lineup Picker */
     .roster-scroll {
       flex: 1 1 auto;
@@ -649,60 +843,116 @@
   <div id="hud">
     <div class="scoreboard">
       <div class="team-score">
-        <span class="team-dot blue"></span>
-        <span class="team-label">BLÅ</span>
+        <span class="team-dot blue" id="hudDotBlue"></span>
+        <span class="team-label" id="hudLabelBlue">EDM</span>
         <span class="score-num" id="scoreBlue">0</span>
       </div>
       <div class="clock-pill" id="clockDisplay">02:00</div>
       <div class="team-score">
         <span class="score-num" id="scoreRed">0</span>
-        <span class="team-label">RÖD</span>
-        <span class="team-dot red"></span>
+        <span class="team-label" id="hudLabelRed">FLA</span>
+        <span class="team-dot red" id="hudDotRed"></span>
       </div>
     </div>
   </div>
 
   <button id="muteBtn" aria-label="Ljud av/på" title="Ljud av/på">🔊</button>
 
-  <!-- START / LINEUP SELECTION SCREEN -->
+  <!-- START / NHL TEAM & FULL ROSTER SELECTION SCREEN -->
   <div id="startScreen" class="overlay">
     <div class="card">
-      <div class="card-header">
-        <div class="badge">3 MOT 3 • 2 MINUTER • STOR IS &amp; SARGTACKLINGAR</div>
-        <h1 class="title">ICE BLITZ 3v3</h1>
-        <p class="subtitle">Välj om du vill spela som utespelare eller målvakt och ta ut ditt lag!</p>
-        <div class="mode-switch" role="group" aria-label="Välj position">
-          <button type="button" id="modeSkaterBtn" class="mode-btn active">🏒 Spela Utespelare</button>
-          <button type="button" id="modeGoalieBtn" class="mode-btn">🧤 Spela Målvakt</button>
+      <!-- STEP 1: CHOOSE FROM ALL 32 NHL TEAMS -->
+      <div id="stepTeamSelect" style="display:flex;flex-direction:column;min-height:0;flex:1;">
+        <div class="card-header">
+          <div class="badge">ALLA 32 NHL-LAG • 3 MOT 3 • 2 MINUTER</div>
+          <h1 class="title">ICE BLITZ NHL</h1>
+          <p class="subtitle">Välj ditt NHL-lag och motståndare ur listan nedan!</p>
+
+          <div class="matchup-bar">
+            <button type="button" id="slotBlueBtn" class="matchup-slot editing">
+              <span class="team-swatch" id="slotBlueSwatch">EDM</span>
+              <span class="matchup-slot-info">
+                <span class="matchup-slot-lbl">Ditt lag</span>
+                <span class="matchup-slot-name" id="slotBlueName">Edmonton Oilers</span>
+              </span>
+            </button>
+            <span class="matchup-vs">VS</span>
+            <button type="button" id="slotRedBtn" class="matchup-slot">
+              <span class="team-swatch" id="slotRedSwatch">FLA</span>
+              <span class="matchup-slot-info">
+                <span class="matchup-slot-lbl">Motståndare</span>
+                <span class="matchup-slot-name" id="slotRedName">Florida Panthers</span>
+              </span>
+            </button>
+          </div>
+
+          <input type="text" id="teamSearchInput" class="search-box" placeholder="🔍 Sök NHL-lag (t.ex. Toronto, Detroit, EDM)..." autocomplete="off">
+        </div>
+
+        <div class="roster-scroll" id="teamListScroll">
+          <div class="section-head">
+            <span id="teamListHeading">🏒 Välj ditt NHL-lag (32 lag)</span>
+            <span class="section-count ready" id="teamCountBadge">32 lag</span>
+          </div>
+          <div class="team-grid" id="teamGrid"></div>
+        </div>
+
+        <div class="card-footer">
+          <div class="highscore-strip" id="startHighScore">
+            <span>🏆 Rekord: 0 mål</span>
+            <span>•</span>
+            <span>🥇 Vinster: 0</span>
+          </div>
+          <div class="btn-row">
+            <button type="button" id="nextToRosterBtn" class="btn-primary">VÄLJ SPELARE (20) →</button>
+          </div>
         </div>
       </div>
 
-      <div class="roster-scroll" id="rosterScroll">
-        <div class="section-head">
-          <span>🧤 Målvakter (välj 1 av 2)</span>
-          <span class="section-count ready" id="goalieCountBadge">1 / 1</span>
-        </div>
-        <div class="goalie-grid" id="goalieGrid"></div>
+      <!-- STEP 2: FULL TEAM ROSTER (2 GOALIES + ALL 18 SKATERS) & ROLE MODE -->
+      <div id="stepRosterSelect" class="step-hidden" style="display:flex;flex-direction:column;min-height:0;flex:1;">
+        <div class="card-header">
+          <div class="roster-topbar">
+            <button type="button" id="backToTeamsBtn" class="back-chip">← Alla 32 lag</button>
+            <div class="roster-team-pill" id="rosterTeamPill">
+              <span class="team-swatch" id="rosterTeamSwatch" style="width:24px;height:24px;font-size:8.5px;">EDM</span>
+              <span id="rosterTeamTitle">Edmonton Oilers</span>
+            </div>
+          </div>
 
-        <div class="section-head">
-          <span>🏒 Utespelare (välj 3 av 10)</span>
-          <span class="section-count ready" id="skaterCountBadge">3 / 3</span>
+          <div class="mode-switch" role="group" aria-label="Välj position">
+            <button type="button" id="modeSkaterBtn" class="mode-btn active">🏒 Spela Utespelare</button>
+            <button type="button" id="modeGoalieBtn" class="mode-btn">🧤 Spela Målvakt</button>
+          </div>
         </div>
-        <div class="skater-grid" id="skaterGrid"></div>
-      </div>
 
-      <div class="card-footer">
-        <div class="controls-compact" id="controlsCompact">
-          📱 <strong>Styr:</strong> Vänster tumme • <strong>SKJUT/TACKLA</strong> &amp; <strong>PASSA/BYT</strong> &nbsp;|&nbsp; ⌨️ <strong>WASD</strong> + <strong>SPACE</strong> + <strong>SHIFT</strong>
+        <div class="roster-scroll" id="rosterScroll">
+          <div class="section-head">
+            <span>🧤 Målvakter (välj 1 av 2)</span>
+            <span class="section-count ready" id="goalieCountBadge">1 / 1</span>
+          </div>
+          <div class="goalie-grid" id="goalieGrid"></div>
+
+          <div class="section-head">
+            <span id="skaterSectionTitle">🏒 Hela truppen (välj 3 av 18)</span>
+            <span class="section-count ready" id="skaterCountBadge">3 / 3</span>
+          </div>
+          <div class="filter-row" id="roleFilterRow">
+            <button type="button" class="filter-pill active" data-filter="all">Alla (18)</button>
+            <button type="button" class="filter-pill" data-filter="speed">⚡ Snabba</button>
+            <button type="button" class="filter-pill" data-filter="sniper">🔥 Skyttar</button>
+            <button type="button" class="filter-pill" data-filter="enforcer">🛡️ Tacklare</button>
+          </div>
+          <div class="skater-grid" id="skaterGrid"></div>
         </div>
-        <div class="highscore-strip" id="startHighScore">
-          <span>🏆 Rekord: 0 mål</span>
-          <span>•</span>
-          <span>🥇 Vinster: 0</span>
-        </div>
-        <div class="btn-row">
-          <button id="randomTeamBtn" class="btn-secondary" title="Slumpa lag">🎲 Slumpa</button>
-          <button id="playBtn" class="btn-primary">SPELA</button>
+
+        <div class="card-footer">
+          <div class="controls-compact" id="controlsCompact">
+            📱 <strong>Styr:</strong> Vänster tumme • <strong>SKJUT/TACKLA</strong> &amp; <strong>PASSA/BYT</strong> &nbsp;|&nbsp; ⌨️ <strong>WASD</strong> + <strong>SPACE</strong> + <strong>SHIFT</strong>
+          </div>
+          <div class="btn-row">
+            <button type="button" id="playBtn" class="btn-primary">SPELA MATCH</button>
+          </div>
         </div>
       </div>
     </div>
@@ -716,12 +966,12 @@
 
       <div class="final-score-box">
         <div class="final-team">
-          <span class="final-team-name" style="color:#65b8ff;">DITT LAG (BLÅ)</span>
+          <span class="final-team-name" id="finalBlueName" style="color:#65b8ff;">EDMONTON OILERS</span>
           <span class="final-team-num" id="finalBlue">0</span>
         </div>
         <span class="final-sep">–</span>
         <div class="final-team">
-          <span class="final-team-name" style="color:#ff7885;">MOTSTÅNDARE (RÖD)</span>
+          <span class="final-team-name" id="finalRedName" style="color:#ff7885;">FLORIDA PANTHERS</span>
           <span class="final-team-num" id="finalRed">0</span>
         </div>
       </div>
@@ -750,6 +1000,7 @@
 
       <div class="btn-row">
         <button id="changeTeamBtn" class="btn-secondary">🏒 Byt lag</button>
+        <button id="changePlayersBtn" class="btn-secondary">👥 Spelare</button>
         <button id="playAgainBtn" class="btn-primary">SPELA IGEN</button>
       </div>
     </div>
@@ -832,69 +1083,525 @@
     }
   };
 
-  // Player's Full NHL Squad: 2 Goalies + 10 Skaters (real NHL names & jersey numbers!)
-  const BLUE_GOALIES = [
+  // =========================================================================
+  // ALL 32 NHL TEAMS — FULL GAME-DAY ROSTERS (2 GOALIES + 18 SKATERS EACH = 640 PLAYERS!)
+  // =========================================================================
+  const NHL_RAW_TEAMS = [
     {
-      id: 'g1',
-      firstName: 'Igor',
-      lastName: 'Shesterkin',
-      number: 31,
-      style: '🧤 Reflex',
-      desc: 'Blixtsnabb i sidled',
-      speed: 225,
-      radius: 15.5,
-      statSpeed: 96,
-      statSize: 74
+      abbr: 'ANA', name: 'Anaheim Ducks', color: '#f47a38', accent: '#b9975b',
+      goalies: [['Lukas Dostal', 1, 'reflex'], ['John Gibson', 36, 'mur']],
+      skaters: [
+        ['Leo Carlsson', 91, 'speed', 91, 84, 72], ['Troy Terry', 19, 'sniper', 86, 90, 62], ['Mason McTavish', 23, 'enforcer', 78, 84, 86],
+        ['Trevor Zegras', 11, 'speed', 90, 82, 56], ['Cutter Gauthier', 61, 'sniper', 87, 92, 68], ['Frank Vatrano', 77, 'sniper', 82, 91, 74],
+        ['Alex Killorn', 17, 'enforcer', 74, 78, 84], ['Ryan Strome', 16, 'speed', 81, 79, 68], ['Isac Lundestrom', 21, 'speed', 85, 72, 66],
+        ['Brock McGinn', 26, 'enforcer', 76, 70, 84], ['Brett Leason', 20, 'enforcer', 75, 74, 82], ['Ross Johnston', 44, 'enforcer', 64, 62, 95],
+        ['Pavel Mintyukov', 34, 'speed', 87, 80, 78], ['Olen Zellweger', 51, 'speed', 90, 81, 66], ['Jackson LaCombe', 2, 'speed', 84, 76, 74],
+        ['Radko Gudas', 7, 'enforcer', 68, 72, 98], ['Brian Dumoulin', 6, 'enforcer', 72, 68, 84], ['Jacob Trouba', 65, 'enforcer', 70, 78, 96]
+      ]
     },
     {
-      id: 'g2',
-      firstName: 'Connor',
-      lastName: 'Hellebuyck',
-      number: 37,
-      style: '🧱 Mur',
-      desc: 'Täcker hela målet',
-      speed: 175,
-      radius: 19.5,
-      statSpeed: 76,
-      statSize: 97
+      abbr: 'BOS', name: 'Boston Bruins', color: '#ffb81c', accent: '#111111',
+      goalies: [['Jeremy Swayman', 1, 'reflex'], ['Joonas Korpisalo', 70, 'mur']],
+      skaters: [
+        ['David Pastrnak', 88, 'sniper', 88, 97, 66], ['Brad Marchand', 63, 'speed', 87, 88, 80], ['Elias Lindholm', 28, 'sniper', 82, 86, 76],
+        ['Pavel Zacha', 18, 'sniper', 81, 85, 76], ['Charlie Coyle', 13, 'enforcer', 78, 80, 86], ['Morgan Geekie', 39, 'sniper', 79, 86, 78],
+        ['Trent Frederic', 11, 'enforcer', 77, 78, 90], ['Matthew Poitras', 51, 'speed', 87, 79, 62], ['Justin Brazeau', 55, 'enforcer', 71, 80, 88],
+        ['Mark Kastelic', 47, 'enforcer', 73, 72, 93], ['John Beecher', 19, 'speed', 86, 72, 78], ['Cole Koepke', 45, 'speed', 85, 76, 74],
+        ['Charlie McAvoy', 73, 'enforcer', 85, 83, 92], ['Hampus Lindholm', 27, 'speed', 84, 79, 80], ['Brandon Carlo', 25, 'enforcer', 74, 72, 88],
+        ['Nikita Zadorov', 91, 'enforcer', 72, 76, 97], ['Mason Lohrei', 6, 'speed', 85, 78, 72], ['Andrew Peeke', 52, 'enforcer', 73, 68, 86]
+      ]
+    },
+    {
+      abbr: 'BUF', name: 'Buffalo Sabres', color: '#003087', accent: '#ffb81c',
+      goalies: [['Ukko-Pekka Luukkonen', 1, 'mur'], ['Devon Levi', 27, 'reflex']],
+      skaters: [
+        ['Tage Thompson', 72, 'sniper', 82, 97, 84], ['Alex Tuch', 89, 'speed', 89, 87, 82], ['JJ Peterka', 77, 'speed', 92, 87, 64],
+        ['Dylan Cozens', 24, 'speed', 88, 84, 78], ['Jack Quinn', 22, 'sniper', 84, 88, 66], ['Jason Zucker', 17, 'sniper', 83, 85, 74],
+        ['Zach Benson', 9, 'speed', 88, 80, 68], ['Ryan McLeod', 71, 'speed', 93, 76, 68], ['Jordan Greenway', 12, 'enforcer', 73, 74, 93],
+        ['Peyton Krebs', 19, 'speed', 84, 74, 72], ['Beck Malenstyn', 29, 'enforcer', 80, 68, 89], ['Sam Lafferty', 81, 'speed', 86, 72, 80],
+        ['Rasmus Dahlin', 26, 'sniper', 88, 89, 84], ['Owen Power', 25, 'speed', 86, 81, 80], ['Bowen Byram', 4, 'speed', 89, 80, 76],
+        ['Mattias Samuelsson', 23, 'enforcer', 73, 68, 90], ['Henri Jokiharju', 10, 'speed', 81, 74, 74], ['Connor Clifton', 75, 'enforcer', 76, 70, 91]
+      ]
+    },
+    {
+      abbr: 'CGY', name: 'Calgary Flames', color: '#d2001c', accent: '#f1be48',
+      goalies: [['Dustin Wolf', 32, 'reflex'], ['Dan Vladar', 80, 'mur']],
+      skaters: [
+        ['Nazem Kadri', 91, 'sniper', 84, 89, 82], ['Jonathan Huberdeau', 10, 'speed', 85, 84, 68], ['Blake Coleman', 20, 'enforcer', 84, 83, 86],
+        ['Mikael Backlund', 11, 'speed', 82, 80, 78], ['Yegor Sharangovich', 17, 'sniper', 84, 90, 66], ['Connor Zary', 47, 'speed', 89, 83, 68],
+        ['Andrei Kuzmenko', 96, 'sniper', 82, 88, 62], ['Martin Pospisil', 76, 'enforcer', 85, 76, 93], ['Anthony Mantha', 39, 'sniper', 77, 86, 82],
+        ['Matt Coronato', 27, 'sniper', 84, 87, 66], ['Kevin Rooney', 21, 'enforcer', 76, 68, 82], ['Ryan Lomberg', 70, 'enforcer', 86, 68, 92],
+        ['MacKenzie Weegar', 52, 'enforcer', 82, 85, 90], ['Rasmus Andersson', 4, 'sniper', 82, 86, 82], ['Kevin Bahl', 7, 'enforcer', 71, 68, 92],
+        ['Daniil Miromanov', 62, 'sniper', 79, 82, 74], ['Brayden Pachal', 94, 'enforcer', 74, 68, 89], ['Jake Bean', 24, 'speed', 82, 74, 70]
+      ]
+    },
+    {
+      abbr: 'CAR', name: 'Carolina Hurricanes', color: '#ce1126', accent: '#111111',
+      goalies: [['Pyotr Kochetkov', 52, 'reflex'], ['Frederik Andersen', 31, 'mur']],
+      skaters: [
+        ['Sebastian Aho', 20, 'speed', 92, 91, 70], ['Andrei Svechnikov', 37, 'enforcer', 86, 90, 88], ['Seth Jarvis', 24, 'speed', 93, 88, 72],
+        ['Martin Necas', 88, 'speed', 97, 89, 66], ['Jordan Staal', 11, 'enforcer', 75, 78, 91], ['Jesperi Kotkaniemi', 82, 'enforcer', 79, 80, 82],
+        ['Jack Roslovic', 96, 'speed', 89, 83, 64], ['Jordan Martinook', 48, 'enforcer', 83, 74, 86], ['Eric Robinson', 50, 'speed', 91, 74, 76],
+        ['William Carrier', 28, 'enforcer', 81, 72, 92], ['Jackson Blake', 53, 'speed', 88, 82, 60], ['Tyson Jost', 27, 'speed', 82, 74, 72],
+        ['Jaccob Slavin', 74, 'speed', 88, 76, 82], ['Brent Burns', 8, 'sniper', 76, 91, 86], ['Dmitry Orlov', 7, 'enforcer', 81, 82, 88],
+        ['Shayne Gostisbehere', 4, 'sniper', 87, 88, 64], ['Sean Walker', 26, 'speed', 86, 78, 74], ['Jalen Chatfield', 5, 'speed', 89, 74, 80]
+      ]
+    },
+    {
+      abbr: 'CHI', name: 'Chicago Blackhawks', color: '#cf0a2c', accent: '#ffffff',
+      goalies: [['Petr Mrazek', 34, 'reflex'], ['Arvid Soderblom', 40, 'mur']],
+      skaters: [
+        ['Connor Bedard', 98, 'sniper', 91, 97, 62], ['Teuvo Teravainen', 86, 'speed', 88, 86, 62], ['Tyler Bertuzzi', 59, 'enforcer', 80, 84, 86],
+        ['Taylor Hall', 71, 'speed', 91, 85, 70], ['Philipp Kurashev', 23, 'speed', 88, 82, 64], ['Nick Foligno', 17, 'enforcer', 74, 76, 91],
+        ['Ryan Donato', 8, 'sniper', 84, 86, 72], ['Jason Dickinson', 16, 'enforcer', 80, 78, 84], ['Ilya Mikheyev', 95, 'speed', 94, 75, 68],
+        ['Lukas Reichel', 73, 'speed', 91, 79, 60], ['Craig Smith', 15, 'sniper', 81, 82, 74], ['Pat Maroon', 77, 'enforcer', 64, 70, 95],
+        ['Seth Jones', 4, 'enforcer', 83, 84, 86], ['Alex Vlasic', 72, 'enforcer', 81, 74, 88], ['Connor Murphy', 5, 'enforcer', 74, 72, 90],
+        ['Alec Martinez', 22, 'enforcer', 74, 76, 84], ['TJ Brodie', 78, 'speed', 81, 70, 74], ['Wyatt Kaiser', 44, 'speed', 86, 72, 72]
+      ]
+    },
+    {
+      abbr: 'COL', name: 'Colorado Avalanche', color: '#6f263d', accent: '#236192',
+      goalies: [['Alexandar Georgiev', 40, 'reflex'], ['Justus Annunen', 60, 'mur']],
+      skaters: [
+        ['Nathan MacKinnon', 29, 'speed', 98, 94, 76], ['Mikko Rantanen', 96, 'sniper', 85, 96, 84], ['Casey Mittelstadt', 37, 'speed', 88, 84, 68],
+        ['Valeri Nichushkin', 13, 'enforcer', 85, 88, 90], ['Artturi Lehkonen', 62, 'speed', 87, 84, 76], ['Jonathan Drouin', 27, 'speed', 89, 82, 62],
+        ['Ross Colton', 20, 'enforcer', 82, 85, 88], ['Logan OConnor', 25, 'speed', 91, 76, 80], ['Miles Wood', 28, 'speed', 93, 76, 84],
+        ['Parker Kelly', 17, 'enforcer', 80, 70, 86], ['Nikolai Kovalenko', 51, 'speed', 86, 80, 74], ['Joel Kiviranta', 94, 'speed', 85, 76, 76],
+        ['Cale Makar', 8, 'speed', 97, 93, 72], ['Devon Toews', 7, 'speed', 89, 82, 78], ['Samuel Girard', 49, 'speed', 90, 76, 66],
+        ['Josh Manson', 42, 'enforcer', 75, 78, 95], ['Sam Malinski', 70, 'speed', 85, 78, 70], ['Calvin de Haan', 44, 'enforcer', 74, 70, 86]
+      ]
+    },
+    {
+      abbr: 'CBJ', name: 'Columbus Blue Jackets', color: '#002654', accent: '#ce1126',
+      goalies: [['Elvis Merzlikins', 90, 'reflex'], ['Daniil Tarasov', 40, 'mur']],
+      skaters: [
+        ['Sean Monahan', 23, 'sniper', 81, 88, 76], ['Kirill Marchenko', 86, 'sniper', 84, 92, 74], ['Adam Fantilli', 19, 'speed', 91, 87, 78],
+        ['Kent Johnson', 91, 'speed', 90, 85, 60], ['Yegor Chinakhov', 59, 'sniper', 90, 91, 66], ['Boone Jenner', 38, 'enforcer', 77, 83, 92],
+        ['Cole Sillinger', 4, 'enforcer', 82, 81, 84], ['Dmitri Voronkov', 10, 'enforcer', 75, 82, 93], ['James van Riemsdyk', 21, 'sniper', 72, 84, 80],
+        ['Justin Danforth', 17, 'speed', 89, 76, 80], ['Sean Kuraly', 7, 'enforcer', 79, 72, 87], ['Mathieu Olivier', 24, 'enforcer', 74, 72, 96],
+        ['Zach Werenski', 8, 'sniper', 88, 91, 80], ['Ivan Provorov', 9, 'enforcer', 82, 80, 85], ['Damon Severson', 78, 'sniper', 82, 83, 78],
+        ['Erik Gudbranson', 44, 'enforcer', 68, 72, 96], ['Jack Johnson', 3, 'enforcer', 72, 70, 86], ['Jordan Harris', 22, 'speed', 84, 72, 72]
+      ]
+    },
+    {
+      abbr: 'DAL', name: 'Dallas Stars', color: '#006847', accent: '#8f8f8c',
+      goalies: [['Jake Oettinger', 29, 'mur'], ['Casey DeSmith', 1, 'reflex']],
+      skaters: [
+        ['Jason Robertson', 21, 'sniper', 82, 95, 74], ['Roope Hintz', 24, 'speed', 95, 89, 74], ['Wyatt Johnston', 53, 'sniper', 88, 91, 70],
+        ['Tyler Seguin', 91, 'sniper', 84, 89, 72], ['Jamie Benn', 14, 'enforcer', 75, 84, 93], ['Matt Duchene', 95, 'speed', 90, 87, 66],
+        ['Mason Marchment', 27, 'enforcer', 82, 85, 88], ['Logan Stankoven', 11, 'speed', 92, 85, 70], ['Evgenii Dadonov', 63, 'speed', 86, 82, 64],
+        ['Sam Steel', 18, 'speed', 86, 76, 72], ['Colin Blackwell', 15, 'speed', 87, 74, 76], ['Mavrik Bourque', 22, 'speed', 87, 81, 66],
+        ['Miro Heiskanen', 4, 'speed', 94, 85, 78], ['Thomas Harley', 55, 'speed', 89, 85, 76], ['Esa Lindell', 23, 'enforcer', 76, 74, 89],
+        ['Matt Dumba', 3, 'enforcer', 80, 81, 91], ['Ilya Lyubushkin', 46, 'enforcer', 71, 68, 94], ['Nils Lundkvist', 5, 'speed', 85, 78, 66]
+      ]
+    },
+    {
+      abbr: 'DET', name: 'Detroit Red Wings', color: '#ce1126', accent: '#ffffff',
+      goalies: [['Cam Talbot', 39, 'mur'], ['Alex Lyon', 34, 'reflex']],
+      skaters: [
+        ['Dylan Larkin', 71, 'speed', 95, 89, 76], ['Lucas Raymond', 23, 'sniper', 89, 92, 68], ['Alex DeBrincat', 93, 'sniper', 87, 93, 64],
+        ['Patrick Kane', 88, 'sniper', 84, 92, 56], ['JT Compher', 37, 'speed', 84, 81, 76], ['Vladimir Tarasenko', 11, 'sniper', 80, 90, 74],
+        ['Andrew Copp', 18, 'enforcer', 79, 78, 82], ['Michael Rasmussen', 27, 'enforcer', 76, 78, 90], ['Marco Kasper', 92, 'speed', 88, 80, 80],
+        ['Jonatan Berggren', 48, 'speed', 87, 81, 62], ['Joe Veleno', 90, 'speed', 88, 76, 74], ['Tyler Motte', 14, 'speed', 86, 72, 78],
+        ['Moritz Seider', 53, 'enforcer', 83, 84, 95], ['Simon Edvinsson', 77, 'enforcer', 82, 78, 90], ['Ben Chiarot', 8, 'enforcer', 73, 74, 91],
+        ['Erik Gustafsson', 56, 'speed', 84, 80, 68], ['Jeff Petry', 46, 'enforcer', 76, 78, 84], ['Olli Maatta', 2, 'enforcer', 75, 72, 82]
+      ]
+    },
+    {
+      abbr: 'EDM', name: 'Edmonton Oilers', color: '#041e42', accent: '#ff4c00',
+      goalies: [['Stuart Skinner', 74, 'mur'], ['Calvin Pickard', 30, 'reflex']],
+      skaters: [
+        ['Connor McDavid', 97, 'speed', 99, 92, 64], ['Leon Draisaitl', 29, 'sniper', 85, 98, 82], ['Zach Hyman', 18, 'enforcer', 83, 89, 88],
+        ['Ryan Nugent-Hopkins', 93, 'speed', 87, 85, 70], ['Jeff Skinner', 53, 'sniper', 86, 89, 62], ['Viktor Arvidsson', 33, 'speed', 90, 86, 70],
+        ['Adam Henrique', 19, 'sniper', 81, 84, 74], ['Evander Kane', 91, 'enforcer', 82, 86, 94], ['Connor Brown', 28, 'speed', 88, 78, 74],
+        ['Mattias Janmark', 13, 'speed', 87, 75, 74], ['Vasily Podkolzin', 92, 'enforcer', 81, 78, 88], ['Corey Perry', 90, 'enforcer', 68, 80, 88],
+        ['Evan Bouchard', 2, 'sniper', 84, 96, 74], ['Mattias Ekholm', 14, 'enforcer', 79, 82, 91], ['Darnell Nurse', 25, 'enforcer', 85, 81, 92],
+        ['Brett Kulak', 27, 'speed', 87, 74, 76], ['Troy Stecher', 51, 'speed', 84, 72, 74], ['Ty Emberson', 49, 'enforcer', 78, 72, 84]
+      ]
+    },
+    {
+      abbr: 'FLA', name: 'Florida Panthers', color: '#c8102e', accent: '#041e42',
+      goalies: [['Sergei Bobrovsky', 72, 'reflex'], ['Spencer Knight', 30, 'mur']],
+      skaters: [
+        ['Aleksander Barkov', 16, 'sniper', 86, 92, 84], ['Matthew Tkachuk', 19, 'enforcer', 82, 91, 92], ['Sam Reinhart', 13, 'sniper', 85, 96, 74],
+        ['Carter Verhaeghe', 23, 'speed', 92, 91, 72], ['Sam Bennett', 9, 'enforcer', 85, 84, 94], ['Anton Lundell', 15, 'speed', 86, 83, 76],
+        ['Evan Rodrigues', 17, 'speed', 87, 82, 72], ['Eetu Luostarinen', 27, 'enforcer', 83, 78, 84], ['Jesper Boqvist', 70, 'speed', 89, 78, 68],
+        ['A.J. Greer', 10, 'enforcer', 77, 72, 91], ['Tomas Nosek', 92, 'enforcer', 75, 72, 84], ['Jonah Gadjovich', 12, 'enforcer', 70, 70, 95],
+        ['Gustav Forsling', 42, 'speed', 92, 84, 80], ['Aaron Ekblad', 5, 'enforcer', 78, 86, 90], ['Niko Mikkola', 77, 'enforcer', 79, 74, 92],
+        ['Dmitry Kulikov', 7, 'enforcer', 76, 72, 89], ['Nate Schmidt', 88, 'speed', 84, 78, 74], ['Uvis Balinskis', 26, 'speed', 83, 76, 74]
+      ]
+    },
+    {
+      abbr: 'LAK', name: 'Los Angeles Kings', color: '#111111', accent: '#a2aaad',
+      goalies: [['Darcy Kuemper', 35, 'mur'], ['David Rittich', 31, 'reflex']],
+      skaters: [
+        ['Anze Kopitar', 11, 'sniper', 80, 89, 82], ['Adrian Kempe', 9, 'speed', 94, 93, 76], ['Kevin Fiala', 22, 'speed', 91, 90, 70],
+        ['Quinton Byfield', 55, 'speed', 92, 86, 84], ['Phillip Danault', 24, 'enforcer', 82, 80, 84], ['Trevor Moore', 12, 'speed', 90, 84, 72],
+        ['Alex Laferriere', 14, 'sniper', 85, 86, 78], ['Warren Foegele', 37, 'speed', 90, 80, 82], ['Tanner Jeannot', 10, 'enforcer', 76, 74, 97],
+        ['Alex Turcotte', 15, 'speed', 88, 79, 72], ['Trevor Lewis', 61, 'enforcer', 77, 72, 84], ['Akil Thomas', 26, 'speed', 85, 78, 72],
+        ['Drew Doughty', 8, 'enforcer', 82, 87, 90], ['Mikey Anderson', 44, 'enforcer', 79, 74, 90], ['Vladislav Gavrikov', 84, 'enforcer', 78, 76, 89],
+        ['Brandt Clarke', 92, 'speed', 89, 84, 70], ['Joel Edmundson', 6, 'enforcer', 70, 74, 95], ['Jordan Spence', 21, 'speed', 87, 78, 68]
+      ]
+    },
+    {
+      abbr: 'MIN', name: 'Minnesota Wild', color: '#154734', accent: '#a6192e',
+      goalies: [['Filip Gustavsson', 32, 'mur'], ['Marc-Andre Fleury', 29, 'reflex']],
+      skaters: [
+        ['Kirill Kaprizov', 97, 'sniper', 93, 97, 72], ['Matt Boldy', 12, 'sniper', 86, 92, 76], ['Joel Eriksson Ek', 14, 'enforcer', 81, 86, 91],
+        ['Mats Zuccarello', 36, 'speed', 87, 85, 62], ['Marco Rossi', 23, 'speed', 89, 85, 68], ['Marcus Johansson', 90, 'speed', 88, 79, 64],
+        ['Ryan Hartman', 38, 'enforcer', 83, 81, 88], ['Marcus Foligno', 17, 'enforcer', 75, 76, 96], ['Yakov Trenin', 13, 'enforcer', 78, 74, 91],
+        ['Frederick Gaudreau', 89, 'speed', 83, 78, 72], ['Marat Khusnutdinov', 22, 'speed', 91, 74, 66], ['Jakub Lauko', 94, 'enforcer', 84, 70, 88],
+        ['Brock Faber', 7, 'speed', 90, 81, 80], ['Jared Spurgeon', 46, 'speed', 87, 82, 74], ['Jonas Brodin', 25, 'speed', 90, 75, 78],
+        ['Jake Middleton', 5, 'enforcer', 74, 74, 93], ['Zach Bogosian', 24, 'enforcer', 72, 74, 91], ['Declan Chisholm', 47, 'speed', 84, 76, 70]
+      ]
+    },
+    {
+      abbr: 'MTL', name: 'Montreal Canadiens', color: '#af1e2d', accent: '#192168',
+      goalies: [['Sam Montembeault', 35, 'mur'], ['Cayden Primeau', 30, 'reflex']],
+      skaters: [
+        ['Nick Suzuki', 14, 'sniper', 86, 91, 76], ['Cole Caufield', 13, 'sniper', 90, 95, 58], ['Juraj Slafkovsky', 20, 'enforcer', 82, 86, 91],
+        ['Kirby Dach', 77, 'enforcer', 82, 83, 86], ['Patrik Laine', 92, 'sniper', 79, 96, 74], ['Alex Newhook', 15, 'speed', 93, 81, 68],
+        ['Josh Anderson', 17, 'enforcer', 89, 79, 92], ['Jake Evans', 71, 'speed', 87, 76, 76], ['Christian Dvorak', 28, 'enforcer', 78, 77, 80],
+        ['Joel Armia', 40, 'enforcer', 77, 81, 86], ['Brendan Gallagher', 11, 'enforcer', 81, 81, 88], ['Emil Heineman', 51, 'sniper', 83, 86, 80],
+        ['Mike Matheson', 8, 'speed', 93, 84, 76], ['Lane Hutson', 48, 'speed', 94, 81, 58], ['Kaiden Guhle', 21, 'enforcer', 85, 78, 90],
+        ['David Savard', 58, 'enforcer', 68, 72, 92], ['Arber Xhekaj', 72, 'enforcer', 74, 78, 99], ['Justin Barron', 52, 'speed', 84, 78, 74]
+      ]
+    },
+    {
+      abbr: 'NSH', name: 'Nashville Predators', color: '#ffb81c', accent: '#041e42',
+      goalies: [['Juuse Saros', 74, 'reflex'], ['Scott Wedgewood', 41, 'mur']],
+      skaters: [
+        ['Filip Forsberg', 9, 'sniper', 86, 96, 80], ['Steven Stamkos', 91, 'sniper', 80, 97, 74], ['Jonathan Marchessault', 81, 'sniper', 86, 92, 74],
+        ['Ryan OReilly', 90, 'enforcer', 77, 85, 86], ['Gustav Nyquist', 14, 'speed', 87, 84, 64], ['Tommy Novak', 82, 'speed', 87, 82, 64],
+        ['Colton Sissons', 10, 'enforcer', 81, 78, 85], ['Luke Evangelista', 77, 'speed', 88, 83, 62], ['Philip Tomasino', 26, 'speed', 87, 82, 64],
+        ['Juuso Parssinen', 13, 'enforcer', 79, 78, 84], ['Michael McCarron', 47, 'enforcer', 70, 72, 95], ['Cole Smith', 36, 'enforcer', 79, 72, 90],
+        ['Roman Josi', 59, 'speed', 92, 91, 78], ['Brady Skjei', 76, 'speed', 88, 82, 82], ['Alexandre Carrier', 45, 'speed', 85, 76, 76],
+        ['Jeremy Lauzon', 3, 'enforcer', 76, 72, 98], ['Luke Schenn', 2, 'enforcer', 67, 70, 96], ['Dante Fabbro', 57, 'speed', 81, 76, 78]
+      ]
+    },
+    {
+      abbr: 'NJD', name: 'New Jersey Devils', color: '#ce1126', accent: '#111111',
+      goalies: [['Jacob Markstrom', 25, 'mur'], ['Jake Allen', 34, 'reflex']],
+      skaters: [
+        ['Jack Hughes', 86, 'speed', 96, 92, 56], ['Nico Hischier', 13, 'speed', 89, 88, 76], ['Jesper Bratt', 63, 'speed', 96, 88, 62],
+        ['Timo Meier', 28, 'enforcer', 84, 90, 91], ['Stefan Noesen', 11, 'enforcer', 78, 83, 86], ['Dawson Mercer', 91, 'speed', 88, 84, 72],
+        ['Erik Haula', 56, 'speed', 86, 80, 78], ['Ondrej Palat', 18, 'enforcer', 80, 80, 84], ['Tomas Tatar', 90, 'speed', 84, 81, 66],
+        ['Paul Cotter', 47, 'enforcer', 83, 79, 91], ['Curtis Lazar', 42, 'enforcer', 80, 72, 88], ['Nathan Bastian', 14, 'enforcer', 74, 72, 92],
+        ['Dougie Hamilton', 7, 'sniper', 80, 94, 80], ['Luke Hughes', 43, 'speed', 94, 83, 68], ['Brett Pesce', 22, 'enforcer', 81, 76, 86],
+        ['Brenden Dillon', 5, 'enforcer', 73, 72, 95], ['Jonas Siegenthaler', 71, 'enforcer', 78, 72, 87], ['Johnathan Kovacevic', 8, 'enforcer', 75, 74, 88]
+      ]
+    },
+    {
+      abbr: 'NYI', name: 'New York Islanders', color: '#00539b', accent: '#f47d30',
+      goalies: [['Ilya Sorokin', 30, 'reflex'], ['Semyon Varlamov', 40, 'mur']],
+      skaters: [
+        ['Mathew Barzal', 13, 'speed', 96, 86, 64], ['Bo Horvat', 14, 'sniper', 84, 91, 80], ['Brock Nelson', 29, 'sniper', 83, 92, 76],
+        ['Kyle Palmieri', 21, 'sniper', 82, 88, 78], ['Anders Lee', 27, 'enforcer', 75, 85, 90], ['Anthony Duclair', 11, 'speed', 93, 85, 64],
+        ['Jean-Gabriel Pageau', 44, 'speed', 85, 79, 80], ['Simon Holmstrom', 10, 'speed', 86, 82, 70], ['Maxim Tsyplakov', 7, 'enforcer', 80, 83, 88],
+        ['Casey Cizikas', 53, 'enforcer', 83, 74, 88], ['Kyle MacLean', 32, 'enforcer', 80, 72, 86], ['Matt Martin', 17, 'enforcer', 66, 66, 97],
+        ['Noah Dobson', 8, 'sniper', 87, 89, 76], ['Alexander Romanov', 28, 'enforcer', 82, 76, 95], ['Ryan Pulock', 6, 'sniper', 77, 92, 88],
+        ['Adam Pelech', 3, 'enforcer', 78, 74, 89], ['Scott Mayfield', 24, 'enforcer', 71, 72, 92], ['Mike Reilly', 2, 'speed', 86, 76, 68]
+      ]
+    },
+    {
+      abbr: 'NYR', name: 'New York Rangers', color: '#0038a8', accent: '#ce1126',
+      goalies: [['Igor Shesterkin', 31, 'reflex'], ['Jonathan Quick', 32, 'mur']],
+      skaters: [
+        ['Artemi Panarin', 10, 'sniper', 91, 96, 62], ['Mika Zibanejad', 93, 'sniper', 87, 93, 76], ['Chris Kreider', 20, 'speed', 91, 90, 84],
+        ['Vincent Trocheck', 16, 'enforcer', 85, 86, 86], ['Alexis Lafreniere', 13, 'sniper', 86, 90, 78], ['Filip Chytil', 72, 'speed', 91, 84, 72],
+        ['Reilly Smith', 91, 'speed', 85, 83, 70], ['Will Cuylle', 50, 'enforcer', 83, 81, 93], ['Kaapo Kakko', 24, 'enforcer', 80, 81, 82],
+        ['Sam Carrick', 39, 'enforcer', 78, 72, 88], ['Adam Edstrom', 84, 'enforcer', 76, 74, 92], ['Matt Rempe', 73, 'enforcer', 68, 66, 99],
+        ['Adam Fox', 23, 'speed', 88, 86, 72], ['KAndre Miller', 79, 'speed', 90, 81, 86], ['Ryan Lindgren', 55, 'enforcer', 78, 70, 91],
+        ['Braden Schneider', 4, 'enforcer', 80, 76, 90], ['Zac Jones', 6, 'speed', 88, 76, 66], ['Victor Mancini', 90, 'enforcer', 80, 76, 86]
+      ]
+    },
+    {
+      abbr: 'OTT', name: 'Ottawa Senators', color: '#c52032', accent: '#c2912c',
+      goalies: [['Linus Ullmark', 35, 'mur'], ['Anton Forsberg', 31, 'reflex']],
+      skaters: [
+        ['Brady Tkachuk', 7, 'enforcer', 82, 88, 98], ['Tim Stutzle', 18, 'speed', 95, 89, 72], ['Josh Norris', 9, 'sniper', 86, 91, 76],
+        ['Drake Batherson', 19, 'sniper', 85, 90, 76], ['Claude Giroux', 28, 'sniper', 81, 88, 74], ['Shane Pinto', 12, 'sniper', 85, 86, 78],
+        ['Ridly Greig', 71, 'enforcer', 85, 80, 88], ['David Perron', 57, 'sniper', 76, 85, 82], ['Michael Amadio', 22, 'speed', 82, 80, 74],
+        ['Nick Cousins', 21, 'enforcer', 80, 75, 84], ['Noah Gregor', 73, 'speed', 93, 74, 74], ['Zack MacEwen', 17, 'enforcer', 72, 70, 94],
+        ['Jake Sanderson', 85, 'speed', 93, 84, 80], ['Thomas Chabot', 72, 'speed', 88, 83, 76], ['Artem Zub', 2, 'enforcer', 80, 74, 89],
+        ['Nick Jensen', 3, 'speed', 87, 74, 78], ['Tyler Kleven', 43, 'enforcer', 74, 74, 94], ['Travis Hamonic', 23, 'enforcer', 70, 72, 88]
+      ]
+    },
+    {
+      abbr: 'PHI', name: 'Philadelphia Flyers', color: '#f74902', accent: '#111111',
+      goalies: [['Samuel Ersson', 33, 'reflex'], ['Ivan Fedotov', 82, 'mur']],
+      skaters: [
+        ['Travis Konecny', 11, 'speed', 93, 91, 80], ['Matvei Michkov', 39, 'sniper', 88, 94, 62], ['Owen Tippett', 74, 'speed', 94, 91, 78],
+        ['Sean Couturier', 14, 'enforcer', 76, 82, 86], ['Tyson Foerster', 71, 'sniper', 82, 90, 76], ['Joel Farabee', 86, 'speed', 87, 84, 74],
+        ['Morgan Frost', 48, 'speed', 87, 82, 66], ['Scott Laughton', 21, 'enforcer', 82, 78, 86], ['Bobby Brink', 10, 'speed', 86, 81, 64],
+        ['Noah Cates', 27, 'enforcer', 81, 76, 82], ['Garnet Hathaway', 19, 'enforcer', 78, 72, 96], ['Nicolas Deslauriers', 44, 'enforcer', 68, 66, 98],
+        ['Travis Sanheim', 6, 'speed', 88, 82, 82], ['Cam York', 8, 'speed', 87, 80, 74], ['Jamie Drysdale', 9, 'speed', 92, 79, 68],
+        ['Rasmus Ristolainen', 55, 'enforcer', 75, 80, 95], ['Nick Seeler', 24, 'enforcer', 76, 70, 91], ['Egor Zamula', 5, 'enforcer', 76, 74, 84]
+      ]
+    },
+    {
+      abbr: 'PIT', name: 'Pittsburgh Penguins', color: '#fcb514', accent: '#111111',
+      goalies: [['Tristan Jarry', 35, 'reflex'], ['Alex Nedeljkovic', 39, 'mur']],
+      skaters: [
+        ['Sidney Crosby', 87, 'sniper', 88, 95, 82], ['Evgeni Malkin', 71, 'sniper', 82, 94, 82], ['Bryan Rust', 17, 'speed', 90, 88, 74],
+        ['Rickard Rakell', 67, 'sniper', 85, 89, 72], ['Michael Bunting', 8, 'enforcer', 82, 84, 86], ['Drew OConnor', 10, 'speed', 90, 80, 78],
+        ['Lars Eller', 20, 'enforcer', 78, 80, 82], ['Anthony Beauvillier', 72, 'speed', 89, 81, 66], ['Cody Glass', 19, 'speed', 84, 79, 72],
+        ['Kevin Hayes', 13, 'enforcer', 72, 81, 82], ['Noel Acciari', 55, 'enforcer', 77, 72, 92], ['Blake Lizotte', 46, 'speed', 89, 74, 76],
+        ['Erik Karlsson', 65, 'speed', 92, 89, 68], ['Kris Letang', 58, 'speed', 89, 86, 82], ['Marcus Pettersson', 28, 'enforcer', 80, 74, 84],
+        ['Matt Grzelcyk', 24, 'speed', 87, 76, 68], ['Ryan Graves', 27, 'enforcer', 76, 76, 88], ['Jack St. Ivany', 3, 'enforcer', 75, 70, 86]
+      ]
+    },
+    {
+      abbr: 'SJS', name: 'San Jose Sharks', color: '#006d75', accent: '#ea7200',
+      goalies: [['Mackenzie Blackwood', 29, 'mur'], ['Vitek Vanecek', 41, 'reflex']],
+      skaters: [
+        ['Macklin Celebrini', 71, 'speed', 92, 91, 74], ['William Eklund', 72, 'speed', 91, 86, 66], ['Tyler Toffoli', 73, 'sniper', 79, 92, 74],
+        ['Mikael Granlund', 64, 'speed', 86, 84, 70], ['Will Smith', 2, 'speed', 90, 86, 62], ['Fabian Zetterlund', 20, 'sniper', 86, 88, 82],
+        ['Alex Wennberg', 21, 'speed', 84, 78, 72], ['Barclay Goodrow', 23, 'enforcer', 78, 74, 88], ['Luke Kunin', 11, 'enforcer', 81, 78, 88],
+        ['Nico Sturm', 7, 'speed', 85, 74, 82], ['Klim Kostin', 10, 'enforcer', 76, 76, 94], ['Carl Grundstrom', 91, 'enforcer', 80, 76, 89],
+        ['Jake Walman', 96, 'sniper', 86, 89, 78], ['Mario Ferraro', 38, 'enforcer', 84, 74, 89], ['Cody Ceci', 4, 'enforcer', 78, 74, 84],
+        ['Jan Rutta', 84, 'enforcer', 74, 74, 86], ['Henry Thrun', 3, 'speed', 83, 74, 74], ['Timothy Liljegren', 37, 'speed', 84, 78, 76]
+      ]
+    },
+    {
+      abbr: 'SEA', name: 'Seattle Kraken', color: '#001628', accent: '#99d9d9',
+      goalies: [['Joey Daccord', 35, 'reflex'], ['Philipp Grubauer', 31, 'mur']],
+      skaters: [
+        ['Jared McCann', 19, 'sniper', 87, 93, 70], ['Matty Beniers', 10, 'speed', 90, 84, 72], ['Jordan Eberle', 7, 'sniper', 84, 88, 66],
+        ['Chandler Stephenson', 9, 'speed', 93, 82, 72], ['Oliver Bjorkstrand', 22, 'sniper', 84, 90, 70], ['Shane Wright', 51, 'sniper', 86, 86, 70],
+        ['Jaden Schwartz', 17, 'speed', 84, 83, 76], ['Eeli Tolvanen', 20, 'sniper', 83, 89, 82], ['Andre Burakovsky', 95, 'speed', 88, 86, 66],
+        ['Yanni Gourde', 37, 'enforcer', 87, 78, 86], ['Brandon Tanev', 13, 'speed', 93, 74, 90], ['Tye Kartye', 52, 'enforcer', 82, 80, 91],
+        ['Vince Dunn', 29, 'speed', 89, 86, 78], ['Brandon Montour', 62, 'speed', 91, 88, 82], ['Adam Larsson', 6, 'enforcer', 77, 78, 94],
+        ['Jamie Oleksiak', 24, 'enforcer', 72, 76, 95], ['Ryker Evans', 41, 'speed', 87, 78, 76], ['Will Borgen', 3, 'enforcer', 78, 74, 91]
+      ]
+    },
+    {
+      abbr: 'STL', name: 'St. Louis Blues', color: '#002f87', accent: '#fcb514',
+      goalies: [['Jordan Binnington', 50, 'reflex'], ['Joel Hofer', 30, 'mur']],
+      skaters: [
+        ['Robert Thomas', 18, 'speed', 92, 88, 72], ['Jordan Kyrou', 25, 'speed', 96, 91, 62], ['Pavel Buchnevich', 89, 'sniper', 85, 91, 76],
+        ['Brayden Schenn', 10, 'enforcer', 80, 85, 92], ['Jake Neighbours', 63, 'enforcer', 82, 86, 90], ['Dylan Holloway', 81, 'speed', 91, 84, 80],
+        ['Brandon Saad', 20, 'sniper', 84, 85, 74], ['Zack Bolduc', 76, 'sniper', 85, 87, 72], ['Alexandre Texier', 9, 'speed', 88, 80, 72],
+        ['Oskar Sundqvist', 70, 'enforcer', 75, 76, 86], ['Alexey Toropchenko', 13, 'enforcer', 84, 74, 92], ['Nathan Walker', 26, 'enforcer', 85, 72, 88],
+        ['Colton Parayko', 55, 'enforcer', 80, 91, 93], ['Philip Broberg', 6, 'speed', 91, 82, 78], ['Justin Faulk', 72, 'sniper', 81, 87, 82],
+        ['Nick Leddy', 4, 'speed', 88, 76, 72], ['Ryan Suter', 22, 'enforcer', 73, 74, 84], ['Matthew Kessel', 51, 'enforcer', 77, 74, 84]
+      ]
+    },
+    {
+      abbr: 'TBL', name: 'Tampa Bay Lightning', color: '#002868', accent: '#ffffff',
+      goalies: [['Andrei Vasilevskiy', 88, 'mur'], ['Jonas Johansson', 31, 'reflex']],
+      skaters: [
+        ['Nikita Kucherov', 86, 'sniper', 90, 98, 66], ['Brayden Point', 21, 'speed', 96, 93, 70], ['Jake Guentzel', 59, 'sniper', 88, 94, 70],
+        ['Brandon Hagel', 38, 'speed', 92, 88, 78], ['Anthony Cirelli', 71, 'speed', 89, 83, 82], ['Nick Paul', 20, 'enforcer', 80, 84, 88],
+        ['Conor Geekie', 14, 'enforcer', 81, 83, 86], ['Mitchell Chaffee', 41, 'enforcer', 81, 80, 86], ['Michael Eyssimont', 23, 'enforcer', 86, 76, 88],
+        ['Luke Glendening', 11, 'enforcer', 81, 70, 86], ['Zemgus Girgensons', 28, 'enforcer', 79, 72, 88], ['Cam Atkinson', 13, 'speed', 85, 81, 64],
+        ['Victor Hedman', 77, 'sniper', 85, 92, 90], ['Ryan McDonagh', 27, 'enforcer', 80, 76, 89], ['Erik Cernak', 81, 'enforcer', 76, 76, 95],
+        ['JJ Moser', 90, 'speed', 86, 78, 78], ['Darren Raddysh', 43, 'sniper', 82, 85, 76], ['Emil Lilleberg', 78, 'enforcer', 76, 72, 92]
+      ]
+    },
+    {
+      abbr: 'TOR', name: 'Toronto Maple Leafs', color: '#00205b', accent: '#ffffff',
+      goalies: [['Anthony Stolarz', 41, 'mur'], ['Joseph Woll', 60, 'reflex']],
+      skaters: [
+        ['Auston Matthews', 34, 'sniper', 87, 99, 78], ['Mitch Marner', 16, 'speed', 93, 88, 66], ['William Nylander', 88, 'speed', 95, 93, 66],
+        ['John Tavares', 91, 'sniper', 79, 91, 80], ['Matthew Knies', 23, 'enforcer', 85, 85, 91], ['Max Domi', 11, 'speed', 88, 82, 80],
+        ['Bobby McMann', 74, 'speed', 90, 85, 82], ['Max Pacioretty', 67, 'sniper', 77, 89, 82], ['Nicholas Robertson', 89, 'sniper', 88, 87, 64],
+        ['Pontus Holmberg', 29, 'speed', 84, 76, 74], ['David Kampf', 64, 'enforcer', 81, 70, 82], ['Ryan Reaves', 75, 'enforcer', 64, 66, 99],
+        ['Morgan Rielly', 44, 'speed', 90, 85, 74], ['Chris Tanev', 8, 'enforcer', 77, 70, 91], ['Oliver Ekman-Larsson', 95, 'sniper', 83, 85, 78],
+        ['Jake McCabe', 22, 'enforcer', 79, 76, 94], ['Simon Benoit', 2, 'enforcer', 74, 68, 95], ['Conor Timmins', 25, 'speed', 82, 78, 76]
+      ]
+    },
+    {
+      abbr: 'UTA', name: 'Utah Hockey Club', color: '#6cace4', accent: '#111111',
+      goalies: [['Connor Ingram', 39, 'reflex'], ['Karel Vejmelka', 70, 'mur']],
+      skaters: [
+        ['Clayton Keller', 9, 'speed', 93, 91, 62], ['Logan Cooley', 92, 'speed', 95, 86, 64], ['Dylan Guenther', 11, 'sniper', 88, 94, 68],
+        ['Nick Schmaltz', 8, 'speed', 89, 86, 64], ['Barrett Hayton', 27, 'sniper', 83, 85, 78], ['Lawson Crouse', 67, 'enforcer', 80, 84, 92],
+        ['Matias Maccelli', 63, 'speed', 90, 80, 60], ['Nick Bjugstad', 17, 'enforcer', 76, 82, 88], ['Alex Kerfoot', 15, 'speed', 88, 77, 72],
+        ['Jack McBain', 22, 'enforcer', 78, 78, 93], ['Kevin Stenlund', 82, 'enforcer', 77, 74, 86], ['Liam OBrien', 38, 'enforcer', 72, 68, 97],
+        ['Mikhail Sergachev', 98, 'sniper', 86, 89, 86], ['Sean Durzi', 50, 'speed', 87, 83, 76], ['John Marino', 6, 'speed', 85, 75, 80],
+        ['Michael Kesselring', 7, 'enforcer', 83, 82, 89], ['Ian Cole', 28, 'enforcer', 74, 72, 88], ['Juuso Valimaki', 4, 'speed', 83, 76, 78]
+      ]
+    },
+    {
+      abbr: 'VAN', name: 'Vancouver Canucks', color: '#00205b', accent: '#00843d',
+      goalies: [['Thatcher Demko', 35, 'mur'], ['Kevin Lankinen', 32, 'reflex']],
+      skaters: [
+        ['Elias Pettersson', 40, 'sniper', 89, 94, 72], ['J.T. Miller', 9, 'enforcer', 85, 92, 91], ['Brock Boeser', 6, 'sniper', 81, 95, 72],
+        ['Jake DeBrusk', 74, 'speed', 90, 87, 74], ['Conor Garland', 8, 'speed', 92, 84, 72], ['Dakota Joshua', 81, 'enforcer', 80, 81, 94],
+        ['Pius Suter', 24, 'speed', 84, 82, 72], ['Nils Hoglander', 21, 'speed', 89, 82, 76], ['Danton Heinen', 20, 'speed', 84, 80, 74],
+        ['Teddy Blueger', 53, 'enforcer', 82, 74, 82], ['Kiefer Sherwood', 44, 'enforcer', 86, 78, 97], ['Daniel Sprong', 10, 'sniper', 87, 88, 60],
+        ['Quinn Hughes', 43, 'speed', 98, 88, 66], ['Filip Hronek', 17, 'sniper', 86, 91, 82], ['Carson Soucy', 7, 'enforcer', 76, 74, 90],
+        ['Tyler Myers', 57, 'enforcer', 75, 80, 91], ['Vincent Desharnais', 73, 'enforcer', 69, 68, 95], ['Erik Brannstrom', 26, 'speed', 88, 76, 68]
+      ]
+    },
+    {
+      abbr: 'VGK', name: 'Vegas Golden Knights', color: '#b4975a', accent: '#333f42',
+      goalies: [['Adin Hill', 33, 'mur'], ['Ilya Samsonov', 35, 'reflex']],
+      skaters: [
+        ['Jack Eichel', 9, 'speed', 94, 94, 74], ['Mark Stone', 61, 'sniper', 79, 92, 84], ['Tomas Hertl', 48, 'enforcer', 80, 88, 88],
+        ['William Karlsson', 71, 'speed', 90, 87, 74], ['Ivan Barbashev', 49, 'enforcer', 85, 85, 90], ['Pavel Dorofeyev', 16, 'sniper', 85, 89, 68],
+        ['Victor Olofsson', 95, 'sniper', 83, 91, 62], ['Nicolas Roy', 10, 'enforcer', 79, 80, 86], ['Brett Howden', 21, 'enforcer', 83, 78, 85],
+        ['Keegan Kolesar', 55, 'enforcer', 81, 74, 96], ['Alexander Holtz', 26, 'sniper', 83, 87, 66], ['Tanner Pearson', 70, 'enforcer', 78, 79, 82],
+        ['Alex Pietrangelo', 7, 'enforcer', 82, 86, 88], ['Shea Theodore', 27, 'speed', 91, 88, 72], ['Noah Hanifin', 15, 'speed', 89, 84, 80],
+        ['Brayden McNabb', 3, 'enforcer', 74, 74, 95], ['Zach Whitecloud', 2, 'enforcer', 80, 74, 88], ['Nicolas Hague', 14, 'enforcer', 72, 78, 94]
+      ]
+    },
+    {
+      abbr: 'WSH', name: 'Washington Capitals', color: '#c8102e', accent: '#041e42',
+      goalies: [['Charlie Lindgren', 79, 'reflex'], ['Logan Thompson', 48, 'mur']],
+      skaters: [
+        ['Alex Ovechkin', 8, 'sniper', 76, 99, 88], ['Dylan Strome', 17, 'sniper', 83, 90, 72], ['Tom Wilson', 43, 'enforcer', 84, 84, 99],
+        ['Connor McMichael', 24, 'speed', 90, 86, 74], ['Pierre-Luc Dubois', 80, 'enforcer', 82, 84, 90], ['Aliaksei Protas', 21, 'enforcer', 84, 82, 88],
+        ['Andrew Mangiapane', 88, 'speed', 88, 84, 74], ['Hendrix Lapierre', 29, 'speed', 89, 80, 66], ['Jakub Vrana', 15, 'speed', 90, 86, 62],
+        ['Nic Dowd', 26, 'enforcer', 79, 75, 88], ['Brandon Duhaime', 22, 'enforcer', 84, 72, 92], ['Taylor Raddysh', 16, 'enforcer', 80, 80, 84],
+        ['John Carlson', 74, 'sniper', 82, 92, 82], ['Jakob Chychrun', 6, 'sniper', 86, 91, 84], ['Rasmus Sandin', 38, 'speed', 87, 80, 74],
+        ['Matt Roy', 3, 'enforcer', 80, 78, 88], ['Martin Fehervary', 42, 'enforcer', 86, 74, 92], ['Trevor van Riemsdyk', 57, 'enforcer', 77, 74, 82]
+      ]
+    },
+    {
+      abbr: 'WPG', name: 'Winnipeg Jets', color: '#041e42', accent: '#004c97',
+      goalies: [['Connor Hellebuyck', 37, 'mur'], ['Eric Comrie', 1, 'reflex']],
+      skaters: [
+        ['Mark Scheifele', 55, 'sniper', 87, 94, 76], ['Kyle Connor', 81, 'speed', 95, 95, 64], ['Nikolaj Ehlers', 27, 'speed', 96, 89, 64],
+        ['Gabriel Vilardi', 13, 'sniper', 81, 91, 80], ['Cole Perfetti', 91, 'sniper', 85, 88, 66], ['Nino Niederreiter', 62, 'enforcer', 80, 86, 88],
+        ['Adam Lowry', 17, 'enforcer', 78, 78, 95], ['Vladislav Namestnikov', 7, 'speed', 86, 80, 74], ['Mason Appleton', 22, 'speed', 85, 79, 78],
+        ['Alex Iafallo', 9, 'speed', 85, 80, 76], ['Morgan Barron', 36, 'enforcer', 81, 76, 89], ['Rasmus Kupari', 15, 'speed', 90, 74, 76],
+        ['Josh Morrissey', 44, 'speed', 92, 88, 76], ['Neal Pionk', 4, 'enforcer', 85, 84, 89], ['Dylan DeMelo', 2, 'enforcer', 80, 74, 84],
+        ['Dylan Samberg', 54, 'enforcer', 80, 74, 89], ['Colin Miller', 6, 'sniper', 80, 88, 82], ['Logan Stanley', 64, 'enforcer', 68, 76, 96]
+      ]
     }
   ];
 
-  const BLUE_SKATERS = [
-    { id: 's1',  firstName: 'Connor', lastName: 'McDavid',    number: 97, role: 'speed',    spdMul: 1.07, shtMul: 0.99, chkMul: 0.92, bars: [99, 82, 55] },
-    { id: 's2',  firstName: 'Nathan', lastName: 'MacKinnon',  number: 29, role: 'speed',    spdMul: 1.04, shtMul: 1.04, chkMul: 0.98, bars: [96, 86, 65] },
-    { id: 's3',  firstName: 'Jack',   lastName: 'Hughes',     number: 86, role: 'speed',    spdMul: 1.02, shtMul: 1.02, chkMul: 0.90, bars: [94, 80, 52] },
-    { id: 's4',  firstName: 'Alex',   lastName: 'Ovechkin',   number: 8,  role: 'sniper',   spdMul: 0.95, shtMul: 1.08, chkMul: 1.12, bars: [72, 99, 82] },
-    { id: 's5',  firstName: 'Auston', lastName: 'Matthews',   number: 34, role: 'sniper',   spdMul: 1.01, shtMul: 1.06, chkMul: 0.98, bars: [81, 97, 68] },
-    { id: 's6',  firstName: 'Filip',  lastName: 'Forsberg',   number: 9,  role: 'sniper',   spdMul: 1.03, shtMul: 1.02, chkMul: 1.04, bars: [83, 93, 74] },
-    { id: 's7',  firstName: 'David',  lastName: 'Pastrnak',   number: 88, role: 'sniper',   spdMul: 1.04, shtMul: 1.04, chkMul: 0.94, bars: [85, 95, 62] },
-    { id: 's8',  firstName: 'Tom',    lastName: 'Wilson',     number: 43, role: 'enforcer', spdMul: 1.01, shtMul: 0.99, chkMul: 1.09, bars: [74, 75, 99] },
-    { id: 's9',  firstName: 'Ryan',   lastName: 'Reaves',     number: 75, role: 'enforcer', spdMul: 0.93, shtMul: 0.95, chkMul: 1.14, bars: [62, 68, 99] },
-    { id: 's10', firstName: 'Brady',  lastName: 'Tkachuk',    number: 7,  role: 'enforcer', spdMul: 1.05, shtMul: 1.03, chkMul: 1.04, bars: [78, 82, 94] }
-  ];
+  function splitName(full) {
+    const parts = full.trim().split(' ');
+    return {
+      firstName: parts[0],
+      lastName: parts.slice(1).join(' ') || parts[0]
+    };
+  }
 
-  // Opponent NHL Roster Pool (real NHL names & jersey numbers!)
-  const RED_GOALIES = [
-    { id: 'rg1', firstName: 'Andrei', lastName: 'Vasilevskiy', number: 88, style: '🧤 Reflex', speed: 192, radius: 17.5 },
-    { id: 'rg2', firstName: 'Jeremy', lastName: 'Swayman',     number: 1,  style: '🧱 Mur',    speed: 174, radius: 18.0 }
-  ];
+  function buildTeamObject(raw) {
+    const goalies = raw.goalies.map((g, idx) => {
+      const { firstName, lastName } = splitName(g[0]);
+      const isReflex = g[2] === 'reflex';
+      return {
+        id: `${raw.abbr}_g${idx}`,
+        firstName,
+        lastName,
+        number: g[1],
+        style: isReflex ? '🧤 Reflex' : '🧱 Mur',
+        desc: isReflex ? 'Blixtsnabb i sidled' : 'Täcker hela målet',
+        speed: isReflex ? 224 : 176,
+        radius: isReflex ? 15.5 : 19.2,
+        statSpeed: isReflex ? 95 : 75,
+        statSize: isReflex ? 74 : 96
+      };
+    });
 
-  const RED_SKATERS = [
-    { firstName: 'Cale',    lastName: 'Makar',     number: 8,  role: 'speed',    spdMul: 1.03, shtMul: 1.02, chkMul: 0.94 },
-    { firstName: 'Mathew',  lastName: 'Barzal',    number: 13, role: 'speed',    spdMul: 1.02, shtMul: 0.97, chkMul: 0.92 },
-    { firstName: 'Dylan',   lastName: 'Larkin',    number: 71, role: 'speed',    spdMul: 1.01, shtMul: 1.01, chkMul: 0.98 },
-    { firstName: 'Nikita',  lastName: 'Kucherov',  number: 86, role: 'sniper',   spdMul: 1.00, shtMul: 1.05, chkMul: 0.94 },
-    { firstName: 'Kirill',  lastName: 'Kaprizov',  number: 97, role: 'sniper',   spdMul: 1.03, shtMul: 1.02, chkMul: 0.96 },
-    { firstName: 'Leon',    lastName: 'Draisaitl', number: 29, role: 'sniper',   spdMul: 0.98, shtMul: 1.06, chkMul: 1.04 },
-    { firstName: 'Matthew', lastName: 'Tkachuk',   number: 19, role: 'enforcer', spdMul: 1.01, shtMul: 1.02, chkMul: 1.03 },
-    { firstName: 'Radko',   lastName: 'Gudas',     number: 7,  role: 'enforcer', spdMul: 0.96, shtMul: 0.96, chkMul: 1.09 },
-    { firstName: 'Arber',   lastName: 'Xhekaj',    number: 72, role: 'enforcer', spdMul: 0.97, shtMul: 0.98, chkMul: 1.10 }
-  ];
+    const skaters = raw.skaters.map((s, idx) => {
+      const { firstName, lastName } = splitName(s[0]);
+      const role = s[2];
+      const spdBar = s[3];
+      const shtBar = s[4];
+      const chkBar = s[5];
+      return {
+        id: `${raw.abbr}_s${idx}`,
+        firstName,
+        lastName,
+        number: s[1],
+        role,
+        spdMul: 0.90 + (spdBar / 100) * 0.18,
+        shtMul: 0.90 + (shtBar / 100) * 0.18,
+        chkMul: 0.88 + (chkBar / 100) * 0.24,
+        bars: [spdBar, shtBar, chkBar]
+      };
+    });
 
-  // Selected lineup & position mode ('skater' | 'goalie')
-  let selectedControlMode = 'skater';
-  let selectedGoalieId = 'g1';
-  let selectedSkaterIds = ['s1', 's4', 's8'];
+    return {
+      abbr: raw.abbr,
+      name: raw.name,
+      color: raw.color,
+      accent: raw.accent,
+      goalies,
+      skaters
+    };
+  }
+
+  const NHL_TEAMS = NHL_RAW_TEAMS.map(buildTeamObject);
+
+  function getTeamByAbbr(abbr) {
+    return NHL_TEAMS.find(t => t.abbr === abbr) || NHL_TEAMS[0];
+  }
+
+  // Color utilities for authentic team jerseys & clash detection
+  function hexToRgb(hex) {
+    const h = hex.replace('#', '');
+    return {
+      r: parseInt(h.slice(0, 2), 16) || 0,
+      g: parseInt(h.slice(2, 4), 16) || 0,
+      b: parseInt(h.slice(4, 6), 16) || 0
+    };
+  }
+
+  function colorDistance(hex1, hex2) {
+    const a = hexToRgb(hex1);
+    const b = hexToRgb(hex2);
+    return Math.hypot(a.r - b.r, a.g - b.g, a.b - b.b);
+  }
+
+  function darkenHex(hex, factor = 0.62) {
+    const c = hexToRgb(hex);
+    const r = Math.round(c.r * factor);
+    const g = Math.round(c.g * factor);
+    const b = Math.round(c.b * factor);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
+  function computeTeamVisuals(blueTeam, redTeam) {
+    const clash = colorDistance(blueTeam.color, redTeam.color) < 125;
+    const bluePrimary = blueTeam.color;
+    const blueDark = darkenHex(bluePrimary, 0.55);
+    const blueTrim = blueTeam.accent;
+
+    // If both teams wear similar colors, put opponent in crisp NHL Away White jersey with team trim!
+    const redPrimary = clash ? '#f2f6fc' : redTeam.color;
+    const redDark = clash ? redTeam.color : darkenHex(redTeam.color, 0.55);
+    const redTrim = clash ? redTeam.color : redTeam.accent;
+    const redTextDark = clash;
+
+    return {
+      blue: { primary: bluePrimary, dark: blueDark, trim: blueTrim, textDark: colorDistance(bluePrimary, '#ffffff') < 140 },
+      red:  { primary: redPrimary,  dark: redDark,  trim: redTrim,  textDark: redTextDark }
+    };
+  }
+
+  // Selected NHL Teams, Full Lineup & Position Mode
+  let selectedBlueAbbr = 'EDM';
+  let selectedRedAbbr = 'FLA';
+  let editingSlot = 'blue'; // 'blue' | 'red'
+  let rosterRoleFilter = 'all'; // 'all' | 'speed' | 'sniper' | 'enforcer'
+  let selectedControlMode = 'skater'; // 'skater' | 'goalie'
+  let selectedGoalieId = '';
+  let selectedSkaterIds = [];
+  let teamVisuals = computeTeamVisuals(getTeamByAbbr(selectedBlueAbbr), getTeamByAbbr(selectedRedAbbr));
+
+  function selectDefaultLineupForTeam(abbr) {
+    const team = getTeamByAbbr(abbr);
+    selectedGoalieId = team.goalies[0].id;
+    // Default starting trio: top speed, top sniper, top enforcer from that team's full 18-skater roster
+    const picked = [];
+    for (const r of ['speed', 'sniper', 'enforcer']) {
+      const match = team.skaters.find(s => s.role === r && !picked.includes(s.id));
+      if (match) picked.push(match.id);
+    }
+    for (const s of team.skaters) {
+      if (picked.length >= 3) break;
+      if (!picked.includes(s.id)) picked.push(s.id);
+    }
+    selectedSkaterIds = picked;
+  }
+  selectDefaultLineupForTeam(selectedBlueAbbr);
 
   // =========================================================================
   // 2. PERSISTENCE (localStorage)
@@ -1260,6 +1967,10 @@
   const ctx = canvas.getContext('2d', { alpha: false });
 
   const hudEl = document.getElementById('hud');
+  const hudDotBlueEl = document.getElementById('hudDotBlue');
+  const hudLabelBlueEl = document.getElementById('hudLabelBlue');
+  const hudDotRedEl = document.getElementById('hudDotRed');
+  const hudLabelRedEl = document.getElementById('hudLabelRed');
   const activePlayerPill = document.getElementById('activePlayerPill');
   const activePlayerIcon = document.getElementById('activePlayerIcon');
   const activePlayerText = document.getElementById('activePlayerText');
@@ -1270,6 +1981,25 @@
 
   const startScreen = document.getElementById('startScreen');
   const gameOverScreen = document.getElementById('gameOverScreen');
+  const stepTeamSelect = document.getElementById('stepTeamSelect');
+  const stepRosterSelect = document.getElementById('stepRosterSelect');
+  const slotBlueBtn = document.getElementById('slotBlueBtn');
+  const slotRedBtn = document.getElementById('slotRedBtn');
+  const slotBlueSwatch = document.getElementById('slotBlueSwatch');
+  const slotBlueName = document.getElementById('slotBlueName');
+  const slotRedSwatch = document.getElementById('slotRedSwatch');
+  const slotRedName = document.getElementById('slotRedName');
+  const teamSearchInput = document.getElementById('teamSearchInput');
+  const teamListHeading = document.getElementById('teamListHeading');
+  const teamCountBadge = document.getElementById('teamCountBadge');
+  const teamGrid = document.getElementById('teamGrid');
+  const nextToRosterBtn = document.getElementById('nextToRosterBtn');
+  const backToTeamsBtn = document.getElementById('backToTeamsBtn');
+  const rosterTeamSwatch = document.getElementById('rosterTeamSwatch');
+  const rosterTeamTitle = document.getElementById('rosterTeamTitle');
+  const skaterSectionTitle = document.getElementById('skaterSectionTitle');
+  const roleFilterRow = document.getElementById('roleFilterRow');
+
   const modeSkaterBtn = document.getElementById('modeSkaterBtn');
   const modeGoalieBtn = document.getElementById('modeGoalieBtn');
   const controlsCompactEl = document.getElementById('controlsCompact');
@@ -1278,12 +2008,14 @@
   const goalieCountBadge = document.getElementById('goalieCountBadge');
   const skaterCountBadge = document.getElementById('skaterCountBadge');
   const playBtn = document.getElementById('playBtn');
-  const randomTeamBtn = document.getElementById('randomTeamBtn');
   const playAgainBtn = document.getElementById('playAgainBtn');
   const changeTeamBtn = document.getElementById('changeTeamBtn');
+  const changePlayersBtn = document.getElementById('changePlayersBtn');
   const startHighScoreEl = document.getElementById('startHighScore');
 
   const resultBannerEl = document.getElementById('resultBanner');
+  const finalBlueNameEl = document.getElementById('finalBlueName');
+  const finalRedNameEl = document.getElementById('finalRedName');
   const finalBlueEl = document.getElementById('finalBlue');
   const finalRedEl = document.getElementById('finalRed');
   const statShotsEl = document.getElementById('statShots');
@@ -1377,10 +2109,135 @@
   }
   updateStartHighScoreUI();
 
-  // Build interactive Lineup Selection Grid (2 Goalies + 10 Skaters)
+  function styleSwatch(el, team) {
+    el.textContent = team.abbr;
+    el.style.background = team.color;
+    el.style.borderColor = team.accent;
+    el.style.color = colorDistance(team.color, '#ffffff') < 145 ? '#111111' : '#ffffff';
+  }
+
+  function showStartStep(step) {
+    const onTeams = step === 'teams';
+    stepTeamSelect.classList.toggle('step-hidden', !onTeams);
+    stepRosterSelect.classList.toggle('step-hidden', onTeams);
+    if (onTeams) {
+      renderTeamPicker();
+    } else {
+      rosterRoleFilter = 'all';
+      renderLineupPicker();
+    }
+  }
+
+  function renderTeamPicker() {
+    const blueT = getTeamByAbbr(selectedBlueAbbr);
+    const redT = getTeamByAbbr(selectedRedAbbr);
+
+    styleSwatch(slotBlueSwatch, blueT);
+    slotBlueName.textContent = blueT.name;
+    styleSwatch(slotRedSwatch, redT);
+    slotRedName.textContent = redT.name;
+
+    slotBlueBtn.classList.toggle('editing', editingSlot === 'blue');
+    slotRedBtn.classList.toggle('editing', editingSlot === 'red');
+    teamListHeading.textContent = editingSlot === 'blue'
+      ? '🏒 Välj DITT NHL-lag (32 lag)'
+      : '⚔️ Välj MOTSTÅNDARE (32 lag)';
+
+    const q = (teamSearchInput.value || '').trim().toLowerCase();
+    const filtered = NHL_TEAMS.filter(t =>
+      !q || t.name.toLowerCase().includes(q) || t.abbr.toLowerCase().includes(q)
+    );
+    teamCountBadge.textContent = `${filtered.length} lag`;
+
+    teamGrid.innerHTML = '';
+    for (const t of filtered) {
+      const isBlue = t.abbr === selectedBlueAbbr;
+      const isRed = t.abbr === selectedRedAbbr;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'team-tile' + (isBlue ? ' selected-blue' : '') + (isRed ? ' selected-red' : '');
+      const textCol = colorDistance(t.color, '#ffffff') < 145 ? '#111111' : '#ffffff';
+      const meta = isBlue && isRed ? 'Ditt lag & Motst.' : (isBlue ? '✓ Ditt lag' : (isRed ? '⚔️ Motståndare' : `${t.goalies.length + t.skaters.length} spelare`));
+      btn.innerHTML = `
+        <span class="team-swatch" style="background:${t.color};border-color:${t.accent};color:${textCol};">${t.abbr}</span>
+        <div style="min-width:0;flex:1;">
+          <div class="team-tile-name">${t.name}</div>
+          <div class="team-tile-meta">${meta}</div>
+        </div>
+      `;
+      btn.addEventListener('click', () => {
+        sfx.unlock();
+        sfx.playUiClick();
+        if (editingSlot === 'blue') {
+          if (selectedBlueAbbr !== t.abbr) {
+            selectedBlueAbbr = t.abbr;
+            selectDefaultLineupForTeam(selectedBlueAbbr);
+          }
+        } else {
+          selectedRedAbbr = t.abbr;
+        }
+        teamVisuals = computeTeamVisuals(getTeamByAbbr(selectedBlueAbbr), getTeamByAbbr(selectedRedAbbr));
+        setupEntities();
+        renderTeamPicker();
+      });
+      teamGrid.appendChild(btn);
+    }
+
+    const totalPlayers = blueT.goalies.length + blueT.skaters.length;
+    nextToRosterBtn.textContent = `VÄLJ SPELARE I ${blueT.abbr} (${totalPlayers}) →`;
+  }
+
+  slotBlueBtn.addEventListener('click', () => {
+    sfx.unlock();
+    sfx.playUiClick();
+    editingSlot = 'blue';
+    renderTeamPicker();
+  });
+
+  slotRedBtn.addEventListener('click', () => {
+    sfx.unlock();
+    sfx.playUiClick();
+    editingSlot = 'red';
+    renderTeamPicker();
+  });
+
+  teamSearchInput.addEventListener('input', renderTeamPicker);
+
+  nextToRosterBtn.addEventListener('click', () => {
+    sfx.unlock();
+    sfx.playUiClick();
+    showStartStep('roster');
+  });
+
+  backToTeamsBtn.addEventListener('click', () => {
+    sfx.unlock();
+    sfx.playUiClick();
+    showStartStep('teams');
+  });
+
+  // Build interactive Full Team Roster Picker (2 Goalies + ALL 18 Skaters of selected NHL team!)
   function renderLineupPicker() {
+    const blueTeam = getTeamByAbbr(selectedBlueAbbr);
+    styleSwatch(rosterTeamSwatch, blueTeam);
+    rosterTeamTitle.textContent = blueTeam.name;
+    skaterSectionTitle.textContent = `🏒 Hela truppen (välj 3 av ${blueTeam.skaters.length})`;
+
+    // Update role filter buttons counts & active state
+    const filterBtns = roleFilterRow.querySelectorAll ? roleFilterRow.querySelectorAll('.filter-pill') : [];
+    const cntSpeed = blueTeam.skaters.filter(s => s.role === 'speed').length;
+    const cntSniper = blueTeam.skaters.filter(s => s.role === 'sniper').length;
+    const cntEnforcer = blueTeam.skaters.filter(s => s.role === 'enforcer').length;
+    filterBtns.forEach(fb => {
+      const f = fb.dataset.filter;
+      fb.classList.toggle('active', f === rosterRoleFilter);
+      if (f === 'all') fb.textContent = `Alla (${blueTeam.skaters.length})`;
+      else if (f === 'speed') fb.textContent = `⚡ Snabba (${cntSpeed})`;
+      else if (f === 'sniper') fb.textContent = `🔥 Skyttar (${cntSniper})`;
+      else if (f === 'enforcer') fb.textContent = `🛡️ Tacklare (${cntEnforcer})`;
+    });
+
     goalieGrid.innerHTML = '';
-    for (const g of BLUE_GOALIES) {
+    for (const g of blueTeam.goalies) {
       const sel = g.id === selectedGoalieId;
       const btn = document.createElement('button');
       btn.type = 'button';
@@ -1414,8 +2271,12 @@
       goalieGrid.appendChild(btn);
     }
 
+    const visibleSkaters = rosterRoleFilter === 'all'
+      ? blueTeam.skaters
+      : blueTeam.skaters.filter(s => s.role === rosterRoleFilter);
+
     skaterGrid.innerHTML = '';
-    for (const s of BLUE_SKATERS) {
+    for (const s of visibleSkaters) {
       const sel = selectedSkaterIds.includes(s.id);
       const rdef = ROLE_DEFS[s.role];
       const btn = document.createElement('button');
@@ -1453,7 +2314,7 @@
           selectedSkaterIds.splice(idx, 1);
         } else {
           if (selectedSkaterIds.length >= 3) {
-            selectedSkaterIds.shift(); // Smoothly swap oldest selection for effortless mobile tapping
+            selectedSkaterIds.shift();
           }
           selectedSkaterIds.push(s.id);
         }
@@ -1467,7 +2328,18 @@
     skaterCountBadge.textContent = `${selectedSkaterIds.length} / 3`;
     skaterCountBadge.classList.toggle('ready', ready);
     playBtn.disabled = !ready;
-    playBtn.textContent = ready ? 'SPELA' : `VÄLJ 3 UTESPELARE (${selectedSkaterIds.length}/3)`;
+    playBtn.textContent = ready ? 'SPELA MATCH' : `VÄLJ 3 UTESPELARE (${selectedSkaterIds.length}/3)`;
+  }
+
+  if (roleFilterRow.querySelectorAll) {
+    roleFilterRow.querySelectorAll('.filter-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        sfx.unlock();
+        sfx.playUiClick();
+        rosterRoleFilter = btn.dataset.filter || 'all';
+        renderLineupPicker();
+      });
+    });
   }
 
   function updateControlModeUI() {
@@ -1497,16 +2369,8 @@
     updateControlModeUI();
   });
 
-  randomTeamBtn.addEventListener('click', () => {
-    sfx.unlock();
-    sfx.playUiClick();
-    selectedGoalieId = BLUE_GOALIES[Math.floor(Math.random() * BLUE_GOALIES.length)].id;
-    const pool = [...BLUE_SKATERS].sort(() => Math.random() - 0.5);
-    selectedSkaterIds = pool.slice(0, 3).map(p => p.id);
-    renderLineupPicker();
-  });
-
   updateControlModeUI();
+  renderTeamPicker();
   renderLineupPicker();
 
   // =========================================================================
@@ -1681,13 +2545,14 @@
   canvas.addEventListener('contextmenu', (e) => e.preventDefault());
 
   window.addEventListener('keydown', (e) => {
+    if (document.activeElement && document.activeElement.tagName === 'INPUT') return;
     sfx.unlock();
     const code = e.code;
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(code)) {
       e.preventDefault();
     }
 
-    if (game.state === 'START' && selectedSkaterIds.length === 3 && code === 'Enter') {
+    if (game.state === 'START' && !stepRosterSelect.classList.contains('step-hidden') && selectedSkaterIds.length === 3 && code === 'Enter') {
       startMatch();
       return;
     }
@@ -1874,30 +2739,42 @@
     };
   }
 
-  function pickRedLineup() {
-    // Pick 1 Speed, 1 Sniper, 1 Enforcer from the named Red roster for balanced 3v3 opposition
-    const byRole = (role) => {
-      const list = RED_SKATERS.filter(p => p.role === role);
-      return list[Math.floor(Math.random() * list.length)];
-    };
-    return [byRole('speed'), byRole('sniper'), byRole('enforcer')];
+  function pickRedLineup(redTeam) {
+    // Pick top Speed, top Sniper, and top Enforcer from the chosen opponent NHL team
+    const picked = [];
+    for (const r of ['speed', 'sniper', 'enforcer']) {
+      const m = redTeam.skaters.find(p => p.role === r && !picked.includes(p));
+      if (m) picked.push(m);
+    }
+    for (const p of redTeam.skaters) {
+      if (picked.length >= 3) break;
+      if (!picked.includes(p)) picked.push(p);
+    }
+    return picked;
   }
 
   function setupEntities() {
+    const blueTeam = getTeamByAbbr(selectedBlueAbbr);
+    const redTeam = getTeamByAbbr(selectedRedAbbr);
+    teamVisuals = computeTeamVisuals(blueTeam, redTeam);
+
     game.skaters = [];
-    const chosenBlue = selectedSkaterIds.map(id => BLUE_SKATERS.find(p => p.id === id)).filter(Boolean);
-    while (chosenBlue.length < 3) chosenBlue.push(BLUE_SKATERS[chosenBlue.length]);
+    const chosenBlue = selectedSkaterIds.map(id => blueTeam.skaters.find(p => p.id === id)).filter(Boolean);
+    while (chosenBlue.length < 3) {
+      const fallback = blueTeam.skaters.find(p => !chosenBlue.includes(p)) || blueTeam.skaters[0];
+      chosenBlue.push(fallback);
+    }
 
     for (let i = 0; i < 3; i++) {
       game.skaters.push(createSkater('blue', i, chosenBlue[i]));
     }
-    const chosenRed = pickRedLineup();
+    const chosenRed = pickRedLineup(redTeam);
     for (let i = 0; i < 3; i++) {
       game.skaters.push(createSkater('red', i, chosenRed[i]));
     }
 
-    const blueG = BLUE_GOALIES.find(g => g.id === selectedGoalieId) || BLUE_GOALIES[0];
-    const redG = RED_GOALIES[Math.floor(Math.random() * RED_GOALIES.length)];
+    const blueG = blueTeam.goalies.find(g => g.id === selectedGoalieId) || blueTeam.goalies[0];
+    const redG = redTeam.goalies[0];
     game.goalies = [createGoalie('blue', blueG), createGoalie('red', redG)];
     game.puck = createPuck();
     game.activeIndex = 0;
@@ -2019,6 +2896,10 @@
       resultBannerEl.className = 'result-banner result-draw';
     }
 
+    const blueTeam = getTeamByAbbr(selectedBlueAbbr);
+    const redTeam = getTeamByAbbr(selectedRedAbbr);
+    finalBlueNameEl.textContent = blueTeam.name.toUpperCase();
+    finalRedNameEl.textContent = redTeam.name.toUpperCase();
     finalBlueEl.textContent = String(game.scoreBlue);
     finalRedEl.textContent = String(game.scoreRed);
     if (game.controlMode === 'goalie') {
@@ -2045,10 +2926,27 @@
     game.state = 'START';
     gameOverScreen.classList.add('hidden');
     startScreen.classList.remove('hidden');
-    renderLineupPicker();
+    showStartStep('teams');
+  });
+  changePlayersBtn.addEventListener('click', () => {
+    sfx.unlock();
+    sfx.playUiClick();
+    game.state = 'START';
+    gameOverScreen.classList.add('hidden');
+    startScreen.classList.remove('hidden');
+    showStartStep('roster');
   });
 
   function updateHudDom() {
+    const blueTeam = getTeamByAbbr(selectedBlueAbbr);
+    const redTeam = getTeamByAbbr(selectedRedAbbr);
+    hudLabelBlueEl.textContent = blueTeam.abbr;
+    hudLabelRedEl.textContent = redTeam.abbr;
+    hudDotBlueEl.style.background = teamVisuals.blue.primary;
+    hudDotBlueEl.style.boxShadow = `0 0 8px ${teamVisuals.blue.trim}`;
+    hudDotRedEl.style.background = teamVisuals.red.primary;
+    hudDotRedEl.style.boxShadow = `0 0 8px ${teamVisuals.red.trim}`;
+
     scoreBlueEl.textContent = String(game.scoreBlue);
     scoreRedEl.textContent = String(game.scoreRed);
     const secs = Math.max(0, Math.ceil(game.timeLeft));
@@ -2937,11 +3835,12 @@
       game.scoreRed += 1;
     }
 
+    const scoringNhl = getTeamByAbbr(scoringTeam === 'blue' ? selectedBlueAbbr : selectedRedAbbr);
     const scorer = game.puck.lastTouchedBy;
     if (scorer && scorer.team === scoringTeam) {
-      game.goalScorerText = `${scorer.arch.icon} ${scorer.fullName} #${scorer.number}`;
+      game.goalScorerText = `${scoringNhl.abbr} • ${scorer.arch.icon} ${scorer.fullName} #${scorer.number}`;
     } else {
-      game.goalScorerText = scoringTeam === 'blue' ? 'BLÅTT LAG' : 'RÖTT LAG';
+      game.goalScorerText = scoringNhl.name.toUpperCase();
     }
 
     updateHudDom();
@@ -2949,9 +3848,9 @@
     triggerShake(11.5, 0.35);
 
     const gx = scoringTeam === 'blue' ? RIGHT_GOAL_X : LEFT_GOAL_X;
-    const teamColor = scoringTeam === 'blue' ? '#3ba4ff' : '#ff4d60';
+    const teamColor = scoringNhl.color;
     spawnParticles(gx, RINK_CY, 40, teamColor, 95, 440, 3, 7.5, 0.88);
-    spawnParticles(gx, RINK_CY, 24, '#ffd43b', 75, 360, 2.5, 6, 0.78);
+    spawnParticles(gx, RINK_CY, 24, scoringNhl.accent, 75, 360, 2.5, 6, 0.78);
   }
 
   function performGoalieDive(g, moveVec) {
@@ -3873,12 +4772,14 @@
     ctx.ellipse(2, 5, g.radius + 3, g.radius + (isDiving ? 16 : 8), 0, 0, Math.PI * 2);
     ctx.fill();
 
-    const primary = g.hitFlash > 0 ? '#ffffff' : (isBlue ? '#1570e6' : '#e0293d');
+    const tv = isBlue ? teamVisuals.blue : teamVisuals.red;
+    const primary = g.hitFlash > 0 ? '#ffffff' : tv.primary;
+    const padStroke = isDiving ? '#ffd43b' : (tv.textDark ? tv.dark : tv.primary);
     const padColor = g.hitFlash > 0 ? '#ffffff' : '#f4f8ff';
 
     const padH = g.radius * (isDiving ? 3.7 : 2.8);
     ctx.fillStyle = padColor;
-    ctx.strokeStyle = isDiving ? '#ffd43b' : primary;
+    ctx.strokeStyle = padStroke;
     ctx.lineWidth = isDiving ? 3.2 : 2.5;
     traceRoundedRect(ctx, -10.5, -padH / 2, 21, padH, 8);
     ctx.fill();
@@ -3888,6 +4789,9 @@
     ctx.arc(0, 0, 14.5, 0, Math.PI * 2);
     ctx.fillStyle = primary;
     ctx.fill();
+    ctx.strokeStyle = tv.dark;
+    ctx.lineWidth = 1.6;
+    ctx.stroke();
 
     ctx.beginPath();
     ctx.arc(isBlue ? 3 : -3, 0, 9, 0, Math.PI * 2);
@@ -3921,8 +4825,9 @@
 
     const r = s.radius;
     const isBlue = s.team === 'blue';
-    const jerseyMain = s.hitFlash > 0 ? '#ffffff' : (isBlue ? '#1978f0' : '#e52b40');
-    const jerseyDark = isBlue ? '#0d4a9e' : '#9c1425';
+    const tv = isBlue ? teamVisuals.blue : teamVisuals.red;
+    const jerseyMain = s.hitFlash > 0 ? '#ffffff' : tv.primary;
+    const jerseyDark = tv.dark;
 
     // Ground shadow (stays on ground/ice while airborne skater rises with z!)
     const shadowScale = Math.max(0.55, 1 - s.z * 0.004);
@@ -4023,7 +4928,7 @@
 
     ctx.beginPath();
     ctx.arc(3, 0, r * 0.48, 0, Math.PI * 2);
-    ctx.fillStyle = isBlue ? '#0a3370' : '#7a0d1b';
+    ctx.fillStyle = tv.dark;
     ctx.fill();
     ctx.strokeStyle = '#ffffff';
     ctx.lineWidth = 1.6;
